@@ -1,0 +1,23 @@
+# The following is to ignore executables
+# TODO use an output directory instead
+# Ingore all
+*
+# Unignore all with extensions
+!*.*
+# Unignore all directories
+!*/
+
+/.idea
+
+# Buildfiles
+/CGAL_Qt5_moc_and_resources_autogen
+CMakeCache.txt
+/CMakeFiles
+Makefile
+/cmake-build-debug
+cmake_install.cmake
+/icons
+libCGAL_Qt5_moc_and_resources.a
+qrc*
+/resources
+ui_ImageInterface.h
