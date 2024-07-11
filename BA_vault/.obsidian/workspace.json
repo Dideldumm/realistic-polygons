@@ -1,0 +1,217 @@
+{
+  "main": {
+    "id": "62b02c7cce11c39b",
+    "type": "split",
+    "children": [
+      {
+        "id": "4c5a0b95fc1e1a92",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8a2bf288867111a8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Notizen zu quellen/Heuristics for the Generation of random Polygons.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5c5c27d6a80abfff",
+    "type": "split",
+    "children": [
+      {
+        "id": "716d0f1aab8d03cd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9e0571711bdaedba",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "e40fd43ba659acb1",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "46eea51160b9c756",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c2490d9c448da052",
+    "type": "split",
+    "children": [
+      {
+        "id": "0953f43f107374de",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9ec1564a12712213",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Notizen zu quellen/Heuristics for the Generation of random Polygons.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "afb88610c8f33e1e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Notizen zu quellen/Heuristics for the Generation of random Polygons.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "d00e221ca40255cc",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "4767e055e7b0ed73",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Notizen zu quellen/Heuristics for the Generation of random Polygons.md"
+              }
+            }
+          },
+          {
+            "id": "348e7a3c760f331f",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
+    }
+  },
+  "floating": {
+    "id": "369af28e7dfd6ad1",
+    "type": "floating",
+    "children": [
+      {
+        "id": "6f43b876bb11731e",
+        "type": "window",
+        "children": [
+          {
+            "id": "085e6f3e0d3f9f6d",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "d60e47353be8bde3",
+                "type": "leaf",
+                "state": {
+                  "type": "pdf",
+                  "state": {
+                    "file": "quellen/Heuristics_for_the_Generation_of_Random_Polygons.pdf"
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 1920,
+        "y": 23,
+        "width": 1920,
+        "height": 1057,
+        "maximize": false,
+        "zoom": -1
+      }
+    ]
+  },
+  "active": "8a2bf288867111a8",
+  "lastOpenFiles": [
+    "Notizen zu quellen/Characterizations of real world Polygons.md",
+    "Chararcerizations of real world Polygons.md",
+    "Notizen zu quellen/Chararcerizations of real world Polygons.md",
+    "Notizen zu quellen/Heuristics for the Generation of random Polygons.md",
+    "Chararcerizations of real$20world$20Polygons.md",
+    "star-shaped.md",
+    "quellen/Heuristics_for_the_Generation_of_Random_Polygons.pdf",
+    "quellen/Characterizations_of_real-world_Polygons.pdf",
+    "Notizen zu quellen/2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations.md",
+    "Notizen BA.md",
+    "quellen/2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations.pdf",
+    "quellen/Triangle-Based_Heuristics_for_Area_Optimal_Polygonizations.pdf",
+    "quellen/Optimal_Area_Polygonization_by_Triangulation_and_Visibility_Search.pdf",
+    "quellen/Random_Polygon_Generation_through_Convex_Layers.pdf",
+    "images/2-opt-move.svg.png",
+    "images/areaMinMaxPolygonizations.png",
+    "images",
+    "Notizen zu quellen",
+    "quellen/Area_Optimal_Polygonization_Using_Simulated_Annealing.pdf",
+    "quellen/Greedy_and_Local_Search_Heuristics_to_Build_Area-Optimal_Polygons.pdf",
+    "CGAL.md"
+  ]
+}
