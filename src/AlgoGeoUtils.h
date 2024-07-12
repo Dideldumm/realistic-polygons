@@ -29,8 +29,8 @@ class RightComparator {
     bool operator()(const Point &a, const Point &b) const;
 };
 
-std::string PointToString (Point point);
+std::string pointToString (Point point);
 
-std::string PolygonToString (const Polygon& polygon);
+std::string polygonToString (const Polygon& polygon);
 
 #endif //ALGOGEOUTILS_H

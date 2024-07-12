@@ -27,16 +27,16 @@ bool ::RightComparator::operator()(const Point &a, const Point &b) const {
     return is_right_of(a, b);
 }
 
-std::string PointToString(const Point point) {
+std::string pointToString(const Point point) {
     const std::string x = std::to_string(point.x());
     const std::string y = std::to_string(point.y());
     return "(" + x + "|" + y + ")";
 }
 
-std::string PolygonToString(const Polygon& polygon) {
+std::string polygonToString(const Polygon& polygon) {
     std::string s = "{";
     for (const Point point: polygon) {
-        s += PointToString(point);
+        s += pointToString(point);
         s += ", ";
     }
     s += "}";

@@ -31,9 +31,6 @@ std::vector<Polygon> generateAllPolygonsForSetOfPoints(const std::vector<Point> 
     do {
         Polygon currentPolygon = generatePolygonForPermutation(points, permutations);
         polygons.push_back(currentPolygon);
-        if (currentPolygon.is_simple()) {
-            std::future<void> noValue = std::async([currentPolygon]() { CGAL::draw(currentPolygon); });
-        }
     } while (std::next_permutation(permutations.begin(), permutations.end()));
     return polygons;
 }
@@ -45,19 +42,11 @@ double calculateDistance(const Point a, const Point b) {
 
 double calculateCircumference(const Polygon &polygon) {
     double circumference = 0;
-    const Point firstPoint = *polygon.begin();
-
-    auto previousPoint = polygon.begin();
-    auto nextPoint = polygon.begin();
-    const auto end = polygon.end();
-    while (nextPoint != end) {
-        const double distance = calculateDistance(*previousPoint, *nextPoint);
-        circumference += distance;
-        ++previousPoint;
-        ++nextPoint;
+    for (auto edge: polygon.edges()) {
+        const double length = sqrt(edge.squared_length());
+        circumference += length;
     }
-    const double lastDistance = calculateDistance(*previousPoint, firstPoint);
-    circumference += lastDistance;
+    std::cout << "Polygon: " << polygonToString(polygon) << "with circumference: " << circumference << std::endl;
     return circumference;
 }
 
