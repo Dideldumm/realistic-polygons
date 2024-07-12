@@ -6,10 +6,12 @@
 #define ALGOGEOUTILS_H
 
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
+#include <CGAL/Polygon_2.h>
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
 typedef CGAL::Segment_2<Kernel> Segment;
+typedef CGAL::Polygon_2<Kernel> Polygon;
 
 bool is_left_of(const Point &a, const Point &b);
 
@@ -26,5 +28,9 @@ class LeftComparator {
 class RightComparator {
     bool operator()(const Point &a, const Point &b) const;
 };
+
+std::string PointToString (Point point);
+
+std::string PolygonToString (const Polygon& polygon);
 
 #endif //ALGOGEOUTILS_H
