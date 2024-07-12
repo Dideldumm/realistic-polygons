@@ -7,6 +7,7 @@
 #include <CGAL/Polygon_2.h>
 #include <CGAL/draw_polygon_2.h>
 #include "AlgoGeoUtils.h"
+#include "RandomPointGenerator.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Polygon_2<Kernel> Polygon;
@@ -14,9 +15,9 @@ typedef CGAL::Point_2<Kernel> Point;
 typedef std::istream_iterator<Point> PointIterator;
 typedef CGAL::Segment_2<Kernel> Segment;
 
-Polygon generatePolygonForPermutation(const std::vector<Point> &points, const std::vector<int> &indices) {
+Polygon generatePolygonForPermutation(const std::vector<Point> &points, const std::vector<unsigned int> &indices) {
     std::vector<Point> polygonPoints{};
-    for (const int i: indices) {
+    for (const unsigned int i: indices) {
         polygonPoints.push_back(points.at(i));
     }
     return {polygonPoints.begin(), polygonPoints.end()};
@@ -24,8 +25,8 @@ Polygon generatePolygonForPermutation(const std::vector<Point> &points, const st
 
 std::vector<Polygon> generateAllPolygonsForSetOfPoints(const std::vector<Point> &points) {
     std::vector<Polygon> polygons;
-    std::vector<int> permutations;
-    for (int i = 0; i < points.size(); ++i) {
+    std::vector<unsigned int> permutations;
+    for (unsigned int i = 0; i < points.size(); ++i) {
         permutations.push_back(i);
     }
     do {
@@ -79,8 +80,21 @@ Polygon createShortestPolygon(const std::vector<Point> &points) {
 }
 
 int main() {
-    const std::vector<Point> userInput = getUserInput();
-    Polygon shortestPolygon = createShortestPolygon(userInput);
-    std::future<void> noValue = std::async([shortestPolygon]() { CGAL::draw(shortestPolygon); });
-    return 0;
+    // const std::vector<Point> userInput = getUserInput();
+    // Polygon shortestPolygon = createShortestPolygon(userInput);
+    // std::future<void> noValue = std::async([shortestPolygon]() { CGAL::draw(shortestPolygon); });
+    // return 0;
+
+    constexpr u32 defaultSeed = 69;
+    constexpr unsigned int defaultRadius = 10;
+    RandomPointGenerator generator(defaultRadius, {defaultRadius, defaultRadius}, defaultSeed);
+
+    auto points = generator.generatePoints(8);
+    for (const Point point: points) {
+        std::cout << pointToString(point) << std::endl;
+    }
+    std::cout << "And now we wait" << std::endl;
+    const Polygon polygon = createShortestPolygon(points);
+    std::cout << "Finished" << std::endl;
+    std::future<void> noValue = std::async([polygon]() { CGAL::draw(polygon); });
 }

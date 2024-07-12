@@ -4,13 +4,12 @@ project(try_cgal)
 find_package(CGAL REQUIRED OPTIONAL_COMPONENTS Qt5)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "-Wall -Wpedantic -Wextra")
 
 add_executable(simplePolygon
         src/GenerateSimplePolygon.cpp
         src/AlgoGeoUtils.h
-        src/AlgoGeoUtils.cpp
-        src/RandomPointGenerator.h
-        src/RandomPointGenerator.cpp)
+        src/AlgoGeoUtils.cpp)
 
 add_executable(shortestPolygon
         src/GenerateShortestPolygon.cpp
@@ -19,8 +18,12 @@ add_executable(shortestPolygon
         src/RandomPointGenerator.h
         src/RandomPointGenerator.cpp)
 
+add_executable(pointGenerator
+        src/RandomPointGenerator.h
+        src/RandomPointGenerator.cpp)
+
 if (CGAL_Qt5_FOUND)
     target_link_libraries(simplePolygon PUBLIC CGAL::CGAL_Basic_viewer)
-	target_link_libraries(shortestPolygon PUBLIC CGAL::CGAL_Basic_viewer)
+    target_link_libraries(shortestPolygon PUBLIC CGAL::CGAL_Basic_viewer)
 endif ()
 
