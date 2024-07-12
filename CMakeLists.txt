@@ -8,12 +8,16 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(simplePolygon
         src/GenerateSimplePolygon.cpp
         src/AlgoGeoUtils.h
-        src/AlgoGeoUtils.cpp)
+        src/AlgoGeoUtils.cpp
+        src/RandomPointGenerator.h
+        src/RandomPointGenerator.cpp)
 
 add_executable(shortestPolygon
         src/GenerateShortestPolygon.cpp
         src/AlgoGeoUtils.h
-        src/AlgoGeoUtils.cpp)
+        src/AlgoGeoUtils.cpp
+        src/RandomPointGenerator.h
+        src/RandomPointGenerator.cpp)
 
 if (CGAL_Qt5_FOUND)
     target_link_libraries(simplePolygon PUBLIC CGAL::CGAL_Basic_viewer)
