@@ -1,3 +1,8 @@
+# Fragen an Schirra und Tetjana
+- maximale Laufzeit zum Generieren eines Polygons?
+- 
+
+
 ## Ideen für "realistische" Polygone
 
 --> siehe [[2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations]]

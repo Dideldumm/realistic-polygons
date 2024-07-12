@@ -28,3 +28,39 @@ The set of input points $S$ is assumed to be in general position
 Algorithm for the enumeration of all star-shaped polygons on a given set of points
 
 - a [star-shaped](Notizen%20zu%20quellen/Characterizations%20of%20real%20world%20Polygons) polygon $P$ is fixed once its kernel has been specified
+- the kernels of two distinct star-shaped polygons share at most one edge
+
+... complicated stuff
+
+### Quick Star
+Wir mache basically einen rotational plane sweep
+- Any point in $CH(S)$ defines a star-shaped polygon
+- Choose a random point $p$ within $CH(S)$
+- Sort the points of $S$ around $p$
+
+## Simple Polygons
+### Steady Growth
+An **incremental algorithm** adding one point after another.
+- Init by selecting three points $s_1,s_2,s_3\in S$ 
+	- such that no other point of $S$ lies within $CH(\{s_1,s_2,s_3\})$ 
+	- Let $S_1:=S\setminus\{s_1,s_2,s_3\}$  
+- During the $i$-th iteration with $1\leq i\leq n-3$ 
+	- Choose a point $s_i\in S_i$ 
+		- such that no other Point lies within $CH(P_{i-1}\cup\{s_i\})$ 
+	- Find an edge $(v_k,v_{k+1})$ of $P_{i-1}$ that is completely visible from $s_i$ and replace it with the edges $(v_k,s_i)$ and $(s_i, v_{k+1})$ 
+
+
+### Space Partioning
+A **divide and conquer** algorithm that recursively partitions $S$ into subsets which have disjoint convex hulls.
+
+
+
+
+### Permute & Reject
+Creates random permutations until a simple polygon is encountered.
+
+### 2-opt Moves
+Generates a random (non-simple) polygon and repairs the deficiencies.
+
+### Incremental Construction & Backtracking
+Tries to minimize backtracking by eliminating dead search trees.
