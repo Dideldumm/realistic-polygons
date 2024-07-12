@@ -7,11 +7,11 @@
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Polygon_2<Kernel> Polygon;
 typedef CGAL::Point_2<Kernel> Point;
-typedef std::istream_iterator<Point> iterator;
+typedef std::istream_iterator<Point> PointIterator;
 typedef CGAL::Segment_2<Kernel> Segment;
 
 
-Polygon create_non_intersecting_polygon(std::istream_iterator<Point> begin, const std::istream_iterator<Point>& end) {
+Polygon create_non_intersecting_polygon(PointIterator begin, const std::istream_iterator<Point>& end) {
     //initialize points, leftmost and rightmost
     std::unordered_set<Point> points{};
     Point leftmost = *begin;
@@ -31,7 +31,7 @@ Polygon create_non_intersecting_polygon(std::istream_iterator<Point> begin, cons
     points.erase(rightmost);
     points.erase(leftmost);
 
-    Segment middle_line(leftmost, rightmost);
+    const Segment middle_line(leftmost, rightmost);
 
     std::set<Point, LeftComparator> a;
     std::set<Point, RightComparator> b;
@@ -56,14 +56,14 @@ Polygon create_non_intersecting_polygon(std::istream_iterator<Point> begin, cons
 }
 
 int main() {
-    iterator const input_begin(std::cin);
-    iterator const input_end;
+    PointIterator const input_begin(std::cin);
+    PointIterator const input_end;
 
     Polygon nonIntersectingPolygon = create_non_intersecting_polygon(input_begin, input_end);
-    const Polygon polygon(input_begin, input_end);
     std::future<void> noValue = std::async([nonIntersectingPolygon](){CGAL::draw(nonIntersectingPolygon);});
 
     // the draw function seems to work with simple polygons only
+    // const Polygon polygon(input_begin, input_end);
     // std::future<void> nootherValue = std::async([polygon](){CGAL::draw(polygon);});
     return 0;
 }
