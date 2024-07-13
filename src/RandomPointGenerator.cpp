@@ -34,6 +34,10 @@ RandomPointGenerator::RandomPointGenerator(const double radius,
                                                                                     origin.y(), radius)) {
 }
 
+RandomPointGenerator::RandomPointGenerator(double radius) : RandomPointGenerator(radius, {0, 0}, createSeed()) {
+}
+
+
 std::vector<Point> RandomPointGenerator::generatePoints(const unsigned int numberOfPoints) {
     std::vector<Point> points{};
     for (unsigned int i = 0; i < numberOfPoints; ++i) {

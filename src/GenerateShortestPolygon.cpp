@@ -86,7 +86,7 @@ int main() {
     // return 0;
 
     constexpr u32 defaultSeed = 69;
-    constexpr unsigned int defaultRadius = 10;
+    constexpr double defaultRadius = 10;
     RandomPointGenerator generator(defaultRadius, {defaultRadius, defaultRadius}, defaultSeed);
 
     auto points = generator.generatePoints(8);

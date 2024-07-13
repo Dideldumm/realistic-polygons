@@ -22,15 +22,17 @@ bool is_above(const Point &p, const Segment &s);
 bool is_below(const Point &p, const Segment &s);
 
 class LeftComparator {
+public:
     bool operator()(const Point &a, const Point &b) const;
 };
 
 class RightComparator {
+public:
     bool operator()(const Point &a, const Point &b) const;
 };
 
-std::string pointToString (Point point);
+std::string pointToString(Point point);
 
-std::string polygonToString (const Polygon& polygon);
+std::string polygonToString(const Polygon &polygon);
 
 #endif //ALGOGEOUTILS_H

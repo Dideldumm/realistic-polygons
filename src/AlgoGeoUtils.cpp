@@ -3,19 +3,19 @@
 //
 #include "AlgoGeoUtils.h"
 
-inline bool is_left_of(const Point &a, const Point &b) {
+bool is_left_of(const Point &a, const Point &b) {
     return a.x() < b.x();
 }
 
-inline bool is_right_of(const Point &a, const Point &b) {
+bool is_right_of(const Point &a, const Point &b) {
     return a.x() > b.x();
 }
 
-inline bool is_above(const Point &p, const Segment &s) {
+bool is_above(const Point &p, const Segment &s) {
     return CGAL::left_turn(s[0], s[1], p);
 }
 
-inline bool is_below(const Point &p, const Segment &s) {
+bool is_below(const Point &p, const Segment &s) {
     return CGAL::right_turn(s[0], s[1], p);
 }
 
