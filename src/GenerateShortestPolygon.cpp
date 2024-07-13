@@ -7,6 +7,7 @@
 #include <CGAL/Polygon_2.h>
 #include <CGAL/draw_polygon_2.h>
 #include "AlgoGeoUtils.h"
+#include "CommandLineArgumentHandler.h"
 #include "RandomPointGenerator.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
@@ -79,15 +80,30 @@ Polygon createShortestPolygon(const std::vector<Point> &points) {
     return shortest;
 }
 
-int main() {
-    // const std::vector<Point> userInput = getUserInput();
-    // Polygon shortestPolygon = createShortestPolygon(userInput);
-    // std::future<void> noValue = std::async([shortestPolygon]() { CGAL::draw(shortestPolygon); });
-    // return 0;
 
-    constexpr u32 defaultSeed = 69;
-    constexpr double defaultRadius = 10;
-    RandomPointGenerator generator(defaultRadius, {defaultRadius, defaultRadius}, defaultSeed);
+RandomPointGenerator createPointGenerator(const std::optional<u32> maybeSeed, const Point origin, const double radius) {
+    if (maybeSeed.has_value()) {
+        return RandomPointGenerator(radius, origin, maybeSeed.value());
+    }
+    return RandomPointGenerator(radius, origin);
+}
+
+int main(const int argc, char *argv[]) {
+    const std::optional<u32> maybeSeed = getCMDLineOption<u32>(argv, argv + argc, "-s");
+    constexpr Point defaultOrigin = {0, 0};
+    const Point origin = getCMDLineOption<Point>(argv, argv + argc, "-o").value_or(defaultOrigin);
+    const std::optional<double> maybeRadius = getCMDLineOption<double>(argv, argv + argc, "-r");
+    const std::optional<unsigned int> maybeNumberOfPoints = getCMDLineOption<unsigned int>(argv, argv + argc, "-n");
+
+    if (!maybeRadius.has_value()) {
+        throw std::invalid_argument("No radius value provided (use option -r)");
+    }
+
+    if (!maybeNumberOfPoints.has_value()) {
+        throw std::invalid_argument("No numberOfPoints value provided (use option -n)");
+    }
+
+    RandomPointGenerator generator = createPointGenerator(maybeSeed, origin, maybeRadius.value());
 
     auto points = generator.generatePoints(8);
     for (const Point point: points) {

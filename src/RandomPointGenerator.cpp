@@ -34,7 +34,11 @@ RandomPointGenerator::RandomPointGenerator(const double radius,
                                                                                     origin.y(), radius)) {
 }
 
-RandomPointGenerator::RandomPointGenerator(double radius) : RandomPointGenerator(radius, {0, 0}, createSeed()) {
+RandomPointGenerator::RandomPointGenerator(const double radius, const Point origin) : RandomPointGenerator(
+    radius, origin, createSeed()) {
+}
+
+RandomPointGenerator::RandomPointGenerator(const double radius) : RandomPointGenerator(radius, {0, 0}, createSeed()) {
 }
 
 
