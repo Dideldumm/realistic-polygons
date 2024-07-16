@@ -2,8 +2,8 @@
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 #include <CGAL/draw_polygon_2.h>
-#include "RandomPointGenerator.h"
-#include "AlgoGeoUtils.h"
+#include "utils/RandomPointGenerator.h"
+#include "utils/AlgoGeoUtils.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Polygon_2<Kernel> Polygon;

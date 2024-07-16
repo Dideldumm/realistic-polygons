@@ -7,18 +7,18 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "-Wall -Wpedantic -Wextra")
 
 add_executable(simplePolygon
-        src/AlgoGeoUtils.cpp
-        src/RandomPointGenerator.cpp
+        src/utils/AlgoGeoUtils.cpp
+        src/utils/RandomPointGenerator.cpp
         src/GenerateSimplePolygon.cpp
-        src/CommandLineArgumentHandler.h
-        src/CommandLineArgumentHandler.cpp)
+        src/utils/CommandLineArgumentHandler.h
+        src/utils/CommandLineArgumentHandler.cpp)
 
 add_executable(shortestPolygon
         src/GenerateShortestPolygon.cpp
-        src/AlgoGeoUtils.cpp
-        src/RandomPointGenerator.cpp
-        src/CommandLineArgumentHandler.h
-        src/CommandLineArgumentHandler.cpp)
+        src/utils/AlgoGeoUtils.cpp
+        src/utils/RandomPointGenerator.cpp
+        src/utils/CommandLineArgumentHandler.h
+        src/utils/CommandLineArgumentHandler.cpp)
 
 if (CGAL_Qt5_FOUND)
     target_link_libraries(simplePolygon PUBLIC CGAL::CGAL_Basic_viewer)

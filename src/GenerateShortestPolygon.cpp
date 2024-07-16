@@ -6,9 +6,9 @@
 #include <CGAL/Euclidean_distance.h>
 #include <CGAL/Polygon_2.h>
 #include <CGAL/draw_polygon_2.h>
-#include "AlgoGeoUtils.h"
-#include "CommandLineArgumentHandler.h"
-#include "RandomPointGenerator.h"
+#include "utils/AlgoGeoUtils.h"
+#include "utils/CommandLineArgumentHandler.h"
+#include "utils/RandomPointGenerator.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Polygon_2<Kernel> Polygon;
