@@ -3,6 +3,7 @@
 //
 
 #include "RandomPointGenerator.h"
+#include "CommandLineArgumentHandler.h"
 #include "AlgoGeoUtils.h"
 
 #define DEFAULT_ORIGIN {0,0}
@@ -27,17 +28,17 @@ std::uniform_real_distribution<> createDistribution(const double middle, const d
 }
 
 RandomPointGenerator::RandomPointGenerator(const double radius,
-                                           const Point origin = Point(0, 0),
-                                           const u32 seed = createSeed()) : radius(radius),
-                                                                            origin(origin),
-                                                                            seed(seed),
-                                                                            number_generator(
-                                                                                createNumberGenerator(seed)),
-                                                                            xDistribution(
-                                                                                createDistribution(origin.x(), radius)),
-                                                                            yDistribution(
-                                                                                createDistribution(
-                                                                                    origin.y(), radius)) {
+                                           const Point origin,
+                                           const u32 seed) : radius(radius),
+                                                             origin(origin),
+                                                             seed(seed),
+                                                             number_generator(
+                                                                 createNumberGenerator(seed)),
+                                                             xDistribution(
+                                                                 createDistribution(origin.x(), radius)),
+                                                             yDistribution(
+                                                                 createDistribution(
+                                                                     origin.y(), radius)) {
 }
 
 RandomPointGenerator::RandomPointGenerator(const double radius, const Point origin) : RandomPointGenerator(
@@ -52,7 +53,6 @@ RandomPointGenerator::RandomPointGenerator(const double radius) : RandomPointGen
     radius, defaultOrigin(), createSeed()) {
 }
 
-
 std::vector<Point> RandomPointGenerator::generatePoints(const unsigned int numberOfPoints) {
     std::vector<Point> points{};
     for (unsigned int i = 0; i < numberOfPoints; ++i) {
@@ -61,4 +61,20 @@ std::vector<Point> RandomPointGenerator::generatePoints(const unsigned int numbe
         points.emplace_back(x, y);
     }
     return points;
+}
+
+RandomPointGenerator createPointGenerator(const std::optional<std::string> &maybeSeed,
+                                          const std::optional<std::string> &maybeOrigin,
+                                          const double radius) {
+    Point origin;
+    if (maybeOrigin.has_value()) {
+        origin = parsePoint(maybeOrigin.value());
+    } else {
+        origin = {0, 0};
+    }
+
+    if (maybeSeed.has_value()) {
+        return RandomPointGenerator(radius, origin, std::stoi(maybeSeed.value()));
+    }
+    return RandomPointGenerator(radius, origin);
 }

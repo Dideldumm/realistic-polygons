@@ -81,22 +81,6 @@ Polygon createShortestPolygon(const std::vector<Point> &points) {
 }
 
 
-RandomPointGenerator createPointGenerator(const std::optional<std::string> &maybeSeed,
-                                          const std::optional<std::string> &maybeOrigin,
-                                          const double radius) {
-    Point origin;
-    if (maybeOrigin.has_value()) {
-        origin = parsePoint(maybeOrigin.value());
-    } else {
-        origin = {0, 0};
-    }
-
-    if (maybeSeed.has_value()) {
-        return RandomPointGenerator(radius, origin, std::stoi(maybeSeed.value()));
-    }
-    return RandomPointGenerator(radius, origin);
-}
-
 int main(const int argc, char *argv[]) {
     const int numberOfPoints = std::stoi(getMandatoryCMDLineOption(argv, argv + argc, "-n"));
     const double radius = std::stod(getMandatoryCMDLineOption(argv, argv + argc, "-r"));
@@ -106,7 +90,6 @@ int main(const int argc, char *argv[]) {
     RandomPointGenerator generator = createPointGenerator(maybeSeed, maybeOrigin,
                                                           radius);
     std::vector<Point> points = generator.generatePoints(numberOfPoints);
-
 
     for (const Point point: points) {
         std::cout << pointToString(point) << std::endl;
