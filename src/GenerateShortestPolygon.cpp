@@ -81,36 +81,41 @@ Polygon createShortestPolygon(const std::vector<Point> &points) {
 }
 
 
-RandomPointGenerator createPointGenerator(const std::optional<u32> maybeSeed, const Point origin, const double radius) {
+RandomPointGenerator createPointGenerator(const std::optional<std::string> &maybeSeed,
+                                          const std::optional<std::string> &maybeOrigin,
+                                          const double radius) {
+    Point origin;
+    if (maybeOrigin.has_value()) {
+        origin = parsePoint(maybeOrigin.value());
+    } else {
+        origin = {0, 0};
+    }
+
     if (maybeSeed.has_value()) {
-        return RandomPointGenerator(radius, origin, maybeSeed.value());
+        return RandomPointGenerator(radius, origin, std::stoi(maybeSeed.value()));
     }
     return RandomPointGenerator(radius, origin);
 }
 
 int main(const int argc, char *argv[]) {
-    const std::optional<u32> maybeSeed = getCMDLineOption<u32>(argv, argv + argc, "-s");
-    constexpr Point defaultOrigin = {0, 0};
-    const Point origin = getCMDLineOption<Point>(argv, argv + argc, "-o").value_or(defaultOrigin);
-    const std::optional<double> maybeRadius = getCMDLineOption<double>(argv, argv + argc, "-r");
-    const std::optional<unsigned int> maybeNumberOfPoints = getCMDLineOption<unsigned int>(argv, argv + argc, "-n");
+    const int numberOfPoints = std::stoi(getMandatoryCMDLineOption(argv, argv + argc, "-n"));
+    const double radius = std::stod(getMandatoryCMDLineOption(argv, argv + argc, "-r"));
+    const std::optional<std::string> maybeSeed = getCMDLineOption(argv, argv + argc, "-s");
+    const std::optional<std::string> maybeOrigin = getCMDLineOption(argv, argv + argc, "-o");
 
-    if (!maybeRadius.has_value()) {
-        throw std::invalid_argument("No radius value provided (use option -r)");
-    }
+    RandomPointGenerator generator = createPointGenerator(maybeSeed, maybeOrigin,
+                                                          radius);
+    std::vector<Point> points = generator.generatePoints(numberOfPoints);
 
-    if (!maybeNumberOfPoints.has_value()) {
-        throw std::invalid_argument("No numberOfPoints value provided (use option -n)");
-    }
 
-    RandomPointGenerator generator = createPointGenerator(maybeSeed, origin, maybeRadius.value());
-
-    auto points = generator.generatePoints(8);
     for (const Point point: points) {
         std::cout << pointToString(point) << std::endl;
     }
     std::cout << "And now we wait" << std::endl;
+    const auto start = std::chrono::high_resolution_clock::now();
     const Polygon polygon = createShortestPolygon(points);
-    std::cout << "Finished" << std::endl;
+    const auto stop = std::chrono::high_resolution_clock::now();
+    const auto duration = std::chrono::duration_cast<std::chrono::seconds>(stop - start);
+    std::cout << "Finished and took " << duration.count() << " seconds." << std::endl;
     std::future<void> noValue = std::async([polygon]() { CGAL::draw(polygon); });
 }

@@ -5,6 +5,8 @@
 #include "RandomPointGenerator.h"
 #include "AlgoGeoUtils.h"
 
+#define DEFAULT_ORIGIN {0,0}
+
 u32 createSeed() {
     std::random_device os_seed;
     return os_seed();
@@ -13,6 +15,10 @@ u32 createSeed() {
 NumberGenerator createNumberGenerator(const u32 seed) {
     const NumberGenerator generator(seed);
     return generator;
+}
+
+Point defaultOrigin() {
+    return {0, 0};
 }
 
 std::uniform_real_distribution<> createDistribution(const double middle, const double radius) {
@@ -38,7 +44,12 @@ RandomPointGenerator::RandomPointGenerator(const double radius, const Point orig
     radius, origin, createSeed()) {
 }
 
-RandomPointGenerator::RandomPointGenerator(const double radius) : RandomPointGenerator(radius, {0, 0}, createSeed()) {
+RandomPointGenerator::RandomPointGenerator(const double radius, const u32 seed) : RandomPointGenerator(
+    radius, defaultOrigin(), seed) {
+}
+
+RandomPointGenerator::RandomPointGenerator(const double radius) : RandomPointGenerator(
+    radius, defaultOrigin(), createSeed()) {
 }
 
 

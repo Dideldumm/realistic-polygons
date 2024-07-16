@@ -8,20 +8,22 @@
 #include <algorithm>
 #include <optional>
 #include <string>
+#include <CGAL/Polygon_2.h>
+#include "RandomPointGenerator.h"
+
+typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
+typedef CGAL::Polygon_2<Kernel> Polygon;
+typedef CGAL::Point_2<Kernel> Point;
 
 inline bool isOptionPresent(char **begin, char **end, const std::string &optionName) {
     return std::find(begin, end, optionName) != end;
 }
 
-template<typename T>
-std::optional<T> getCMDLineOption(char **begin, char **end, const std::string &optionName) {
-    char **itr = std::find(begin, end, optionName);
-    if (!isOptionPresent(begin, end, optionName) || ++itr == end) {
-        return {};
-    }
-    T parsed = dynamic_cast<T>(*itr);
-    return parsed;
-}
+Point parsePoint(const std::string &pointString);
+
+std::optional<std::string> getCMDLineOption(char **begin, char **end, const std::string &optionName);
+
+std::string getMandatoryCMDLineOption(char **begin, char **end, const std::string &optionName);
 
 
 #endif //COMMANDLINEARGUMENTHANDLER_H

@@ -25,7 +25,11 @@ private:
 
 public:
     explicit RandomPointGenerator(double radius, Point origin, u32 seed);
+
     explicit RandomPointGenerator(double radius, Point origin);
+
+    explicit RandomPointGenerator(double radius, u32 seed);
+
     explicit RandomPointGenerator(double radius);
 
     [[nodiscard]] std::vector<Point> generatePoints(unsigned int numberOfPoints);

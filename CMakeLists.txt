@@ -10,13 +10,15 @@ add_executable(simplePolygon
         src/AlgoGeoUtils.cpp
         src/RandomPointGenerator.cpp
         src/GenerateSimplePolygon.cpp
-        src/CommandLineArgumentHandler.h)
+        src/CommandLineArgumentHandler.h
+        src/CommandLineArgumentHandler.cpp)
 
 add_executable(shortestPolygon
         src/GenerateShortestPolygon.cpp
         src/AlgoGeoUtils.cpp
         src/RandomPointGenerator.cpp
-        src/CommandLineArgumentHandler.h)
+        src/CommandLineArgumentHandler.h
+        src/CommandLineArgumentHandler.cpp)
 
 if (CGAL_Qt5_FOUND)
     target_link_libraries(simplePolygon PUBLIC CGAL::CGAL_Basic_viewer)
