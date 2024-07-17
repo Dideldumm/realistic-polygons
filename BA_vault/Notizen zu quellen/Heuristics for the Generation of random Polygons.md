@@ -11,7 +11,7 @@
 	- of algorithms that  operate on polygons
 
 ## Notations
-- Vertices of a polygon $v_1, ..., v_n$ are assumed to be in counterclockwise order
+- Vertices of a polygon $v_1, ..., v_n$ are assumed to be in counter clockwise order
 - A point of the input set $S$ is denoted by $s$ 
 - A arbitrary point is denoted by $p$
 - $P_i$ denotes the polygon obtained after the execution of phases $1$ through $i$ of the algorithm
@@ -52,9 +52,27 @@ An **incremental algorithm** adding one point after another.
 
 ### Space Partioning
 A **divide and conquer** algorithm that recursively partitions $S$ into subsets which have disjoint convex hulls.
+The algorithm cannot generate all possible simple polygons for the given set of points.
 
+Initially
+- Let $S'$ be a subset of $S$
+	- thus $CH(S')$ does not contain any point from $S\setminus S'$ 
+- When generating a Polygon $P$ it is ensured that the intersection of $P$ with $CH(S')$ consists of a single chain
+	- $s'_f$ is the first and
+	- $s'_l$ is the last point of that chain
+	- both points are located at the boundary of $CH(S')$
+- initially $s'_f$ and $s'_l$ are chosen randomly
+-  **TODO check:** all points on one side of $l(s'_f, s'_l)$ and the points itself determine $S'$
+	- the rest of the points remains in $S$
 
+To split a subset $S'$ in two smaller subsets $S''$ and $S'''$ 
+- Pick a point $s'\in S'$ at random
+- Select a random line $l$ through $s'$ that intersects $\overline{s'_fs'_l}$ 
+- the line divides $S'$ into two smaller subsets $S''$ and $S'''$
+	- $S''$ has $s'_f$ as first and $s'$ as last point
+	- $S'''$ has $s'$ as first and $s'_l$ as last point
 
+The recursion ends if a subset has only two points or less in it.
 
 ### Permute & Reject
 Creates random permutations until a simple polygon is encountered.
@@ -62,5 +80,30 @@ Creates random permutations until a simple polygon is encountered.
 ### 2-opt Moves
 Generates a random (non-simple) polygon and repairs the deficiencies.
 
+- Initialize a Polygon $P$ with a random permutation of $S$ 
+- Iteratively remove all self intersections of $P$ with 2-opt moves
+	- replace a pair of intersection edges
+	- $(v_i,v_{i+1}), (v_j,v_{j+1}) \Longrightarrow (v_{j+1},v_{i+1}), (v_j,v_i)$ 
+
+The number of intersections to be removed is at most $O(n^3)$, which makes this algorithm run in $O(n^4)$ 
+The algorithm can find all possible simple polygons for the given set of points but not uniformly distributed.
+
 ### Incremental Construction & Backtracking
 Tries to minimize backtracking by eliminating dead search trees.
+
+- Choose a random point
+- Iteratively add more random points until the chain of points is not longer simple
+	- **TODO check:** i think that means we make a polygon in each iteration with the points we have and check if that polygon is simple or not
+- Stop when all points from $S$ could be added, or the chain is no longer simple
+	- for the latter -> backtrack
+
+Goal is to avoid extensive backtracking.
+To achieve this, edges that are not usable to complete a polygon are marked
+
+- Initially all edges are unmarked
+- When a new point is added, thus using edge $e$
+	- -> all edges that intersect $e$ are marked
+- additionally if a point $p$ is adjacent to two other points $p_1, p_2$ that both
+	- have only two unmarked edges
+	- -> mark all edges incident to $p$, but those also incident to $p_1$ or $p_2$
+- 
