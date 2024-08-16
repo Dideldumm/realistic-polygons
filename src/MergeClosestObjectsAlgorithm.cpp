@@ -134,9 +134,12 @@ int main() {
         objects.erase(std::remove(objects.begin(), objects.end(), shortestA), objects.end());
         objects.erase(std::remove(objects.begin(), objects.end(), shortestB), objects.end());
         PolygonalObject merged(shortestA, shortestB);
+        objects.emplace_back(merged);
     }
 
-    const PolygonalObject finalPolygonalChain = objects.front();
-    const Polygon polygon(finalPolygonalChain.getElements().begin(), finalPolygonalChain.getElements().end());
+    const auto finalPolygonalChain = objects.front().getElements();
+    const Polygon polygon(finalPolygonalChain.begin(), finalPolygonalChain.end());
+    const std::string points = polygonToString(polygon);
+    std::cout << "final Polygon: " << points << std::endl;
     CGAL::draw(polygon);
 }
