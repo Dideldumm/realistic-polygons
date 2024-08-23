@@ -9,6 +9,7 @@
 #include "utils/AlgoGeoUtils.h"
 #include "utils/CommandLineArgumentHandler.h"
 #include "utils/RandomPointGenerator.h"
+#include "utils/ToStringUtils.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Polygon_2<Kernel> Polygon;

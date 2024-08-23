@@ -6,7 +6,7 @@ find_package(CGAL REQUIRED OPTIONAL_COMPONENTS Qt5)
 find_package(GMP REQUIRED)
 
 # Set C++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wpedantic -Wextra")
 
@@ -21,15 +21,32 @@ add_executable(shortestPolygon
         src/GenerateShortestPolygon.cpp
         src/utils/AlgoGeoUtils.cpp
         src/utils/RandomPointGenerator.cpp
-        src/utils/CommandLineArgumentHandler.cpp)
+        src/utils/CommandLineArgumentHandler.cpp
+        src/utils/ToStringUtils.cpp)
 
 add_executable(mergeClosestObjects
         src/MergeClosestObjectsAlgorithm.cpp
-        src/utils/AlgoGeoUtils.cpp)
+        src/utils/AlgoGeoUtils.cpp
+        src/utils/ToStringUtils.cpp)
+
+add_executable(twoOptMoves
+        src/TwoOptMoves.cpp
+        src/utils/RandomPointGenerator.cpp
+        src/utils/CommandLineArgumentHandler.cpp
+        src/utils/ToStringUtils.cpp)
+
+# Define a list of targets
+set(TARGETS simplePolygon shortestPolygon mergeClosestObjects twoOptMoves)
 
 # Link libraries if CGAL with Qt5 is found
 if (CGAL_Qt5_FOUND)
-    target_link_libraries(simplePolygon PUBLIC CGAL::CGAL_Basic_viewer stdc++ m)
-    target_link_libraries(shortestPolygon PUBLIC CGAL::CGAL_Basic_viewer stdc++ m)
-    target_link_libraries(mergeClosestObjects PUBLIC CGAL::CGAL_Basic_viewer stdc++ m)
+    foreach (target IN LISTS TARGETS)
+        target_link_libraries(${target} PUBLIC CGAL::CGAL_Basic_viewer stdc++ m)
+    endforeach ()
+else ()
+    # Fallback action or alternative libraries
+    message(WARNING "CGAL with Qt5 not found. The viewer will not be linked.")
+    foreach (target IN LISTS TARGETS)
+        target_link_libraries(${target} PUBLIC stdc++ m)
+    endforeach ()
 endif ()

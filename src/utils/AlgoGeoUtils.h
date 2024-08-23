@@ -31,8 +31,4 @@ public:
     bool operator()(const Point &a, const Point &b) const;
 };
 
-std::string pointToString(Point point);
-
-std::string polygonToString(const Polygon &polygon);
-
 #endif //ALGOGEOUTILS_H
