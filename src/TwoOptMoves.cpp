@@ -24,6 +24,23 @@ class TwoOptMoves {
 private:
     Polygon polygon;
 
+    static std::optional<Point> getIntersection(const Segment &edge, const Segment &newPointEdge, const Point &oldEnd,
+                                                const Point &oldStart) {
+        if (auto intersectEdgeToNewPoint = CGAL::intersection(edge, newPointEdge)) {
+            // Determine the type of intersection using boost::get
+            if (const Point *p = boost::get<Point>(&*intersectEdgeToNewPoint)) {
+                // Intersection is a point
+                if (*p != oldEnd && *p != oldStart) {
+                    return {*p};
+                }
+            } else if (boost::get<Segment>(&*intersectEdgeToNewPoint)) {
+                // Intersection is a line (lines are collinear)
+                throw std::invalid_argument("The lines are collinear and overlap.");
+            }
+        }
+        return {};
+    }
+
     static Segment findIntersection(const Polygon &test, const Point &newPoint) {
         Segment edgeToNewPoint;
         Segment edgeFromNewPoint;
@@ -42,35 +59,19 @@ private:
 
         for (Segment edge: test.edges()) {
             if (edge == edgeToNewPoint || edge == edgeFromNewPoint) {
-                // skip the added segments
+                // skip the added segments since they obviously intersect with themselves
                 continue;
             }
 
-            std::optional<Point> intersectionWithNewEdges;
-            if (auto intersectEdgeToNewPoint = CGAL::intersection(edge, edgeToNewPoint)) {
-                // Determine the type of intersection using boost::get
-                if (const Point *p = boost::get<Point>(&*intersectEdgeToNewPoint)) {
-                    // Intersection is a point
-                    if (*p != oldEnd && *p != oldStart) {
-                        return edge;
-                    }
-                } else if (boost::get<Segment>(&*intersectEdgeToNewPoint)) {
-                    // Intersection is a line (lines are collinear)
-                    throw std::invalid_argument("The lines are collinear and overlap.");
-                }
+            std::optional<Point> intersectionWithNewEdges = getIntersection(
+                edge, edgeToNewPoint, oldEnd, oldStart);
+            if (intersectionWithNewEdges) {
+                return edge;
             }
 
-            if (auto intersectEdgeFromNewPoint = CGAL::intersection(edge, edgeFromNewPoint)) {
-                // Determine the type of intersection using boost::get
-                if (const Point *p = boost::get<Point>(&*intersectEdgeFromNewPoint)) {
-                    // Intersection is a point
-                    if (*p != oldEnd && *p != oldStart) {
-                        return edge;
-                    }
-                } else if (boost::get<Segment>(&*intersectEdgeFromNewPoint)) {
-                    // Intersection is a line (lines are collinear)
-                    throw std::invalid_argument("The lines are collinear and overlap.");
-                }
+            intersectionWithNewEdges = getIntersection(edge, edgeFromNewPoint, oldEnd, oldStart);
+            if (intersectionWithNewEdges) {
+                return edge;
             }
         }
         throw std::invalid_argument("Iterated over all edges but found no intersection");
@@ -87,8 +88,6 @@ public:
         test.push_back(point);
 
         while (!test.is_simple()) {
-            CGAL::draw(polygon);
-            CGAL::draw(test);
             Segment intersectingSegment = findIntersection(test, point);
             test = polygon;
             for (auto it = test.begin(); it != test.end(); ++it) {
@@ -97,7 +96,6 @@ public:
                     break;
                 }
             }
-            CGAL::draw(test);
         }
         polygon = test;
     }
@@ -131,9 +129,8 @@ std::pair<Segment, Segment> swapSegmentsOtherWay(const Segment &x, const Segment
 
 
 int main() {
-    // RandomPointGenerator point_generator(30.0);
-    // std::vector<Point> points = point_generator.generatePoints(8);
-    std::vector<Point> points = {{0, 0}, {0, -1}, {1, 1}, {2, -1}, {2, 0}};
+    RandomPointGenerator point_generator(30.0);
+    std::vector<Point> points = point_generator.generatePoints(50);
     TwoOptMoves two_opt_moves;
     for (Point point: points) {
         two_opt_moves.addPoint(point);
@@ -143,4 +140,5 @@ int main() {
     std::cout << "Number of edges: " << polygon.edges().size() << "\n" << std::endl;
     std::cout << "Vertices: \n" << containerToString<Point>(polygon.vertices(), pointToString, "\n") << std::endl;
     std::cout << "Number of vertices: " << polygon.size() << "\n" << std::endl;
+    CGAL::draw(polygon);
 }
