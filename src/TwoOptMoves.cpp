@@ -25,45 +25,49 @@ private:
     Polygon polygon;
 
     static Segment findIntersection(const Polygon &test, const Point &newPoint) {
-        Segment newSegment1;
-        Segment newSegment2;
+        Segment edgeToNewPoint;
+        Segment edgeFromNewPoint;
         Point oldStart;
         Point oldEnd;
         for (Segment edge: test.edges()) {
             if (edge.end() == newPoint) {
-                newSegment1 = edge;
+                edgeToNewPoint = edge;
                 oldStart = edge.start();
             }
             if (edge.start() == newPoint) {
-                newSegment2 = edge;
+                edgeFromNewPoint = edge;
                 oldEnd = edge.end();
             }
         }
 
         for (Segment edge: test.edges()) {
-            if (edge == newSegment1 || edge == newSegment2) {
+            if (edge == edgeToNewPoint || edge == edgeFromNewPoint) {
+                // skip the added segments
                 continue;
             }
 
-            if (auto intersection1 = CGAL::intersection(edge, newSegment1)) {
+            std::optional<Point> intersectionWithNewEdges;
+            if (auto intersectEdgeToNewPoint = CGAL::intersection(edge, edgeToNewPoint)) {
                 // Determine the type of intersection using boost::get
-                if (const Point* p = boost::get<Point>(&*intersection1)) {
+                if (const Point *p = boost::get<Point>(&*intersectEdgeToNewPoint)) {
                     // Intersection is a point
                     if (*p != oldEnd && *p != oldStart) {
                         return edge;
                     }
-                } else if (boost::get<Segment>(&*intersection1)) {
+                } else if (boost::get<Segment>(&*intersectEdgeToNewPoint)) {
                     // Intersection is a line (lines are collinear)
                     throw std::invalid_argument("The lines are collinear and overlap.");
                 }
-            } else if (auto intersection2 = CGAL::intersection(edge, newSegment2)) {
+            }
+
+            if (auto intersectEdgeFromNewPoint = CGAL::intersection(edge, edgeFromNewPoint)) {
                 // Determine the type of intersection using boost::get
-                if (const Point* p = boost::get<Point>(&*intersection2)) {
+                if (const Point *p = boost::get<Point>(&*intersectEdgeFromNewPoint)) {
                     // Intersection is a point
                     if (*p != oldEnd && *p != oldStart) {
                         return edge;
                     }
-                } else if (boost::get<Segment>(&*intersection2)) {
+                } else if (boost::get<Segment>(&*intersectEdgeFromNewPoint)) {
                     // Intersection is a line (lines are collinear)
                     throw std::invalid_argument("The lines are collinear and overlap.");
                 }
