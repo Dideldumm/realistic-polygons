@@ -2,11 +2,15 @@
 // Created by dideldumm on 16.08.24.
 //
 
+
 #include <CGAL/draw_polygon_2.h>
 #include "utils/AlgoGeoUtils.h"
 #include "utils/RandomPointGenerator.h"
 #include "utils/ToStringUtils.h"
+#include "utils/CommandLineArgumentHandler.h"
+
 #include "TwoOptMoves.h"
+
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
@@ -15,7 +19,8 @@ typedef CGAL::Segment_2<Kernel> Segment;
 typedef boost::variant<Point, Segment> IntersectionResult;
 
 
-std::optional<Point> TwoOptMoves::getIntersection(const Segment &edge, const Segment &newPointEdge, const Point &oldEnd, const Point &oldStart) {
+std::optional<Point> TwoOptMoves::getIntersection(const Segment &edge, const Segment &newPointEdge, const Point &oldEnd,
+                                                  const Point &oldStart) {
     if (auto intersectEdgeToNewPoint = CGAL::intersection(edge, newPointEdge)) {
         // Determine the type of intersection using boost::get
         if (const Point *p = boost::get<Point>(&*intersectEdgeToNewPoint)) {
@@ -89,10 +94,11 @@ void TwoOptMoves::addPoint(const Point &point) {
     polygon = test;
 }
 
+int TwoOptMoves::main(const int argc, char **argv) {
+    const int numberOfPoints = argc > 0 ? std::stoi(argv[0]) : 12;
 
-int main() {
     RandomPointGenerator point_generator(30.0);
-    std::vector<Point> points = point_generator.generatePoints(50);
+    std::vector<Point> points = point_generator.generatePoints(numberOfPoints);
     TwoOptMoves two_opt_moves;
     for (Point point: points) {
         two_opt_moves.addPoint(point);
@@ -103,4 +109,5 @@ int main() {
     std::cout << "Vertices: \n" << containerToString<Point>(polygon.vertices(), pointToString, "\n") << std::endl;
     std::cout << "Number of vertices: " << polygon.size() << "\n" << std::endl;
     CGAL::draw(polygon);
+    return 0;
 }

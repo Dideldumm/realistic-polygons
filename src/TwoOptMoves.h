@@ -26,6 +26,8 @@ public:
     [[nodiscard]] Polygon getPolygon() const {
         return this->polygon;
     }
+
+    static int main(int argc, char **argv);
 };
 
 #endif //TWOOPTMOVES_H
