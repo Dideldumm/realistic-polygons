@@ -27,7 +27,10 @@ add_executable(shortestPolygon
 add_executable(mergeClosestObjects
         src/MergeClosestObjectsAlgorithm.cpp
         src/utils/AlgoGeoUtils.cpp
-        src/utils/ToStringUtils.cpp)
+        src/utils/ToStringUtils.cpp
+        src/TwoOptMoves.cpp
+        src/utils/RandomPointGenerator.cpp
+        src/utils/CommandLineArgumentHandler.cpp)
 
 add_executable(twoOptMoves
         src/TwoOptMoves.cpp

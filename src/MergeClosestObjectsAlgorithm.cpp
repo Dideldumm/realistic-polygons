@@ -5,8 +5,12 @@
 #include <CGAL/draw_polygon_2.h>
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
+
+#include <ranges>
 #include "utils/AlgoGeoUtils.h"
 #include "utils/ToStringUtils.h"
+#include "TwoOptMoves.h"
+#include "utils/RandomPointGenerator.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
@@ -32,8 +36,8 @@ private:
                 this->elements.push_back(point);
             }
         } else {
-            for (auto begin = elements.rbegin(); begin != elements.rend(); ++begin) {
-                this->elements.push_back(*begin);
+            for (auto element: std::ranges::reverse_view(elements)) {
+                this->elements.push_back(element);
             }
         }
     }
@@ -112,11 +116,23 @@ PolygonalObject::PolygonalObject(const PolygonalObject &a, const PolygonalObject
     addAllElements(connectorB == First, b.elements);
 }
 
-int main() {
+Polygon removeIntersections(const auto &polygonWithIntersections) {
+    TwoOptMoves twoOptMoves;
+    for (Point point: polygonWithIntersections) {
+        twoOptMoves.addPoint(point);
+    }
+    return twoOptMoves.getPolygon();
+}
+
+int main(const int argc, char **argv) {
     // initialize all points as polygonal objects
-    std::vector<Point> input = {{0, 0}, {1, 0}, {1, 1}, {2, 2}, {1, 3}, {0, 2}};
+    const int numberOfPoints = argc > 1 ? std::stoi(argv[1]) : 12;
+
+    RandomPointGenerator point_generator(30.0);
+    std::vector<Point> points = point_generator.generatePoints(numberOfPoints);
+
     std::vector<PolygonalObject> objects;
-    for (const auto point: input) {
+    for (const auto point: points) {
         objects.emplace_back(point);
     }
 
@@ -138,9 +154,9 @@ int main() {
         objects.emplace_back(merged);
     }
 
-    const auto finalPolygonalChain = objects.front().getElements();
-    const Polygon polygon(finalPolygonalChain.begin(), finalPolygonalChain.end());
-    const std::string points = polygonToString(polygon);
-    std::cout << "final Polygon: " << points << std::endl;
+    const std::vector<Point> finalPolygonalChain = objects.front().getElements();
+    const Polygon polygonWithintersections(finalPolygonalChain.begin(), finalPolygonalChain.end());
+    CGAL::draw(polygonWithintersections);
+    const Polygon polygon = removeIntersections(polygonWithintersections.vertices());
     CGAL::draw(polygon);
 }
