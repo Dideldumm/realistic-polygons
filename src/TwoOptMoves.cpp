@@ -6,7 +6,6 @@
 #include <CGAL/draw_polygon_2.h>
 #include "utils/AlgoGeoUtils.h"
 #include "utils/RandomPointGenerator.h"
-#include "utils/ToStringUtils.h"
 #include "utils/CommandLineArgumentHandler.h"
 
 #include "TwoOptMoves.h"
@@ -72,8 +71,36 @@ Segment TwoOptMoves::findIntersection(const Polygon &test, const Point &newPoint
     throw std::invalid_argument("Iterated over all edges but found no intersection");
 }
 
+// Polygon TwoOptMoves::constructPolygonWithoutIntersection(const Point &point, Polygon &test) const {
+//     const Segment intersectingSegment = findIntersection(test, point);
+//     test = polygon;
+//     for (auto it = test.begin(); it != test.end(); ++it) {
+//         if (const Point vertex = *it; vertex == intersectingSegment.end()) {
+//             test.insert(it, point);
+//             break;
+//         }
+//     }
+//     return test;
+// }
+
+Polygon TwoOptMoves::constructPolygonWithoutIntersection(const Point &point, Polygon &test) const {
+    const Segment intersectingSegment = findIntersection(test, point);
+    test = polygon;
+    Polygon newPolygon;
+    bool alreadyAdded = false;
+    for (Point vertex: test.vertices()) {
+        newPolygon.push_back(vertex);
+        if (!alreadyAdded && (vertex == intersectingSegment.start() || vertex == intersectingSegment.end())) {
+            newPolygon.push_back(point);
+            alreadyAdded = true;
+        }
+    }
+    return newPolygon;
+}
+
 void TwoOptMoves::addPoint(const Point &point) {
     if (polygon.size() < 3) {
+        // trivial case
         polygon.push_back(point);
         return;
     }
@@ -82,32 +109,9 @@ void TwoOptMoves::addPoint(const Point &point) {
     test.push_back(point);
 
     while (!test.is_simple()) {
-        Segment intersectingSegment = findIntersection(test, point);
-        test = polygon;
-        for (auto it = test.begin(); it != test.end(); ++it) {
-            if (const Point vertex = *it; vertex == intersectingSegment.end()) {
-                test.insert(it, point);
-                break;
-            }
-        }
+        std::cout << "now" << std::endl;
+        CGAL::draw(test);
+        test = constructPolygonWithoutIntersection(point, test);
     }
     polygon = test;
-}
-
-int TwoOptMoves::main(const int argc, char **argv) {
-    const int numberOfPoints = argc > 0 ? std::stoi(argv[0]) : 12;
-
-    RandomPointGenerator point_generator(30.0);
-    std::vector<Point> points = point_generator.generatePoints(numberOfPoints);
-    TwoOptMoves two_opt_moves;
-    for (Point point: points) {
-        two_opt_moves.addPoint(point);
-    }
-    const Polygon polygon = two_opt_moves.getPolygon();
-    std::cout << "Edges: \n" << containerToString<Segment>(polygon.edges(), segmentToString, "\n") << std::endl;
-    std::cout << "Number of edges: " << polygon.edges().size() << "\n" << std::endl;
-    std::cout << "Vertices: \n" << containerToString<Point>(polygon.vertices(), pointToString, "\n") << std::endl;
-    std::cout << "Number of vertices: " << polygon.size() << "\n" << std::endl;
-    CGAL::draw(polygon);
-    return 0;
 }

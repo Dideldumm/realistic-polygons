@@ -20,14 +20,14 @@ class TwoOptMoves {
 
     static Segment findIntersection(const Polygon &test, const Point &newPoint);
 
+    [[nodiscard]] Polygon constructPolygonWithoutIntersection(const Point &point, Polygon &test) const;
+
 public:
     void addPoint(const Point &point);
 
     [[nodiscard]] Polygon getPolygon() const {
         return this->polygon;
     }
-
-    static int main(int argc, char **argv);
 };
 
 #endif //TWOOPTMOVES_H

@@ -15,14 +15,16 @@ add_executable(simplePolygon
         src/utils/AlgoGeoUtils.cpp
         src/utils/RandomPointGenerator.cpp
         src/GenerateSimplePolygon.cpp
-        src/utils/CommandLineArgumentHandler.cpp)
+        src/utils/CommandLineArgumentHandler.cpp
+)
 
 add_executable(shortestPolygon
         src/GenerateShortestPolygon.cpp
         src/utils/AlgoGeoUtils.cpp
         src/utils/RandomPointGenerator.cpp
         src/utils/CommandLineArgumentHandler.cpp
-        src/utils/ToStringUtils.cpp)
+        src/utils/ToStringUtils.cpp
+)
 
 add_executable(mergeClosestObjects
         src/MergeClosestObjectsAlgorithm.cpp
@@ -30,13 +32,16 @@ add_executable(mergeClosestObjects
         src/utils/ToStringUtils.cpp
         src/TwoOptMoves.cpp
         src/utils/RandomPointGenerator.cpp
-        src/utils/CommandLineArgumentHandler.cpp)
+        src/utils/CommandLineArgumentHandler.cpp
+)
 
 add_executable(twoOptMoves
         src/TwoOptMoves.cpp
         src/utils/RandomPointGenerator.cpp
         src/utils/CommandLineArgumentHandler.cpp
-        src/utils/ToStringUtils.cpp)
+        src/utils/ToStringUtils.cpp
+        src/TwoOptMovesTest.cpp
+)
 
 # Define a list of targets
 set(TARGETS simplePolygon shortestPolygon mergeClosestObjects twoOptMoves)

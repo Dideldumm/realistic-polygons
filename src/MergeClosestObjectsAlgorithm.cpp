@@ -155,8 +155,11 @@ int main(const int argc, char **argv) {
     }
 
     const std::vector<Point> finalPolygonalChain = objects.front().getElements();
-    const Polygon polygonWithintersections(finalPolygonalChain.begin(), finalPolygonalChain.end());
-    CGAL::draw(polygonWithintersections);
-    const Polygon polygon = removeIntersections(polygonWithintersections.vertices());
-    CGAL::draw(polygon);
+    const Polygon polygonWithIntersections(finalPolygonalChain.begin(), finalPolygonalChain.end());
+    CGAL::draw(polygonWithIntersections);
+    if (!polygonWithIntersections.is_simple()) {
+        std::cout << "polygon is not simple" << std::endl;
+        const Polygon polygon = removeIntersections(polygonWithIntersections.vertices());
+        CGAL::draw(polygon);
+    }
 }
