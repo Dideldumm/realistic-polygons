@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.28)
 project(try_cgal)
 
 # Find necessary packages
-find_package(CGAL REQUIRED OPTIONAL_COMPONENTS Qt5)
+find_package(CGAL REQUIRED OPTIONAL_COMPONENTS Qt6)
 find_package(GMP REQUIRED)
 
 # Set C++ standard
@@ -46,8 +46,8 @@ add_executable(twoOptMoves
 # Define a list of targets
 set(TARGETS simplePolygon shortestPolygon mergeClosestObjects twoOptMoves)
 
-# Link libraries if CGAL with Qt5 is found
-if (CGAL_Qt5_FOUND)
+# Link libraries if CGAL with Qt6 is found
+if (CGAL_Qt6_FOUND)
     foreach (target IN LISTS TARGETS)
         target_link_libraries(${target} PUBLIC CGAL::CGAL_Basic_viewer stdc++ m)
     endforeach ()
@@ -58,3 +58,4 @@ else ()
         target_link_libraries(${target} PUBLIC stdc++ m)
     endforeach ()
 endif ()
+add_executable(divideAndConquer src/DivideAndConquer.cpp src/DivideAndConquer.h)

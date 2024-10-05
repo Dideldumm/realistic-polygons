@@ -15,19 +15,18 @@ typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
 typedef CGAL::Polygon_2<Kernel> Polygon;
 typedef CGAL::Segment_2<Kernel> Segment;
-typedef boost::variant<Point, Segment> IntersectionResult;
 
 
 std::optional<Point> TwoOptMoves::getIntersection(const Segment &edge, const Segment &newPointEdge, const Point &oldEnd,
                                                   const Point &oldStart) {
     if (auto intersectEdgeToNewPoint = CGAL::intersection(edge, newPointEdge)) {
         // Determine the type of intersection using boost::get
-        if (const Point *p = boost::get<Point>(&*intersectEdgeToNewPoint)) {
+        if (const Point *p = std::get_if<Point>(&*intersectEdgeToNewPoint)) {
             // Intersection is a point
             if (*p != oldEnd && *p != oldStart) {
                 return {*p};
             }
-        } else if (boost::get<Segment>(&*intersectEdgeToNewPoint)) {
+        } else if (std::get_if<Segment>(&*intersectEdgeToNewPoint)) {
             // Intersection is a line (lines are collinear)
             throw std::invalid_argument("The lines are collinear and overlap.");
         }
