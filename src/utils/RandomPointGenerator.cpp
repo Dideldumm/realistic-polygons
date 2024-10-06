@@ -4,7 +4,7 @@
 
 #include "RandomPointGenerator.h"
 #include "CommandLineArgumentHandler.h"
-#include "geometry/PointUtils.h"
+#include "geometry/PointAndSegmentUtils.h"
 
 #define DEFAULT_ORIGIN {0,0}
 

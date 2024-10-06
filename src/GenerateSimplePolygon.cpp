@@ -3,7 +3,7 @@
 #include <CGAL/Polygon_2.h>
 #include <CGAL/draw_polygon_2.h>
 #include "utils/RandomPointGenerator.h"
-#include "utils/geometry/PointUtils.h"
+#include "utils/geometry/PointAndSegmentUtils.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Polygon_2<Kernel> Polygon;

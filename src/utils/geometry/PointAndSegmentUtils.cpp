@@ -1,7 +1,7 @@
 //
 // Created by dideldumm on 12.07.24.
 //
-#include "PointUtils.h"
+#include "PointAndSegmentUtils.h"
 
 bool is_left_of(const Point &a, const Point &b) {
     return a.x() < b.x();
