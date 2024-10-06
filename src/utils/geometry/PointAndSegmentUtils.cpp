@@ -23,6 +23,6 @@ bool LeftComparator::operator()(const Point &a, const Point &b) const {
     return is_left_of(a, b);
 }
 
-bool ::RightComparator::operator()(const Point &a, const Point &b) const {
+bool RightComparator::operator()(const Point &a, const Point &b) const {
     return is_right_of(a, b);
 }

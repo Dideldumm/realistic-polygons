@@ -18,6 +18,26 @@ typedef CGAL::Polygon_2<Kernel> Polygon;
 
 class PolygonalChain;
 
+enum ShortestConnectionPosition {
+    First,
+    Last
+};
+
+std::tuple<ShortestConnectionPosition, ShortestConnectionPosition, double> minimalDistance(
+    const PolygonalChain &a, const PolygonalChain &b);
+
+void PolygonalChain::addAllElements(const bool forwards, const std::vector<Point> &elements) {
+    if (forwards) {
+        for (auto point: elements) {
+            this->elements.push_back(point);
+        }
+    } else {
+        for (auto element: std::ranges::reverse_view(elements)) {
+            this->elements.push_back(element);
+        }
+    }
+}
+
 std::vector<std::pair<PolygonalChain, PolygonalChain> > createAllPairs(const std::vector<PolygonalChain> &elements) {
     std::vector<std::pair<PolygonalChain, PolygonalChain> > pairs = {};
     for (unsigned int i = 0; i < elements.size(); ++i) {

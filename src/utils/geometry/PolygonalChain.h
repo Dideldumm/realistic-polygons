@@ -22,6 +22,9 @@ private:
     void addAllElements(bool forwards, const std::vector<Point> &elements);
 
 public:
+    explicit PolygonalChain(): elements({}) {
+    };
+
     /**
      * Creates a Polygonal Chain that contains exactly one point
      * @param p the point that this polygonal chain will contain
@@ -70,8 +73,10 @@ public:
     bool operator==(const PolygonalChain &other) const {
         return other.elements == this->elements;
     }
+
+    static double find_minimal_squared_distance(const Point &a, const PolygonalChain &b);
+
+    static double find_minimal_squared_distance(const PolygonalChain &a, const PolygonalChain &b);
 };
-
-
 
 #endif //POLYGONALCHAIN_H

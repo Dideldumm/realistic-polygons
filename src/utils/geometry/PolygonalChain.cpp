@@ -3,14 +3,7 @@
 //
 
 #include "PolygonalChain.h"
-
-enum ShortestConnectionPosition {
-    First,
-    Last
-};
-
-std::tuple<ShortestConnectionPosition, ShortestConnectionPosition, double> minimalDistance(
-    const PolygonalChain &a, const PolygonalChain &b);
+#include <ranges>
 
 void PolygonalChain::addAllElements(const bool forwards, const std::vector<Point> &elements) {
     if (forwards) {
@@ -25,37 +18,24 @@ void PolygonalChain::addAllElements(const bool forwards, const std::vector<Point
 }
 
 PolygonalChain::PolygonalChain(const PolygonalChain &chain, const Point &point) {
+}
 
+
+double PolygonalChain::find_minimal_squared_distance(const Point &a, const PolygonalChain &b) {
+}
+
+double PolygonalChain::find_minimal_squared_distance(const PolygonalChain &a,
+                                                     const PolygonalChain &b) {
+    if (a.size() == 1 && b.size() == 1) {
+        return CGAL::squared_distance(a.getFirstElement(), b.getFirstElement());
+    }
+    if (a.size() == 1) {
+        return find_minimal_squared_distance(a.getFirstElement(), b);
+    }
 }
 
 PolygonalChain::PolygonalChain(const PolygonalChain &a, const PolygonalChain &b) {
     // auto [connectorA, connectorB, distance] = minimalDistance(a, b);
     // addAllElements(connectorA == Last, a.elements);
-    // addAllElements(connectorB == First, b.elements);
-}
-
-std::tuple<ShortestConnectionPosition, ShortestConnectionPosition, double> minimalDistance(
-    const PolygonalChain &a, const PolygonalChain &b) {
-    double shortestDistance = CGAL::squared_distance(a.getFirstElement(), b.getFirstElement());
-    ShortestConnectionPosition connectorA = First;
-    ShortestConnectionPosition connectorB = First;
-    if (const double firstLastDistance = CGAL::squared_distance(a.getFirstElement(), b.getLastElement());
-        shortestDistance > firstLastDistance) {
-        shortestDistance = firstLastDistance;
-        connectorA = First;
-        connectorB = Last;
-    }
-    if (const double lastFirstDistance = CGAL::squared_distance(a.getLastElement(), b.getFirstElement());
-        shortestDistance > lastFirstDistance) {
-        shortestDistance = lastFirstDistance;
-        connectorA = Last;
-        connectorB = First;
-    }
-    if (const double lastLastDistance = CGAL::squared_distance(a.getLastElement(), b.getLastElement());
-        shortestDistance > lastLastDistance) {
-        shortestDistance = lastLastDistance;
-        connectorA = Last;
-        connectorB = Last;
-    }
-    return {connectorA, connectorB, shortestDistance};
+    // addAllElements(connectorB == First, b.elements);,
 }

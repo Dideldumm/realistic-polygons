@@ -14,5 +14,18 @@ void remove_element_from_vector(std::vector<T> &vector, const T &element) {
     }
 }
 
+template<typename T>
+std::vector<std::pair<T, T> > createAllPairs(const std::vector<T> &elements) {
+    std::vector<std::pair<T, T> > pairs = {};
+    for (unsigned int i = 0; i < elements.size(); ++i) {
+        for (unsigned int j = i; j < elements.size(); ++j) {
+            if (i != j) {
+                pairs.emplace_back(elements[i], elements[j]);
+            }
+        }
+    }
+    return pairs;
+}
+
 
 #endif //VECTORUTILS_H
