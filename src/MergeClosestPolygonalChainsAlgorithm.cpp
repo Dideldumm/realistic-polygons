@@ -9,8 +9,8 @@
 #include "utils/geometry/PolygonalChain.h"
 #include "utils/VectorUtils.h"
 
-std::pair<PolygonalChain, PolygonalChain> findClosestPolygonalChains(
-    const std::vector<PolygonalChain> &setOfPolygonalChains) {
+std::pair<PolygonalChain, PolygonalChain> find_closest_polygonal_chains(
+    const std::vector<PolygonalChain> &set_of_polygonal_chains) {
 }
 
 template<typename Container>
@@ -37,14 +37,14 @@ template<typename Container>
 Polygon mergeClosestChainsAlgorithm(const Container &points) {
     std::vector<PolygonalChain> polygonal_chains = map_points_to_polygonal_chains(points);
     while (polygonal_chains.size() > 1) {
-        auto [a, b] = findClosestPolygonalChains(polygonal_chains);
+        auto [a, b] = find_closest_polygonal_chains(polygonal_chains);
         PolygonalChain merged = merge_chains(a, b);
         remove_element_from_vector(polygonal_chains, a);
         remove_element_from_vector(polygonal_chains, b);
         polygonal_chains.emplace_back(merged);
     }
-    const PolygonalChain finalChain = polygonal_chains.front();
-    return build_polygon(finalChain);
+    const PolygonalChain final_chain = polygonal_chains.front();
+    return build_polygon(final_chain);
 }
 
 int main(const int argc, char **argv) {
