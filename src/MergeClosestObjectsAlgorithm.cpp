@@ -7,7 +7,6 @@
 #include <CGAL/Polygon_2.h>
 
 #include <ranges>
-#include "utils/geometry/AlgoGeoUtils.h"
 #include "utils/ToStringUtils.h"
 #include "TwoOptMoves.h"
 #include "utils/RandomPointGenerator.h"

@@ -6,7 +6,6 @@
 #include <CGAL/Euclidean_distance.h>
 #include <CGAL/Polygon_2.h>
 #include <CGAL/draw_polygon_2.h>
-#include "utils/geometry/AlgoGeoUtils.h"
 #include "utils/CommandLineArgumentHandler.h"
 #include "utils/RandomPointGenerator.h"
 #include "utils/ToStringUtils.h"

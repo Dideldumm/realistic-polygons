@@ -5,7 +5,6 @@
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 
-#include "utils/geometry/AlgoGeoUtils.h"
 #include "utils/geometry/PolygonalChain.h"
 #include "utils/VectorUtils.h"
 

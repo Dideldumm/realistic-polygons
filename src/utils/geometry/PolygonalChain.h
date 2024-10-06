@@ -9,7 +9,6 @@
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 
-#include <ranges>
 #include "../ToStringUtils.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
