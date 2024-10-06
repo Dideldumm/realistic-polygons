@@ -33,6 +33,8 @@ add_executable(mergeClosestObjects
         src/TwoOptMoves.cpp
         src/utils/RandomPointGenerator.cpp
         src/utils/CommandLineArgumentHandler.cpp
+        src/utils/PolygonalChain.cpp
+        src/utils/PolygonalChain.h
 )
 
 add_executable(twoOptMoves
@@ -42,6 +44,16 @@ add_executable(twoOptMoves
         src/utils/ToStringUtils.cpp
         src/TwoOptMovesTest.cpp
 )
+
+add_executable(divideAndConquer
+        src/DivideAndConquer.cpp)
+
+add_executable(mergeClosestChains
+        src/MergeClosestPolygonalChainsAlgorithm.cpp
+        src/utils/PolygonalChain.cpp
+        src/utils/PolygonalChain.h
+        src/utils/VectorUtils.cpp
+        src/utils/VectorUtils.h)
 
 # Define a list of targets
 set(TARGETS simplePolygon shortestPolygon mergeClosestObjects twoOptMoves)
@@ -58,4 +70,4 @@ else ()
         target_link_libraries(${target} PUBLIC stdc++ m)
     endforeach ()
 endif ()
-add_executable(divideAndConquer src/DivideAndConquer.cpp src/DivideAndConquer.h)
+
