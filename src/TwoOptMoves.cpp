@@ -4,7 +4,7 @@
 
 
 #include <CGAL/draw_polygon_2.h>
-#include "utils/AlgoGeoUtils.h"
+#include "utils/geometry/AlgoGeoUtils.h"
 #include "utils/RandomPointGenerator.h"
 #include "utils/CommandLineArgumentHandler.h"
 

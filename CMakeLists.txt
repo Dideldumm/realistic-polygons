@@ -12,7 +12,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wpedantic -Wextra")
 
 # Add executables
 add_executable(simplePolygon
-        src/utils/AlgoGeoUtils.cpp
+        src/utils/geometry/AlgoGeoUtils.cpp
         src/utils/RandomPointGenerator.cpp
         src/GenerateSimplePolygon.cpp
         src/utils/CommandLineArgumentHandler.cpp
@@ -20,7 +20,7 @@ add_executable(simplePolygon
 
 add_executable(shortestPolygon
         src/GenerateShortestPolygon.cpp
-        src/utils/AlgoGeoUtils.cpp
+        src/utils/geometry/AlgoGeoUtils.cpp
         src/utils/RandomPointGenerator.cpp
         src/utils/CommandLineArgumentHandler.cpp
         src/utils/ToStringUtils.cpp
@@ -28,13 +28,13 @@ add_executable(shortestPolygon
 
 add_executable(mergeClosestObjects
         src/MergeClosestObjectsAlgorithm.cpp
-        src/utils/AlgoGeoUtils.cpp
+        src/utils/geometry/AlgoGeoUtils.cpp
         src/utils/ToStringUtils.cpp
         src/TwoOptMoves.cpp
         src/utils/RandomPointGenerator.cpp
         src/utils/CommandLineArgumentHandler.cpp
-        src/utils/PolygonalChain.cpp
-        src/utils/PolygonalChain.h
+        src/utils/geometry/PolygonalChain.cpp
+        src/utils/geometry/PolygonalChain.h
 )
 
 add_executable(twoOptMoves
@@ -50,8 +50,8 @@ add_executable(divideAndConquer
 
 add_executable(mergeClosestChains
         src/MergeClosestPolygonalChainsAlgorithm.cpp
-        src/utils/PolygonalChain.cpp
-        src/utils/PolygonalChain.h
+        src/utils/geometry/PolygonalChain.cpp
+        src/utils/geometry/PolygonalChain.h
         src/utils/VectorUtils.cpp
         src/utils/VectorUtils.h)
 

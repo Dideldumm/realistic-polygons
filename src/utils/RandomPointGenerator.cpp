@@ -4,7 +4,7 @@
 
 #include "RandomPointGenerator.h"
 #include "CommandLineArgumentHandler.h"
-#include "AlgoGeoUtils.h"
+#include "geometry/AlgoGeoUtils.h"
 
 #define DEFAULT_ORIGIN {0,0}
 
