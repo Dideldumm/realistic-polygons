@@ -24,10 +24,14 @@ void PolygonalChain::addAllElements(const bool forwards, const std::vector<Point
     }
 }
 
+PolygonalChain::PolygonalChain(const PolygonalChain &chain, const Point &point) {
+
+}
+
 PolygonalChain::PolygonalChain(const PolygonalChain &a, const PolygonalChain &b) {
-    auto [connectorA, connectorB, distance] = minimalDistance(a, b);
-    addAllElements(connectorA == Last, a.elements);
-    addAllElements(connectorB == First, b.elements);
+    // auto [connectorA, connectorB, distance] = minimalDistance(a, b);
+    // addAllElements(connectorA == Last, a.elements);
+    // addAllElements(connectorB == First, b.elements);
 }
 
 std::tuple<ShortestConnectionPosition, ShortestConnectionPosition, double> minimalDistance(

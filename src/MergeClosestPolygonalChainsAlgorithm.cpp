@@ -23,6 +23,9 @@ std::vector<PolygonalChain> map_points_to_polygonal_chains(const Container &poin
 }
 
 PolygonalChain merge_chains(const PolygonalChain &a, const PolygonalChain &b) {
+    if (a.size() == 1 && b.size() == 1) {
+        PolygonalChain c(a.getFirstElement());
+    }
 }
 
 Polygon build_polygon(const PolygonalChain &polygonal_chain) {
