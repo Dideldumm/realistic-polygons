@@ -46,7 +46,7 @@ Eine Möglichkeit wäre Polygone aus der Punktmenge zu bilden, welche einen mög
 	- Die Hüllen irgendwie mergen
 
 - Plane Sweep aber drehen? -> star shaped polygons
-	- Funktioniert glaube nicht so gut
+	- Das resultierende polygon ist nicht wirklich realistisch
 
 - Idee Polygon ohne Überschneidungen abwandeln
 	- rekursiver Algorithmus (divide and conquer)
