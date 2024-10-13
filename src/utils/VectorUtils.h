@@ -15,6 +15,13 @@ void remove_element_from_vector(std::vector<T> &vector, const T &element) {
 }
 
 template<typename T>
+void remove_all_from_vector(std::vector<T> &vector, const auto &elements) {
+    for (T element: elements) {
+        remove_element_from_vector(vector, element);
+    }
+}
+
+template<typename T>
 std::vector<std::pair<T, T> > createAllPairs(const std::vector<T> &elements) {
     std::vector<std::pair<T, T> > pairs = {};
     for (unsigned int i = 0; i < elements.size(); ++i) {
