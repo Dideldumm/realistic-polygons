@@ -10,14 +10,21 @@ Then the convex hulls are merged to build a polygon that consists of all the giv
 ```c
 function merge_convex_hulls(PointSet point_set) -> Polygon {
     List convex_hulls := create_convex_hulls(point_set);
-    Polygon polygon = convex_hulls.pop_back();
+    Polygon polygon = convex_hulls.pop_front();
     while (convex_hulls is not empty) {
-        Polygon new_hull = convex_hulls.pop_back();
+        Polygon new_hull = convex_hulls.pop_front();
         polygon = merge(polygon, new_hull);
     }
 
 }
 
+/**
+ * Iteratively creates a convex hull for the given point set and
+ * removes the points from the set.
+ * Repeats this process until the set is empty.
+ * Returns a list of the created convex hulls
+ * The hulls in the list are sorted from most outside to most inside.
+ */
 function create_convex_hulls(PointSet point_set) -> ListOfConvexHulls {
     List convex_hulls := {};
     while (point_set is not empty) {
