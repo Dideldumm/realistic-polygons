@@ -45,8 +45,8 @@ add_executable(twoOptMoves
         src/TwoOptMovesTest.cpp
 )
 
-add_executable(divideAndConquer
-        src/DivideAndConquer.cpp)
+add_executable(mergeConvexHulls
+        src/MergeConvexHulls.cpp)
 
 add_executable(mergeClosestChains
         src/MergeClosestPolygonalChainsAlgorithm.cpp
