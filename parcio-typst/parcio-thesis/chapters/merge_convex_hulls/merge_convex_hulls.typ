@@ -30,9 +30,7 @@ function create_convex_hulls(PointSet point_set) -> ListOfConvexHulls {
     while (point_set is not empty) {
         Polygon new_hull = create_convex_hull(point_set);
         convex_hulls.add(new_hull);
-        for (Point point in new_hull) {
-            point_set.remove(point);
-        }
+        point_set.remove_all(new_hull.get_vertices());
     }
     return convex_hulls;
 }
