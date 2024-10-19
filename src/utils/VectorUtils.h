@@ -53,5 +53,21 @@ std::vector<std::pair<T, T> > createAllPairs(const std::vector<T> &elements) {
     return pairs;
 }
 
+/**
+ * Removes the first element of the given vector an returns it.
+ * If the vector is empty, returns no value.
+ * @tparam T the type of the elements in the vector
+ * @param vector the vector to pop the first element from
+ * @return the first element in the given vector or empty if the given vector has no elements
+ */
+template<typename T>
+std::optional<T> pop_front(std::vector<T> &vector) {
+    if (vector.empty()) {
+        return {};
+    }
+    T front = vector.front();
+    vector.erase(vector.begin());
+    return front;
+}
 
 #endif //VECTORUTILS_H
