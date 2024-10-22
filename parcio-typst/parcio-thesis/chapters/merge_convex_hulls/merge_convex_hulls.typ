@@ -37,6 +37,11 @@ function create_convex_hulls(PointSet point_set) -> ListOfConvexHulls {
 
 function merge(Polygon polygon, ConvexPolygon new_hull) -> Polygon {
     // TODO add implementation
+    for (Point vertex : new_hull.vertices()) {
+        Segment nearest_segment = find_nearest_segment(polygon.edges(), point);
+        polygon.insert_point_at_segment(nearest_segment, point);
+    }
+    return polygon;
 }
 
 ```

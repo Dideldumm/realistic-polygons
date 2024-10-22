@@ -46,7 +46,9 @@ add_executable(twoOptMoves
 )
 
 add_executable(mergeConvexHulls
-        src/MergeConvexHulls.cpp)
+        src/MergeConvexHulls.cpp
+        src/utils/geometry/PolygonUtils.cpp
+        src/utils/geometry/PolygonUtils.h)
 
 #add_executable(mergeClosestChains
 #        src/MergeClosestPolygonalChainsAlgorithm.cpp

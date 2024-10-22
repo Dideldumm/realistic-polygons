@@ -6,6 +6,9 @@
 #include <CGAL/Polygon_2.h>
 #include <CGAL/convex_hull_2.h>
 
+#include "utils/geometry/PointAndSegmentUtils.h"
+#include "utils/geometry/PolygonUtils.h"
+
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
 typedef CGAL::Segment_2<Kernel> Segment;
@@ -32,11 +35,10 @@ std::list<ConvexHull> build_convex_hulls(std::list<Point> points) {
 }
 
 void merge(Polygon &polygon, const ConvexHull &new_hull) {
-    // TODO implement
-    // Wir wollen am liebsten die Punkte von new_hull durchgehen und
-    // an der Kante von polygon einfügen, die den Punkt am nächsten ist.
-    // Dafür brauchen wir eine Methode, die uns einen Punkt an einer Kante einfügen lässt.
-    // Polygon.insert fügt vor i ein, das heißt wir nehmen den Endpunkt der Kante??
+    for (Point point: new_hull) {
+        const Segment nearest_segment = find_nearest_segment(polygon.edges(), point);
+        insert_point_at_segment(polygon, nearest_segment, point);
+    }
 }
 
 Polygon merge_convex_hulls_algorithm(const auto &vertices) {
@@ -45,8 +47,8 @@ Polygon merge_convex_hulls_algorithm(const auto &vertices) {
         std::cout << "Houston wir haben ein Problem!" << std::endl;
     }
     ConvexHull initial_hull = convex_hulls.front();
-    Polygon polygon(initial_hull.begin(), initial_hull.end());
     convex_hulls.pop_front();
+    Polygon polygon(initial_hull.begin(), initial_hull.end());
     while (!convex_hulls.empty()) {
         ConvexHull new_hull = convex_hulls.front();
         convex_hulls.pop_front();
