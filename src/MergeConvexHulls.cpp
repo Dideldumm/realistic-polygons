@@ -5,9 +5,11 @@
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 #include <CGAL/convex_hull_2.h>
+#include <CGAL/draw_polygon_2.h>
 
 #include "utils/geometry/PointAndSegmentUtils.h"
 #include "utils/geometry/PolygonUtils.h"
+#include "utils/RandomPointGenerator.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
@@ -41,7 +43,7 @@ void merge(Polygon &polygon, const ConvexHull &new_hull) {
     }
 }
 
-Polygon merge_convex_hulls_algorithm(const auto &vertices) {
+Polygon merge_convex_hulls_algorithm(const std::list<Point> &vertices) {
     std::list<ConvexHull> convex_hulls = build_convex_hulls(vertices);
     if (convex_hulls.empty()) {
         std::cout << "Houston wir haben ein Problem!" << std::endl;
@@ -58,4 +60,9 @@ Polygon merge_convex_hulls_algorithm(const auto &vertices) {
 }
 
 int main() {
+    RandomPointGenerator point_generator{};
+    std::list<Point> points;
+    std::ranges::copy(point_generator.generatePoints(1032), std::back_inserter(points));
+    const Polygon polygon = merge_convex_hulls_algorithm(points);
+    CGAL::draw(polygon);
 }

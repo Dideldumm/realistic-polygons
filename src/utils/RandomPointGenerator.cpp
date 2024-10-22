@@ -53,6 +53,9 @@ RandomPointGenerator::RandomPointGenerator(const double radius) : RandomPointGen
     radius, defaultOrigin(), createSeed()) {
 }
 
+RandomPointGenerator::RandomPointGenerator() : RandomPointGenerator(1) {
+}
+
 std::vector<Point> RandomPointGenerator::generatePoints(const unsigned int numberOfPoints) {
     std::vector<Point> points{};
     for (unsigned int i = 0; i < numberOfPoints; ++i) {
@@ -62,19 +65,19 @@ std::vector<Point> RandomPointGenerator::generatePoints(const unsigned int numbe
     }
     return points;
 }
-
-RandomPointGenerator createPointGenerator(const std::optional<std::string> &maybeSeed,
-                                          const std::optional<std::string> &maybeOrigin,
-                                          const double radius) {
-    Point origin;
-    if (maybeOrigin.has_value()) {
-        origin = parsePoint(maybeOrigin.value());
-    } else {
-        origin = {0, 0};
-    }
-
-    if (maybeSeed.has_value()) {
-        return RandomPointGenerator(radius, origin, std::stoi(maybeSeed.value()));
-    }
-    return RandomPointGenerator(radius, origin);
-}
+//
+// RandomPointGenerator createPointGenerator(const std::optional<std::string> &maybeSeed,
+//                                           const std::optional<std::string> &maybeOrigin,
+//                                           const double radius) {
+//     Point origin;
+//     if (maybeOrigin.has_value()) {
+//         origin = parsePoint(maybeOrigin.value());
+//     } else {
+//         origin = {0, 0};
+//     }
+//
+//     if (maybeSeed.has_value()) {
+//         return RandomPointGenerator(radius, origin, std::stoi(maybeSeed.value()));
+//     }
+//     return RandomPointGenerator(radius, origin);
+// }

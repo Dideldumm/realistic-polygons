@@ -32,11 +32,13 @@ public:
 
     explicit RandomPointGenerator(double radius);
 
+    explicit RandomPointGenerator();
+
     [[nodiscard]] std::vector<Point> generatePoints(unsigned int numberOfPoints);
 };
 
-RandomPointGenerator createPointGenerator(const std::optional<std::string> &maybeSeed,
-                                          const std::optional<std::string> &maybeOrigin,
-                                          double radius);
+// RandomPointGenerator createPointGenerator(const std::optional<std::string> &maybeSeed,
+//                                           const std::optional<std::string> &maybeOrigin,
+//                                           double radius);
 
 #endif //SEEDEDPOINTSETGENERATOR_H
