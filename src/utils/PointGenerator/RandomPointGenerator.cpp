@@ -7,15 +7,6 @@
 
 #define DEFAULT_ORIGIN {0,0}
 
-Point defaultOrigin() {
-    return {0, 0};
-}
-
-std::uniform_real_distribution<> createDistribution(const double middle, const double radius) {
-    const std::uniform_real_distribution<> distribution(middle - radius, middle + radius);
-    return distribution;
-}
-
 RandomPointGenerator::RandomPointGenerator(const double radius,
                                            const Point origin,
                                            const u32 seed) : RingDistributionPointGenerator(
@@ -27,11 +18,11 @@ RandomPointGenerator::RandomPointGenerator(const double radius, const Point orig
 }
 
 RandomPointGenerator::RandomPointGenerator(const double radius, const u32 seed) : RandomPointGenerator(
-    radius, defaultOrigin(), seed) {
+    radius, DEFAULT_ORIGIN, seed) {
 }
 
 RandomPointGenerator::RandomPointGenerator(const double radius) : RandomPointGenerator(
-    radius, defaultOrigin(), create_seed()) {
+    radius, DEFAULT_ORIGIN, create_seed()) {
 }
 
 RandomPointGenerator::RandomPointGenerator() : RandomPointGenerator(1) {

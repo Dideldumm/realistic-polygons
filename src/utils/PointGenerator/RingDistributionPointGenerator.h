@@ -6,7 +6,7 @@
 #define RINGDISTRIBUTIONPOINTGENERATOR_H
 
 #include <random>
-#include "../geometry/SeededPointGenerator.h"
+#include "SeededPointGenerator.h"
 
 typedef uint_least32_t u32;
 
@@ -18,7 +18,7 @@ private:
     std::uniform_real_distribution<> angle_distribution;
     std::uniform_real_distribution<> distance_distribution;
 
-    Point calculate_point(double angle, double distance) const;
+    [[nodiscard]] Point calculate_point(double angle, double distance) const;
 
 public:
     explicit RingDistributionPointGenerator(double inner_radius, double outer_radius, Point origin, u32 seed);

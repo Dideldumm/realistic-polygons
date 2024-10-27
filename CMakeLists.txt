@@ -51,9 +51,7 @@ add_executable(mergeConvexHulls
         src/utils/geometry/PointAndSegmentUtils.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
         src/utils/PointGenerator/RingDistributionPointGenerator.cpp
-        src/utils/PointGenerator/RingDistributionPointGenerator.h
-        src/utils/geometry/SeededPointGenerator.h
-        src/utils/geometry/SeededPointGenerator.cpp)
+        src/utils/PointGenerator/SeededPointGenerator.cpp)
 
 #add_executable(mergeClosestChains
 #        src/MergeClosestPolygonalChainsAlgorithm.cpp

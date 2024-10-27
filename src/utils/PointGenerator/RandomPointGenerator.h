@@ -9,7 +9,7 @@
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 
 #include "RingDistributionPointGenerator.h"
-#include "../geometry/SeededPointGenerator.h"
+#include "SeededPointGenerator.h"
 
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
