@@ -8,18 +8,18 @@
 #include <random>
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 
+#include "../geometry/SeededPointGenerator.h"
+
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
 typedef uint_least32_t u32;
 typedef std::mt19937 NumberGenerator;
 
-class RandomPointGenerator {
+class RandomPointGenerator final : SeededPointGenerator {
 private:
     const double radius;
     const Point origin;
-    const u32 seed;
-    NumberGenerator number_generator;
     std::uniform_real_distribution<> xDistribution;
     std::uniform_real_distribution<> yDistribution;
 
@@ -34,11 +34,7 @@ public:
 
     explicit RandomPointGenerator();
 
-    [[nodiscard]] std::vector<Point> generatePoints(unsigned int numberOfPoints);
+    [[nodiscard]] std::vector<Point> generate_points(unsigned int number_of_points) override;
 };
-
-// RandomPointGenerator createPointGenerator(const std::optional<std::string> &maybeSeed,
-//                                           const std::optional<std::string> &maybeOrigin,
-//                                           double radius);
 
 #endif //SEEDEDPOINTSETGENERATOR_H
