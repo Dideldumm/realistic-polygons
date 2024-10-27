@@ -10,12 +10,15 @@
 
 typedef uint_least32_t u32;
 
-class RingDistributionPointGenerator final : SeededPointGenerator {
+class RingDistributionPointGenerator : SeededPointGenerator {
 private:
+    const Point origin;
     const double inner_radius;
     const double outer_radius;
     std::uniform_real_distribution<> angle_distribution;
     std::uniform_real_distribution<> distance_distribution;
+
+    Point calculate_point(double angle, double distance) const;
 
 public:
     explicit RingDistributionPointGenerator(double inner_radius, double outer_radius, Point origin, u32 seed);

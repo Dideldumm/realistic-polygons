@@ -14,6 +14,7 @@ RingDistributionPointGenerator::RingDistributionPointGenerator(const double inne
                                                                Point origin,
                                                                const u32 seed) : SeededPointGenerator(
         seed, create_number_generator(seed)),
+    origin(origin),
     inner_radius(inner_radius),
     outer_radius(outer_radius),
     angle_distribution(createDistribution(0, 360)),
@@ -36,9 +37,11 @@ RingDistributionPointGenerator::RingDistributionPointGenerator(const double inne
     inner_radius, outer_radius, {0, 0}, create_seed()) {
 }
 
-Point calculate_point(const double angle, const double distance) {
+Point RingDistributionPointGenerator::calculate_point(const double angle, const double distance) const {
     double x = distance * std::cos(angle);
+    x += origin.x();
     double y = distance * std::sin(angle);
+    y += origin.y();
     return {x, y};
 }
 
