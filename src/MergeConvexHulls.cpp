@@ -61,7 +61,7 @@ Polygon merge_convex_hulls_algorithm(const std::list<Point> &vertices) {
 
 int main(int argc, char **argv) {
     const int number_of_points = std::stoi(argv[1]);
-    RandomPointGenerator point_generator{};
+    RingDistributionPointGenerator point_generator(10, 15);
     std::list<Point> points;
     std::ranges::copy(point_generator.generate_points(number_of_points), std::back_inserter(points));
     const Polygon polygon = merge_convex_hulls_algorithm(points);
