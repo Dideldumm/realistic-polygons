@@ -17,7 +17,7 @@ typedef CGAL::Point_2<Kernel> Point;
 typedef uint_least32_t u32;
 typedef std::mt19937 NumberGenerator;
 
-class RandomPointGenerator final : RingDistributionPointGenerator {
+class RandomPointGenerator final : public RingDistributionPointGenerator {
 public:
     explicit RandomPointGenerator(double radius, Point origin, u32 seed);
 
@@ -28,8 +28,6 @@ public:
     explicit RandomPointGenerator(double radius);
 
     explicit RandomPointGenerator();
-
-    [[nodiscard]] std::vector<Point> generate_points(unsigned int number_of_points) override;
 };
 
 #endif //SEEDEDPOINTSETGENERATOR_H
