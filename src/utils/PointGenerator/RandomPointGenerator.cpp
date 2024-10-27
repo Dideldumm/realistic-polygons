@@ -18,14 +18,8 @@ std::uniform_real_distribution<> createDistribution(const double middle, const d
 
 RandomPointGenerator::RandomPointGenerator(const double radius,
                                            const Point origin,
-                                           const u32 seed) : SeededPointGenerator(seed, create_number_generator(seed)),
-                                                             radius(radius),
-                                                             origin(origin),
-                                                             xDistribution(
-                                                                 createDistribution(origin.x(), radius)),
-                                                             yDistribution(
-                                                                 createDistribution(
-                                                                     origin.y(), radius)) {
+                                           const u32 seed) : RingDistributionPointGenerator(
+    0, radius, origin, seed) {
 }
 
 RandomPointGenerator::RandomPointGenerator(const double radius, const Point origin) : RandomPointGenerator(
@@ -41,14 +35,4 @@ RandomPointGenerator::RandomPointGenerator(const double radius) : RandomPointGen
 }
 
 RandomPointGenerator::RandomPointGenerator() : RandomPointGenerator(1) {
-}
-
-std::vector<Point> RandomPointGenerator::generate_points(const unsigned int number_of_points) {
-    std::vector<Point> points{};
-    for (unsigned int i = 0; i < number_of_points; ++i) {
-        double x = this->xDistribution(this->number_generator);
-        double y = this->yDistribution(this->number_generator);
-        points.emplace_back(x, y);
-    }
-    return points;
 }
