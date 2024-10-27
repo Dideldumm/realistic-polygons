@@ -3,8 +3,7 @@
 //
 
 #include "RandomPointGenerator.h"
-#include "CommandLineArgumentHandler.h"
-#include "geometry/PointAndSegmentUtils.h"
+#include "../CommandLineArgumentHandler.h"
 
 #define DEFAULT_ORIGIN {0,0}
 
