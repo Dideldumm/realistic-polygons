@@ -14,6 +14,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wpedantic -Wextra")
 add_executable(simplePolygon
         src/utils/geometry/PointAndSegmentUtils.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
+        src/utils/PointGenerator/SeededPointGenerator.cpp
+        src/utils/PointGenerator/RingDistributionPointGenerator.cpp
         src/GenerateSimplePolygon.cpp
         src/utils/CommandLineArgumentHandler.cpp
 )
@@ -22,6 +24,8 @@ add_executable(shortestPolygon
         src/GenerateShortestPolygon.cpp
         src/utils/geometry/PointAndSegmentUtils.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
+        src/utils/PointGenerator/SeededPointGenerator.cpp
+        src/utils/PointGenerator/RingDistributionPointGenerator.cpp
         src/utils/CommandLineArgumentHandler.cpp
         src/utils/ToStringUtils.cpp
 )
@@ -31,7 +35,9 @@ add_executable(mergeClosestObjects
         src/utils/geometry/PointAndSegmentUtils.cpp
         src/utils/ToStringUtils.cpp
         src/TwoOptMoves.cpp
-        src/utils/RandomPointGenerator.cpp
+        src/utils/PointGenerator/RandomPointGenerator.cpp
+        src/utils/PointGenerator/SeededPointGenerator.cpp
+        src/utils/PointGenerator/RingDistributionPointGenerator.cpp
         src/utils/CommandLineArgumentHandler.cpp
         src/utils/geometry/PolygonalChain.cpp
         src/utils/geometry/PolygonalChain.h
@@ -40,6 +46,8 @@ add_executable(mergeClosestObjects
 add_executable(twoOptMoves
         src/TwoOptMoves.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
+        src/utils/PointGenerator/SeededPointGenerator.cpp
+        src/utils/PointGenerator/RingDistributionPointGenerator.cpp
         src/utils/CommandLineArgumentHandler.cpp
         src/utils/ToStringUtils.cpp
         src/TwoOptMovesTest.cpp

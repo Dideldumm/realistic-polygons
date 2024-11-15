@@ -82,8 +82,8 @@ int main(const int argc, char **argv) {
                 shortestB = b;
             }
         }
-        objects.erase(std::remove(objects.begin(), objects.end(), shortestA), objects.end());
-        objects.erase(std::remove(objects.begin(), objects.end(), shortestB), objects.end());
+        std::erase(objects, shortestA);
+        std::erase(objects, shortestB);
         PolygonalChain merged(shortestA, shortestB);
         objects.emplace_back(merged);
     }
