@@ -7,7 +7,7 @@
 #include <CGAL/Polygon_2.h>
 #include <CGAL/draw_polygon_2.h>
 #include "utils/CommandLineArgumentHandler.h"
-#include "utils/RandomPointGenerator.h"
+#include "utils/PointGenerator/RandomPointGenerator.h"
 #include "utils/ToStringUtils.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
@@ -33,7 +33,7 @@ std::vector<Polygon> generateAllPolygonsForSetOfPoints(const std::vector<Point> 
     do {
         Polygon currentPolygon = generatePolygonForPermutation(points, permutations);
         polygons.push_back(currentPolygon);
-    } while (std::next_permutation(permutations.begin(), permutations.end()));
+    } while (std::ranges::next_permutation(permutations).found);
     return polygons;
 }
 
@@ -65,9 +65,7 @@ std::vector<Point> getUserInput() {
 
 Polygon createShortestPolygon(const std::vector<Point> &points) {
     std::vector<Polygon> allPossiblePolygons = generateAllPolygonsForSetOfPoints(points);
-    allPossiblePolygons.erase(std::remove_if(allPossiblePolygons.begin(), allPossiblePolygons.end(),
-                                             [](const Polygon &polygon) { return !polygon.is_simple(); }),
-                              allPossiblePolygons.end());
+    erase_if(allPossiblePolygons, [](const Polygon &polygon) { return !polygon.is_simple(); });
 
     Polygon shortest;
     double shortestCircumference = std::numeric_limits<double>::max();
@@ -83,13 +81,9 @@ Polygon createShortestPolygon(const std::vector<Point> &points) {
 
 int main(const int argc, char *argv[]) {
     const int numberOfPoints = std::stoi(getMandatoryCMDLineOption(argv, argv + argc, "-n"));
-    const double radius = std::stod(getMandatoryCMDLineOption(argv, argv + argc, "-r"));
-    const std::optional<std::string> maybeSeed = getCMDLineOption(argv, argv + argc, "-s");
-    const std::optional<std::string> maybeOrigin = getCMDLineOption(argv, argv + argc, "-o");
 
-    RandomPointGenerator generator = createPointGenerator(maybeSeed, maybeOrigin,
-                                                          radius);
-    std::vector<Point> points = generator.generatePoints(numberOfPoints);
+    RandomPointGenerator generator;
+    std::vector<Point> points = generator.generate_points(numberOfPoints);
 
     for (const Point point: points) {
         std::cout << pointToString(point) << std::endl;

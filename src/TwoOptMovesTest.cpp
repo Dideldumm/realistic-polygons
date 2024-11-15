@@ -5,7 +5,7 @@
 #include <CGAL/draw_polygon_2.h>
 
 #include "TwoOptMoves.h"
-#include "utils/RandomPointGenerator.h"
+#include "utils/PointGenerator/RandomPointGenerator.h"
 #include "utils/ToStringUtils.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
@@ -17,7 +17,7 @@ int main(const int argc, char **argv) {
     const int numberOfPoints = argc > 1 ? std::stoi(argv[1]) : 12;
 
     RandomPointGenerator point_generator(30.0);
-    std::vector<Point> points = point_generator.generatePoints(numberOfPoints);
+    std::vector<Point> points = point_generator.generate_points(numberOfPoints);
     TwoOptMoves two_opt_moves;
     for (Point point: points) {
         two_opt_moves.addPoint(point);

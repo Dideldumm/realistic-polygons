@@ -4,6 +4,7 @@
 
 #ifndef VECTORUTILS_H
 #define VECTORUTILS_H
+#include <optional>
 #include <vector>
 
 /**

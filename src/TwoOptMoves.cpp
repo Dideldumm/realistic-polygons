@@ -4,7 +4,7 @@
 
 
 #include <CGAL/draw_polygon_2.h>
-#include "utils/RandomPointGenerator.h"
+#include "utils/PointGenerator/RandomPointGenerator.h"
 #include "utils/CommandLineArgumentHandler.h"
 
 #include "TwoOptMoves.h"

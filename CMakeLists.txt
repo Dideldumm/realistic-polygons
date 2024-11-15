@@ -26,16 +26,16 @@ add_executable(shortestPolygon
         src/utils/ToStringUtils.cpp
 )
 
-#add_executable(mergeClosestObjects
-#        src/MergeClosestObjectsAlgorithm.cpp
-#        src/utils/geometry/PointAndSegmentUtils.cpp
-#        src/utils/ToStringUtils.cpp
-#        src/TwoOptMoves.cpp
-#        src/utils/RandomPointGenerator.cpp
-#        src/utils/CommandLineArgumentHandler.cpp
-#        src/utils/geometry/PolygonalChain.cpp
-#        src/utils/geometry/PolygonalChain.h
-#)
+add_executable(mergeClosestObjects
+        src/MergeClosestObjectsAlgorithm.cpp
+        src/utils/geometry/PointAndSegmentUtils.cpp
+        src/utils/ToStringUtils.cpp
+        src/TwoOptMoves.cpp
+        src/utils/RandomPointGenerator.cpp
+        src/utils/CommandLineArgumentHandler.cpp
+        src/utils/geometry/PolygonalChain.cpp
+        src/utils/geometry/PolygonalChain.h
+)
 
 add_executable(twoOptMoves
         src/TwoOptMoves.cpp
@@ -53,20 +53,19 @@ add_executable(mergeConvexHulls
         src/utils/PointGenerator/RingDistributionPointGenerator.cpp
         src/utils/PointGenerator/SeededPointGenerator.cpp)
 
-#add_executable(mergeClosestChains
-#        src/MergeClosestPolygonalChainsAlgorithm.cpp
-#        src/utils/geometry/PolygonalChain.cpp
-#        src/utils/geometry/PolygonalChain.h
-#        src/utils/VectorUtils.cpp
-#        src/utils/VectorUtils.h)
+add_executable(mergeClosestChains
+        src/MergeClosestPolygonalChainsAlgorithm.cpp
+        src/utils/geometry/PolygonalChain.cpp
+        src/utils/geometry/PolygonalChain.h
+        src/utils/VectorUtils.cpp
+        src/utils/VectorUtils.h)
 
 add_executable(test
         src/test.cpp
         src/utils/ToStringUtils.cpp)
 
 # Define a list of targets
-#set(TARGETS simplePolygon shortestPolygon mergeClosestObjects twoOptMoves)
-set(TARGETS simplePolygon shortestPolygon twoOptMoves mergeConvexHulls test)
+set(TARGETS simplePolygon shortestPolygon mergeClosestObjects twoOptMoves mergeConvexHulls test)
 
 # Link libraries if CGAL with Qt6 is found
 if (CGAL_Qt6_FOUND)

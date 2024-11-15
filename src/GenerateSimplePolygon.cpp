@@ -2,7 +2,7 @@
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 #include <CGAL/draw_polygon_2.h>
-#include "utils/RandomPointGenerator.h"
+#include "utils/PointGenerator/RandomPointGenerator.h"
 #include "utils/geometry/PointAndSegmentUtils.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
@@ -60,7 +60,7 @@ Polygon create_non_intersecting_polygon(std::vector<Point> inputPoints) {
 int main() {
     constexpr double radius = 5;
     RandomPointGenerator random_point_generator(radius);
-    const std::vector<Point> points = random_point_generator.generatePoints(120);
+    const std::vector<Point> points = random_point_generator.generate_points(120);
     Polygon nonIntersectingPolygon = create_non_intersecting_polygon(points);
 
 
