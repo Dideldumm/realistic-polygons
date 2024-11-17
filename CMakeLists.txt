@@ -59,7 +59,8 @@ add_executable(mergeConvexHulls
         src/utils/geometry/PointAndSegmentUtils.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
         src/utils/PointGenerator/RingDistributionPointGenerator.cpp
-        src/utils/PointGenerator/SeededPointGenerator.cpp)
+        src/utils/PointGenerator/SeededPointGenerator.cpp
+)
 
 #add_executable(mergeClosestChains
 #        src/MergeClosestPolygonalChainsAlgorithm.cpp
@@ -70,7 +71,12 @@ add_executable(mergeConvexHulls
 
 add_executable(test
         src/test.cpp
-        src/utils/ToStringUtils.cpp)
+        src/utils/ToStringUtils.cpp
+        src/utils/PointGenerator/RandomPointGenerator.cpp
+        src/utils/PointGenerator/RingDistributionPointGenerator.cpp
+        src/utils/PointGenerator/SeededPointGenerator.cpp
+        src/utils/geometry/PolygonUtils.cpp
+)
 
 # Define a list of targets - mergeClosestObjects
 set(TARGETS simplePolygon shortestPolygon twoOptMoves mergeConvexHulls test)

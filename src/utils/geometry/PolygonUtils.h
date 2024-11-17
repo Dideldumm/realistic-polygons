@@ -12,6 +12,9 @@ typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
 typedef CGAL::Segment_2<Kernel> Segment;
 typedef CGAL::Polygon_2<Kernel> Polygon;
+typedef std::list<Point> ConvexHull;
+
+ConvexHull create_convex_hull(const std::list<Point> &vertices);
 
 /**
  * Inserts the given point into the given polygon at the position of the given segment.

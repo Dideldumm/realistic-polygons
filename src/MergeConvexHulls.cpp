@@ -15,14 +15,8 @@ typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
 typedef CGAL::Segment_2<Kernel> Segment;
 typedef CGAL::Polygon_2<Kernel> Polygon;
-typedef std::list<Point> ConvexHull;
 
 
-ConvexHull create_convex_hull(const std::list<Point> &vertices) {
-    ConvexHull new_hull;
-    CGAL::convex_hull_2(vertices.begin(), vertices.end(), std::back_inserter(new_hull));
-    return new_hull;
-}
 
 std::list<ConvexHull> build_convex_hulls(std::list<Point> points) {
     std::list<ConvexHull> convex_hulls;
