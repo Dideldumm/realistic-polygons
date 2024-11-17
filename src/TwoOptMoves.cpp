@@ -108,7 +108,7 @@ void TwoOptMoves::addPoint(const Point &point) {
 
     while (!test.is_simple()) {
         std::cout << "now" << std::endl;
-        CGAL::draw(test);
+        // CGAL::draw(test);
         test = constructPolygonWithoutIntersection(point, test);
     }
     polygon = test;
