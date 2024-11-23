@@ -1,12 +1,28 @@
+# TODO
+- Arbeitsbescheinigung!!
+- Polygone lesen und schreiben
+	- [CGAL - IO Streams](https://doc.cgal.org/latest/Stream_support/IOStreamSupportedFileFormats.html#IOStreamPLY)
+		- Was ist Polygon Soup?
+		- Einen Wrapper für IO schreiben?
+	- Wavefront (`.obj`)
+		- wird von Blender und [[2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations]] benutzt
+		- Ist sehr mächtig und dementsprechend komplex
+		- Wieviel nimmt CGAL ab?
+	  - Polygon File Format (`.ply`)
+		  - vermutlich weniger komplex als Wavefront
+- Two Opt implementation finden
+	- [[2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations]]
+- Notizen sortieren
+	- Links zu Stellen in der BA hinzufügen
+- Unit-Tests??
+
 # Fragen an Schirra und Tetjana
 - maximale Laufzeit zum Generieren eines Polygons? -> sollte in P sein
-- 
 
-
-## Ideen für "realistische" Polygone
-
+## Ideen zur Definition / Beschreibung realistischer Polygone
 --> siehe [[2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations]]
 
+### Umfang minimieren
 Eine Möglichkeit wäre Polygone aus der Punktmenge zu bilden, welche einen möglichst geringen Umfang haben.
 
 1. Umfang minimal -> Travelling Salesman Problem (TSP)
@@ -14,41 +30,63 @@ Eine Möglichkeit wäre Polygone aus der Punktmenge zu bilden, welche einen mög
 	- Min/max Fläche bildet keine schönen Polygone :C
 	- ![[areaMinMaxPolygonizations.png]]
 
-2. [Fatness](https://en.wikipedia.org/wiki/Fat_object_(geometry)) minimal
-
+### Punkte Generieren
 - Punkte nicht zufällig
-	- Punkte nur in einem definierten Ring
+	- Punkte nur in einem definierten Ring - skaliert nur das Problem :C
 	
-- Two Opt: Heuristik für TSP 
-- Systematisch Ausprobieren
-	- Vor und Nachteile
-- Github durchsuchen
-- [Computational Geometry: Solving Hard Optimization Problems](https://cgshop.ibr.cs.tu-bs.de/)
-- Polygonalisierung
-	- Wie viele Polygone kann man für eine gegebene Punktemenge finden
-- realistische Polygone, sodass Tests von Algorithmen darauf sinnvolle Ergebnisse liefern
+
+### Ziel / Zweck
+realistische Polygone, sodass Tests von Algorithmen darauf sinnvolle Ergebnisse liefern
 	- QuickHull ist im worst case quadratisch, aber das tritt im Praxisfall nicht auf 
 	- QuickHull auf realistischen Polygonen sollte im worst case also nicht quadratisch sein
 
-## Ideen für Algorithmen
-
+## Algorithmus - Ideen
 - Delauney-Triangulierung und dann Kanten entfernen
 	- welche Kanten?
 
-- Konvexe Hülle bilden
-	- Punkt, der am nächsten an einer Kante ist, an dieser Kante hinzufügen
-	- Wiederholen bis alle Punkte zum Polygon dazugehören
+### Umgesetzte Algorithmen
+#### `MergeConvexHulls`
+Pseudocode:
+- Initiales Polygon ist die konvexe Hülle
+- Bis alle Punkte zum Polygon gehören:
+	- Neue konvexe Hülle bilden
+	- Die Punkte der neuen konvexen Hülle zum Polygon hinzufügen
+	- Jeder Punkt wird an der ihm nächstgelegenen Kante eingefügt
 
--  Konvex Layer
-       - Konvexe Hülle bilden
-	- Von den übrigen Punkten die Konvexe Hülle bilden
-	- Bis alle Punkte zu einer konvexen Hülle gehören
-	- Die Hüllen irgendwie mergen
+### Work In Progress
 
-- Plane Sweep aber drehen? -> star shaped polygons
-	- Das resultierende polygon ist nicht wirklich realistisch
+#### Union Of Convex Hulls
+Ganz grob:
+- Mehrere zufällige Punktmengen bilden
+- Von jeder Punktmenge die konvexe Hülle bilden
+- Die konvexen Hüllen vereinigen
+	- [`CGAL::join(...)`](https://doc.cgal.org/latest/Boolean_set_operations_2/group__boolean__join.html)
+- Zu klären: 
+	- Wie genau die Punktmengen generieren
+	  Generatoren von CGAL angucken
+	- Wie mit gegebener Punkteanzahl umgeben
+#### Merge Closest Chains
+Mit Chain ist ein Polygonzug gemeint (also eine Kette von verbundenen Punkten)
 
-- Idee Polygon ohne Überschneidungen abwandeln
+Pseudocode
+- Initialisiere jeden Punkt als Polygonzug 
+- Füge die Polygonzüge einer Menge hinzu
+- Bis nur noch ein einzelner Polygonzug in der Menge ist:
+	- Suche die Polygonzüge, die sich am nächsten sind
+	- Entferne die beiden Polygonzüge aus der Menge
+	- Merge die beiden Polygonzüge
+	- Füge den gemergten Polygonzug wieder zur Menge hinzu
+- Bilde ein Polygon aus dem Polygonzug (nur End- und Anfangspunkt verbinden)
+
+Probleme
+- die letzte Kante (von End- zu Anfangspunkt des letzten Polygonzugs) hat fast immer viele Kreuzungen
+- noch weitere Kreuzungen der anderen Kanten
+- Was jetzt?
+	- Two opt nutzen
+	- Andere Funktion zum mergen überlegen
+
+### Noch nicht genauer angeschaut
+Idee Polygon ohne Überschneidungen abwandeln
 	- rekursiver Algorithmus (divide and conquer)
 	- leftmost und rightmost suchen
 	- Punkte oberhalb und unterhalb der Linie zwischen leftmost/rightmost eigenen sets zuordnen
@@ -57,15 +95,8 @@ Eine Möglichkeit wäre Polygone aus der Punktmenge zu bilden, welche einen mög
 	- rechte Eckpunkte verbinden
 	- alle Mittellinien entfernen
 
+### Verworfene Ideen
+- Plane Sweep aber drehen 
+	- -> star shaped polygons
+	- Das resultierende polygon ist nicht wirklich realistisch
 
-# Current Algorithm: 
-Merge closest objects algorithm
-
-- Bis ein vollständiges Polygon entstanden ist
-	- Suche den kürzesten Abstand zwischen zwei vorhandenen geometrischen Objekten
-	- Bilde eine neue Kante zwischen diesen Objekten
-	- geometrische Objekte können in diesem Zusammenhang folgendes sein
-		- Ein Punkt
-		- Eine Kante
-		- Eine polygonal chain
-- Schließlich die verbleibende Lücke mit einer zusätzlichen Kante schließen
