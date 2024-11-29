@@ -13,7 +13,7 @@
 	- The diameter of a set of points is the maximum distance between two points of the set
 - Fatness
 	- 
-## Characterizations of polygons found in the thesis
+## Characterizations of polygons
 
 
 | Polygon                             | Definition                                                                                                                                                                                                                                                                                                                                                                                                         | indicator?                  |

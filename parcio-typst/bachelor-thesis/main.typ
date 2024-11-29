@@ -35,10 +35,11 @@
 // --- ACTUAL CONTENT OF THESIS. --- //
 
 #include "chapters/merge_closest_objects/merge_closest_objects.typ"
-#include "chapters/introduction/intro.typ"
-#include "chapters/background/background.typ"
-#include "chapters/eval/eval.typ"
-#include "chapters/conclusion/conc.typ"
+#include "chapters/merge_convex_hulls/merge_convex_hulls.typ"
+//#include "template_chapters/introduction/intro.typ"
+//#include "template_chapters/background/background.typ"
+//#include "template_chapters/eval/eval.typ"
+//#include "template_chapters/conclusion/conc.typ"
 
 // --------------------------------- //
 

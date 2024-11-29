@@ -4,16 +4,28 @@
     "type": "split",
     "children": [
       {
-        "id": "4c5a0b95fc1e1a92",
+        "id": "4ebe83a88d1efff3",
         "type": "tabs",
         "children": [
           {
-            "id": "8a2bf288867111a8",
+            "id": "f64fedaf205ad9ff",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Notizen zu quellen/Heuristics for the Generation of random Polygons.md",
+                "file": "Notizen BA.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "6ecd7755da8e25c9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Notizen zu quellen/Characterizations of real world Polygons.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Notizen zu quellen/Heuristics for the Generation of random Polygons.md",
+                "file": "Notizen BA.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +114,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Notizen zu quellen/Heuristics for the Generation of random Polygons.md",
+                "file": "Notizen BA.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +137,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Notizen zu quellen/Heuristics for the Generation of random Polygons.md"
+                "file": "Notizen BA.md"
               }
             }
           },
@@ -155,53 +167,18 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "floating": {
-    "id": "369af28e7dfd6ad1",
-    "type": "floating",
-    "children": [
-      {
-        "id": "6f43b876bb11731e",
-        "type": "window",
-        "children": [
-          {
-            "id": "085e6f3e0d3f9f6d",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "d60e47353be8bde3",
-                "type": "leaf",
-                "state": {
-                  "type": "pdf",
-                  "state": {
-                    "file": "quellen/Heuristics_for_the_Generation_of_Random_Polygons.pdf"
-                  }
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical",
-        "x": 1920,
-        "y": 23,
-        "width": 1920,
-        "height": 1057,
-        "maximize": false,
-        "zoom": -1
-      }
-    ]
-  },
-  "active": "8a2bf288867111a8",
+  "active": "f64fedaf205ad9ff",
   "lastOpenFiles": [
     "Notizen zu quellen/Characterizations of real world Polygons.md",
+    "Notizen BA.md",
+    "Notizen zu quellen/Heuristics for the Generation of random Polygons.md",
+    "quellen/Heuristics_for_the_Generation_of_Random_Polygons.pdf",
     "Chararcerizations of real world Polygons.md",
     "Notizen zu quellen/Chararcerizations of real world Polygons.md",
-    "Notizen zu quellen/Heuristics for the Generation of random Polygons.md",
     "Chararcerizations of real$20world$20Polygons.md",
     "star-shaped.md",
-    "quellen/Heuristics_for_the_Generation_of_Random_Polygons.pdf",
     "quellen/Characterizations_of_real-world_Polygons.pdf",
     "Notizen zu quellen/2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations.md",
-    "Notizen BA.md",
     "quellen/2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations.pdf",
     "quellen/Triangle-Based_Heuristics_for_Area_Optimal_Polygonizations.pdf",
     "quellen/Optimal_Area_Polygonization_by_Triangulation_and_Visibility_Search.pdf",
