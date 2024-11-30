@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f64fedaf205ad9ff",
+            "id": "2ca6d0d34a1eb015",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Notizen BA.md",
+                "file": "Characterizations Of Polygons.md",
                 "mode": "source",
                 "source": false
               }
@@ -97,7 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Notizen BA.md",
+                "file": "Characterizations Of Polygons.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +114,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Notizen BA.md",
+                "file": "Characterizations Of Polygons.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +137,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Notizen BA.md"
+                "file": "Characterizations Of Polygons.md"
               }
             }
           },
@@ -167,28 +167,29 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "f64fedaf205ad9ff",
+  "active": "2ca6d0d34a1eb015",
   "lastOpenFiles": [
     "Notizen zu quellen/Characterizations of real world Polygons.md",
+    "quellen/Minimum Link Path Within Simple Polygons.pdf",
+    "quellen/Measuring the Complexity of Polygonal Objects.pdf",
+    "quellen/Heuristics for the Generation of Random Polygons.pdf",
+    "quellen/Generalized Polygons.pdf",
+    "quellen/Characterizations_of_real-world_Polygons.pdf",
+    "quellen/Characterizations of real-world Polygons.pdf",
+    "quellen/Web and Wireless Geographical Information Systems.pdf",
+    "quellen/Random Polygon Generation through Convex Layers.pdf",
+    "quellen/Polygon Characterization With the Multiplicatively Weighted Voronoi Diagram.pdf",
+    "quellen/Polygon Characterization With the Multiplicatively Weighted Voronoi Diagram .pdf",
+    "Characterizations Of Polygons.md",
+    "CGAL.md",
     "Notizen BA.md",
     "Notizen zu quellen/Heuristics for the Generation of random Polygons.md",
-    "quellen/Heuristics_for_the_Generation_of_Random_Polygons.pdf",
     "Chararcerizations of real world Polygons.md",
     "Notizen zu quellen/Chararcerizations of real world Polygons.md",
     "Chararcerizations of real$20world$20Polygons.md",
     "star-shaped.md",
-    "quellen/Characterizations_of_real-world_Polygons.pdf",
     "Notizen zu quellen/2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations.md",
-    "quellen/2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations.pdf",
-    "quellen/Triangle-Based_Heuristics_for_Area_Optimal_Polygonizations.pdf",
-    "quellen/Optimal_Area_Polygonization_by_Triangulation_and_Visibility_Search.pdf",
-    "quellen/Random_Polygon_Generation_through_Convex_Layers.pdf",
     "images/2-opt-move.svg.png",
-    "images/areaMinMaxPolygonizations.png",
-    "images",
-    "Notizen zu quellen",
-    "quellen/Area_Optimal_Polygonization_Using_Simulated_Annealing.pdf",
-    "quellen/Greedy_and_Local_Search_Heuristics_to_Build_Area-Optimal_Polygons.pdf",
-    "CGAL.md"
+    "images/areaMinMaxPolygonizations.png"
   ]
 }

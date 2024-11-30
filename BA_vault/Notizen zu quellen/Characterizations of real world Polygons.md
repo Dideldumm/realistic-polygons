@@ -1,21 +1,5 @@
 [[Characterizations_of_real-world_Polygons.pdf]]
 
-## Basic Terms
-- **Simple Polygon**
-	- a Polygon is simple if its edges only intersect at their end points
-- **Visibility**
-	- Point *p* sees point *q* if the line section $\overline{pq}$ is completely inside a Polygon *P*
-- **Convex and reflex vertices**
-	- A vertex *v* is convex if its internal angle is less than 180° otherwise *v* is reflex
-- **Convex Chains**
-	- A path of points $p_1, ..., p_n$ is a convex chain, if for every edge of the chain the adjacent edges lie on the same side
-- Diameter
-	- The diameter of a set of points is the maximum distance between two points of the set
-- Fatness
-	- 
-## Characterizations of polygons
-
-
 | Polygon                             | Definition                                                                                                                                                                                                                                                                                                                                                                                                         | indicator?                  |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
 | Simple Polygons                     | Edges intersect only at their end points.                                                                                                                                                                                                                                                                                                                                                                          | mandatory                   |
