@@ -14,6 +14,7 @@ The diameter of a set of points is the maximum distance between two points of th
 
 ## Fatness 
 
+
 # Characterizations Of Polygons
 ## Simple Polygons
 A Polygon is simple if its edges only intersect at their end points.
