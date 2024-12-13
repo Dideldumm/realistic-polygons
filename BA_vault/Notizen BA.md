@@ -1,45 +1,21 @@
 # Letztes Meeting mit Prof. Schirra
-- Mehr Eigenschaften von Polygonen angucken und nach Bewertungsfunktionen schauen
-- Thema konkretisieren
-	- Eigenschaft raussuchen (aus Internet / [[Characterizations_of_real-world_Polygons.pdf]])
-		- Könnte zum Beispiel _k-Link-Convexity_ sein (siehe [[Characterizations of real world Polygons#Characterizations of polygons]])
-	- Algorithmus finden oder schreiben, der diese Eigenschaft an einem Polygon bewertet
-	- Verschiedene Algorithmen zum Generieren vergleichen bezüglich der Eigenschaft
-	- Die Eigenschaft  bewerten im Bezug darauf, wie realistisch das Polygon ist
-- Zu jedem Algorithmus mal was aufschreiben
-- Praktikumsbericht
-	- Mehr Aufgaben, auch mal was komplexeres aufschreiben
-	- Allgemein mehr, was ich gemacht habe und weniger über das Unternehmen
-- _Vereinigung von konvexen Hüllen_
-	- Punktemengen generieren:
-		- Ruhig an der gleichen Stelle generieren
-		- Jede Punktemenge um einen (zufälligen) Vektor verschieben
-		- Jede Punktemenge (zufällig) skalieren
+- **Erstmal nur Polygone erzeugen!!**
+	- Polygone erzeugen und übereinanderlegen
+	- _Vereinigung von konvexen Hüllen_
+		- Punktemengen generieren:
+			- Ruhig an der gleichen Stelle generieren
+			- Jede Punktemenge um einen (zufälligen) Vektor verschieben
+			- Jede Punktemenge (zufällig) skalieren
 	- Mal ausprobieren, was bei disjunkten Polygonen passiert
 		- Wie sieht `outer boundary` dann aus?
 		- 2 _outer boundaries_?
 		- Zur Not vermeiden durch gezieltes Verschieben der Punktemengen
-
-# TODO
-- Mit BA anfangen
-	- Erstmal irgendwas hinschreiben
-	- Die Gliederung und Themen ergeben sich dann schon
-- Polygone lesen und schreiben
-	- [CGAL - IO Streams](https://doc.cgal.org/latest/Stream_support/IOStreamSupportedFileFormats.html#IOStreamPLY)
-		- Was ist Polygon Soup?
-		- Einen Wrapper für IO schreiben?
-	- Wavefront (`.obj`)
-		- wird von Blender und [[2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations]] benutzt
-		- Ist sehr mächtig und dementsprechend komplex
-		- Wieviel nimmt CGAL ab?
-	  - Polygon File Format (`.ply`)
-		  - vermutlich weniger komplex als Wavefront
-- TwoOpt implementation finden
-	- [[2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations]]
-- Notizen sortieren
-	- Links zu Stellen in der BA hinzufügen
-- Unit-Tests??
-
+- Praktikumsbericht nur ein ganz kurzes Fazit
+	- Die Ziele sollten aus den Aufgaben ersichtlich werden
+- Mit KI überprüfen, ob ein polygon realistisch ist? 
+	- nur nebenbei so 5% der Zeit investieren
+	- Zur Überprüfung open street Bilder nutzen 
+	- Christians Clustering and Classification Seminar (welche Bibliothek wurde genutzt)
 ## Ideen zur Definition / Beschreibung realistischer Polygone
 --> siehe [[2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations]]
 
