@@ -43,15 +43,15 @@ add_executable(shortestPolygon
 #        src/utils/geometry/PolygonalChain.h
 #)
 
-add_executable(twoOptMoves
-        src/TwoOptMoves.cpp
-        src/utils/PointGenerator/RandomPointGenerator.cpp
-        src/utils/PointGenerator/SeededPointGenerator.cpp
-        src/utils/PointGenerator/RingDistributionPointGenerator.cpp
-        src/utils/CommandLineArgumentHandler.cpp
-        src/utils/ToStringUtils.cpp
-        src/TwoOptMovesTest.cpp
-)
+#add_executable(twoOptMoves
+#        src/TwoOptMoves.cpp
+#        src/utils/PointGenerator/RandomPointGenerator.cpp
+#        src/utils/PointGenerator/SeededPointGenerator.cpp
+#        src/utils/PointGenerator/RingDistributionPointGenerator.cpp
+#        src/utils/CommandLineArgumentHandler.cpp
+#        src/utils/ToStringUtils.cpp
+#        src/TwoOptMovesTest.cpp
+#)
 
 add_executable(mergeConvexHulls
         src/MergeConvexHulls.cpp
@@ -71,17 +71,16 @@ add_executable(mergeConvexHulls
 
 add_executable(test
         src/test.cpp
-        src/utils/ToStringUtils.cpp
-        src/utils/PointGenerator/RandomPointGenerator.cpp
-        src/utils/PointGenerator/RingDistributionPointGenerator.cpp
         src/utils/PointGenerator/SeededPointGenerator.cpp
+        src/utils/PointGenerator/RingDistributionPointGenerator.cpp
+        src/utils/PointGenerator/RandomPointGenerator.cpp
+        src/utils/ToStringUtils.cpp
         src/utils/geometry/PolygonUtils.cpp
-        src/utils/geometry/VectorUtils.h
         src/utils/geometry/VectorUtils.cpp
 )
 
-# Define a list of targets - mergeClosestObjects
-set(TARGETS simplePolygon shortestPolygon twoOptMoves mergeConvexHulls test)
+# Define a list of targets - mergeClosestObjects twoOptMoves
+set(TARGETS simplePolygon shortestPolygon mergeConvexHulls test)
 
 # Link libraries if CGAL with Qt6 is found
 if (CGAL_Qt6_FOUND)
@@ -96,4 +95,3 @@ else ()
         target_link_libraries(${target} PUBLIC stdc++ m)
     endforeach ()
 endif ()
-add_executable(cgal_two_opt src/utils/geometry/MakeSimple.cpp)

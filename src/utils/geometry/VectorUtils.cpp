@@ -14,6 +14,5 @@ Vector map_angle_to_vector(const double &angle) {
 }
 
 Vector create_random_vector(SeededPointGenerator &point_generator) {
-    constexpr Point origin{0, 0};
-    return {origin, point_generator.generate_point()};
+    return {{0, 0}, point_generator.generate_point()};
 }

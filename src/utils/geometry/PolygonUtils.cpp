@@ -5,9 +5,10 @@
 #include <CGAL/convex_hull_2.h>
 #include <CGAL/Polygon_with_holes_2.h>
 #include <CGAL/Polygon_2.h>
-#include "PolygonUtils.h"
-
+#include <CGAL/draw_polygon_2.h>
 #include <CGAL/Boolean_set_operations_2/join.h>
+
+#include "PolygonUtils.h"
 
 typedef CGAL::Polygon_with_holes_2<Kernel> PolygonWithHoles;
 typedef CGAL::Aff_transformation_2<Kernel> Transformation;
@@ -31,9 +32,13 @@ void insert_point_at_segment(Polygon &polygon, const Segment &segment, const Poi
 
 Polygon join_polygons(const std::vector<Polygon> &polygons) {
     //TODO unit test
-    PolygonWithHoles result;
-    for (const Polygon &polygon: polygons) {
-        CGAL::join(polygon, result, result);
+    PolygonWithHoles result(polygons.at(0));
+    for (unsigned int i = 1; i < polygons.size(); ++i) {
+        CGAL::join(polygons.at(i), result.outer_boundary(), result);
+        // std::cout << "added polygon:" << std::endl;
+        // CGAL::draw(polygon);
+        // std::cout << "result outer boundary" << std::endl;
+        // CGAL::draw(result.outer_boundary());
     }
     return result.outer_boundary();
 }

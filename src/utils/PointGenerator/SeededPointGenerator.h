@@ -5,6 +5,7 @@
 #ifndef POINTGENERATOR_H
 #define POINTGENERATOR_H
 
+#include <random>
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;

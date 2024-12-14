@@ -22,10 +22,7 @@ typedef CGAL::Segment_2<Kernel> Segment;
 typedef CGAL::Polygon_2<Kernel> Polygon;
 typedef CGAL::Polygon_with_holes_2<Kernel> PolygonWithHoles;
 
-constexpr unsigned int number_of_polygons = 15;
-constexpr unsigned int max_number_of_points = 100;
-
-Polygon generate_random_convex_polygon(const Point &origin) {
+Polygon generate_random_convex_polygon(const Point &origin, const int max_number_of_points) {
     RandomPointGenerator generator(max_number_of_points, origin);
     std::vector<Point> vector = generator.generate_points(max_number_of_points);
     std::list<Point> points;
@@ -39,13 +36,17 @@ Polygon generate_random_convex_polygon(const Point &origin) {
     return translated_polygon;
 }
 
-int main() {
-    constexpr Point origin = {0, 0};
+int main(int argc, char **argv) {
+    const int number_of_polygons = std::stoi(argv[1]);
+    const int max_number_of_points = std::stoi(argv[2]);
+    const Point origin = {0, 0};
     std::vector<Polygon> polygons;
-    for (unsigned int i = 0; i < number_of_polygons; ++i) {
-        Polygon next_polygon = generate_random_convex_polygon(origin);
+    for (int i = 0; i < number_of_polygons; ++i) {
+        Polygon next_polygon = generate_random_convex_polygon(origin, max_number_of_points);
+        //TODO use another RandomPointGenerator for translating the polygon instead of the same one
         polygons.emplace_back(next_polygon);
     }
     const Polygon result = join_polygons(polygons);
+    std::cout << polygonToString(result) << std::endl;
     CGAL::draw(result);
 }
