@@ -10,17 +10,20 @@
 #include <CGAL/Boolean_set_operations_2.h>
 #include <CGAL/draw_polygon_2.h>
 
+#include "utils/PointGenerator/SeededPointGenerator.h"
 #include "utils/PointGenerator/RandomPointGenerator.h"
 #include "utils/ToStringUtils.h"
 #include "utils/geometry/PolygonUtils.h"
+#include "utils/geometry/VectorUtils.h"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
 typedef CGAL::Segment_2<Kernel> Segment;
 typedef CGAL::Polygon_2<Kernel> Polygon;
+typedef CGAL::Polygon_with_holes_2<Kernel> PolygonWithHoles;
 
-#define number_of_polygons 15
-#define max_number_of_points 100
+constexpr unsigned int number_of_polygons = 15;
+constexpr unsigned int max_number_of_points = 100;
 
 Polygon generate_random_convex_polygon(const Point &origin) {
     RandomPointGenerator generator(max_number_of_points, origin);
@@ -30,16 +33,19 @@ Polygon generate_random_convex_polygon(const Point &origin) {
     Polygon p;
     CGAL::random_polygon_2(points.size(), std::back_inserter(p), points.begin());
     ConvexHull hull = create_convex_hull(points);
-    return {hull.begin(), hull.end()};
+    const Vector translation_vector = create_random_vector(generator);
+    const Polygon generated_polygon(hull.begin(), hull.end());
+    const Polygon translated_polygon = translate_polygon(generated_polygon, translation_vector);
+    return translated_polygon;
 }
 
 int main() {
-    Point origin = {0, 0};
-    CGAL::Polygon_with_holes_2<Kernel> with_holes(generate_random_convex_polygon(origin));
+    constexpr Point origin = {0, 0};
+    std::vector<Polygon> polygons;
     for (unsigned int i = 0; i < number_of_polygons; ++i) {
-        origin = {i*number_of_polygons, 0};
         Polygon next_polygon = generate_random_convex_polygon(origin);
-        CGAL::join(with_holes, next_polygon, with_holes);
+        polygons.emplace_back(next_polygon);
     }
-    CGAL::draw(with_holes.outer_boundary());
+    const Polygon result = join_polygons(polygons);
+    CGAL::draw(result);
 }

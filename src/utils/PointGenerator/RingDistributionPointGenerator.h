@@ -10,7 +10,7 @@
 
 typedef uint_least32_t u32;
 
-class RingDistributionPointGenerator : SeededPointGenerator {
+class RingDistributionPointGenerator : public SeededPointGenerator {
 private:
     const Point origin;
     const double inner_radius;

@@ -4,11 +4,13 @@
 
 #include <CGAL/convex_hull_2.h>
 #include <CGAL/Polygon_with_holes_2.h>
+#include <CGAL/Polygon_2.h>
 #include "PolygonUtils.h"
 
 #include <CGAL/Boolean_set_operations_2/join.h>
 
 typedef CGAL::Polygon_with_holes_2<Kernel> PolygonWithHoles;
+typedef CGAL::Aff_transformation_2<Kernel> Transformation;
 
 ConvexHull create_convex_hull(const std::list<Point> &vertices) {
     ConvexHull new_hull;
@@ -34,4 +36,9 @@ Polygon join_polygons(const std::vector<Polygon> &polygons) {
         CGAL::join(polygon, result, result);
     }
     return result.outer_boundary();
+}
+
+Polygon translate_polygon(const Polygon &polygon, const Vector &vector) {
+    const Transformation translate(CGAL::TRANSLATION, vector);
+    return CGAL::transform(translate, polygon);
 }

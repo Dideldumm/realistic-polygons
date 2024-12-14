@@ -20,6 +20,6 @@ typedef CGAL::Vector_2<Kernel> Vector;
  */
 Vector map_angle_to_vector(const double &angle);
 
-Vector create_random_vector(const SeededPointGenerator &point_generator);
+Vector create_random_vector(SeededPointGenerator &point_generator);
 
 #endif //VECTORUTILS_H

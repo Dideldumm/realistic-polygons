@@ -8,11 +8,13 @@
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 
+
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
 typedef CGAL::Segment_2<Kernel> Segment;
 typedef CGAL::Polygon_2<Kernel> Polygon;
 typedef std::list<Point> ConvexHull;
+typedef CGAL::Vector_2<Kernel> Vector;
 
 ConvexHull create_convex_hull(const std::list<Point> &vertices);
 
@@ -28,8 +30,8 @@ ConvexHull create_convex_hull(const std::list<Point> &vertices);
  */
 void insert_point_at_segment(Polygon &polygon, const Segment &segment, const Point &point);
 
-Polygon join_polygons(const std::vector<Polygon> & polygons);
+Polygon join_polygons(const std::vector<Polygon> &polygons);
 
-void trans
+Polygon translate_polygon(const Polygon &polygon, const Vector &vector);
 
 #endif //POLYGONUTILS_H
