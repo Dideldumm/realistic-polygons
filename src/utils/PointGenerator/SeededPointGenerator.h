@@ -27,6 +27,8 @@ public:
     virtual ~SeededPointGenerator() = default;
 
     [[nodiscard]] virtual std::vector<Point> generate_points(unsigned int numberOfPoints) = 0;
+
+    [[nodiscard]] virtual Point generate_point() = 0;
 };
 
 u32 create_seed();

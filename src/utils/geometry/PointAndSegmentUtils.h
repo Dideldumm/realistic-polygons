@@ -42,4 +42,6 @@ Segment find_nearest_segment(const T &segments, const Point &point) {
     return nearest_segment;
 }
 
+
+
 #endif //ALGOGEOUTILS_H

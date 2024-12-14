@@ -30,6 +30,8 @@ public:
     explicit RingDistributionPointGenerator(double inner_radius, double outer_radius);
 
     std::vector<Point> generate_points(unsigned int number_of_points) override;
+
+    Point generate_point() override;
 };
 
 

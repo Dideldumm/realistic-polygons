@@ -48,9 +48,13 @@ Point RingDistributionPointGenerator::calculate_point(const double angle, const 
 std::vector<Point> RingDistributionPointGenerator::generate_points(const unsigned int number_of_points) {
     std::vector<Point> points{};
     for (unsigned int i = 0; i < number_of_points; ++i) {
-        const double angle = this->angle_distribution(this->number_generator);
-        const double distance = this->distance_distribution(this->number_generator);
-        points.emplace_back(calculate_point(angle, distance));
+        points.emplace_back(generate_point());
     }
     return points;
+}
+
+Point RingDistributionPointGenerator::generate_point() {
+    const double angle = this->angle_distribution(this->number_generator);
+    const double distance = this->distance_distribution(this->number_generator);
+    return calculate_point(angle, distance);
 }

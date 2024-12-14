@@ -76,6 +76,8 @@ add_executable(test
         src/utils/PointGenerator/RingDistributionPointGenerator.cpp
         src/utils/PointGenerator/SeededPointGenerator.cpp
         src/utils/geometry/PolygonUtils.cpp
+        src/utils/geometry/VectorUtils.h
+        src/utils/geometry/VectorUtils.cpp
 )
 
 # Define a list of targets - mergeClosestObjects

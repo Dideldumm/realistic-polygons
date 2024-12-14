@@ -28,4 +28,8 @@ ConvexHull create_convex_hull(const std::list<Point> &vertices);
  */
 void insert_point_at_segment(Polygon &polygon, const Segment &segment, const Point &point);
 
+Polygon join_polygons(const std::vector<Polygon> & polygons);
+
+void trans
+
 #endif //POLYGONUTILS_H
