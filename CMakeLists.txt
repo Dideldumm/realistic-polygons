@@ -68,6 +68,7 @@ add_executable(mergeConvexHulls
 #        src/utils/geometry/PolygonalChain.h
 #        src/utils/VectorUtils.cpp
 #        src/utils/VectorUtils.h)
+#)
 
 add_executable(test
         src/test.cpp
@@ -79,8 +80,18 @@ add_executable(test
         src/utils/geometry/VectorUtils.cpp
 )
 
+add_executable(unionOfConvexHulls
+        src/UnionOfConvexHulls.cpp
+        src/utils/PointGenerator/SeededPointGenerator.cpp
+        src/utils/PointGenerator/RingDistributionPointGenerator.cpp
+        src/utils/PointGenerator/RandomPointGenerator.cpp
+        src/utils/ToStringUtils.cpp
+        src/utils/geometry/PolygonUtils.cpp
+        src/utils/geometry/VectorUtils.cpp
+)
+
 # Define a list of targets - mergeClosestObjects twoOptMoves
-set(TARGETS simplePolygon shortestPolygon mergeConvexHulls test)
+set(TARGETS simplePolygon shortestPolygon mergeConvexHulls test unionOfConvexHulls)
 
 # Link libraries if CGAL with Qt6 is found
 if (CGAL_Qt6_FOUND)
@@ -95,3 +106,4 @@ else ()
         target_link_libraries(${target} PUBLIC stdc++ m)
     endforeach ()
 endif ()
+
