@@ -11,14 +11,12 @@
             "id": "2ca6d0d34a1eb015",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "Notizen BA.md",
-                "mode": "source",
-                "source": false
+                "file": "quellen/Characterizations of real-world Polygons.pdf"
               },
-              "icon": "lucide-file",
-              "title": "Notizen BA"
+              "icon": "lucide-file-text",
+              "title": "Characterizations of real-world Polygons"
             }
           }
         ]
@@ -139,10 +137,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Notizen BA.md"
+                "file": "quellen/Characterizations of real-world Polygons.pdf"
               },
               "icon": "lucide-list",
-              "title": "Outline of Notizen BA"
+              "title": "Outline of Characterizations of real-world Polygons"
             }
           },
           {
@@ -175,8 +173,8 @@
   },
   "active": "2ca6d0d34a1eb015",
   "lastOpenFiles": [
-    "Notizen zu quellen/Characterizations of real world Polygons.md",
     "Notizen BA.md",
+    "Notizen zu quellen/Characterizations of real world Polygons.md",
     "quellen/Random Polygon Generation through Convex Layers.pdf",
     "quellen/Minimum Link Path Within Simple Polygons.pdf",
     "quellen/minimum-link-path/Minimum Link Path Within Simple Polygons.pdf",
