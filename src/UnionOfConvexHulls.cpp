@@ -43,8 +43,6 @@ Polygon unionOfConvexHulls(const unsigned int max_number_of_points, const unsign
         std::list<Point> vertices;
         std::ranges::copy(points, std::back_inserter(vertices));
 
-        //Polygon next_polygon;
-        //CGAL::random_polygon_2(vertices.size(), std::back_inserter(next_polygon), vertices.begin());
         Polygon next_polygon = generate_random_convex_polygon(vertices);
         Point random_point = random_vector_generator.generate_point();
         Vector random_vector(random_point.x(), random_point.y());

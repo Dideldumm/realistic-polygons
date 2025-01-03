@@ -1,31 +1,31 @@
 # Letztes Meeting mit Prof. Schirra
 - **Erstmal nur Polygone erzeugen!!**
 	- Polygone erzeugen und übereinanderlegen
-	- _Vereinigung von konvexen Hüllen_
+	- [x] _Vereinigung von konvexen Hüllen_
 		- Punktemengen generieren:
 			- Ruhig an der gleichen Stelle generieren
 			- Jede Punktemenge um einen (zufälligen) Vektor verschieben
 			- Jede Punktemenge (zufällig) skalieren
-	- Mal ausprobieren, was bei disjunkten Polygonen passiert
-		- Wie sieht `outer boundary` dann aus?
-		- 2 _outer boundaries_?
+	- [x] Mal ausprobieren, was bei disjunkten Polygonen passiert -> Leeres Polygon
+		- Wie sieht `outer boundary` dann aus? -> Leere Menge also kein Polygon bzw. keine Vertices
 		- Zur Not vermeiden durch gezieltes Verschieben der Punktemengen
-- Praktikumsbericht nur ein ganz kurzes Fazit
+- [x] Praktikumsbericht nur ein ganz kurzes Fazit
 	- Die Ziele sollten aus den Aufgaben ersichtlich werden
 - Mit KI überprüfen, ob ein polygon realistisch ist? 
 	- nur nebenbei so 5% der Zeit investieren
 	- Zur Überprüfung open street Bilder nutzen 
-	- Christians Clustering and Classification Seminar (welche Bibliothek wurde genutzt)
+	- [x] Christians Clustering and Classification Seminar -> sklearn
+
 ## Ideen zur Definition / Beschreibung realistischer Polygone
 --> siehe [[2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations]]
 
 ### Umfang minimieren
 Eine Möglichkeit wäre Polygone aus der Punktmenge zu bilden, welche einen möglichst geringen Umfang haben.
 
-1. Umfang minimal -> Travelling Salesman Problem (TSP)
-	- Es gibt viele Quellen für minimale / maximale Fläche, aber ich hab noch nix zu min/max Umfang gesehen
+1. Fläche minimal -> sieht doof aus
 	- Min/max Fläche bildet keine schönen Polygone :C
 	- ![[areaMinMaxPolygonizations.png]]
+2. Umfang minimal -> Travelling Salesman Problem (TSP)
 
 ### Punkte Generieren
 - Punkte nicht zufällig
@@ -61,7 +61,11 @@ Ganz grob:
 - Zu klären: 
 	- Wie genau die Punktmengen generieren
 	  Generatoren von CGAL angucken
-	- Wie mit gegebener Punkteanzahl umgeben
+	- Wie mit gegebener Punkteanzahl umgehen
+- Probleme:
+	- Das Ergebnis ist relativ kreisförmig
+	- -> Polygone verschieben, bevor sie vereinigt werden
+
 #### Merge Closest Chains
 Mit Chain ist ein Polygonzug gemeint (also eine Kette von verbundenen Punkten)
 
