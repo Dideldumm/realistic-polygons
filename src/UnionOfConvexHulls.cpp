@@ -36,7 +36,7 @@ Polygon unionOfConvexHulls(const unsigned int max_number_of_points, const unsign
                            max_translation_distance) {
     RandomPointGenerator random_vector_generator(max_translation_distance);
     RandomPointGenerator random_vertex_generator;
-
+    Vector current_vector{0, 0};
     std::vector<Polygon> polygons;
     for (unsigned int i = 0; i < number_of_polygons; ++i) {
         const std::vector<Point> points = random_vertex_generator.generate_points(max_number_of_points);
@@ -45,8 +45,9 @@ Polygon unionOfConvexHulls(const unsigned int max_number_of_points, const unsign
 
         Polygon next_polygon = generate_random_convex_polygon(vertices);
         Point random_point = random_vector_generator.generate_point();
-        Vector random_vector(random_point.x(), random_point.y());
-        Polygon translated_polygon = translate_polygon(next_polygon, random_vector);
+        const Vector random_vector(random_point.x(), random_point.y());
+        current_vector += random_vector;
+        Polygon translated_polygon = translate_polygon(next_polygon, current_vector);
 
         polygons.emplace_back(translated_polygon);
     }
