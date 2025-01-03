@@ -8,7 +8,7 @@
 #include "utils/VectorUtils.h"
 #include "utils/geometry/PointAndSegmentUtils.h"
 
-typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
+typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
 typedef CGAL::Segment_2<Kernel> Segment;
 typedef CGAL::Polygon_2<Kernel> Polygon;
 typedef Polygon PolygonalChain;

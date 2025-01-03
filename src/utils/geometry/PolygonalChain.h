@@ -11,7 +11,7 @@
 
 #include "../ToStringUtils.h"
 
-typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
+typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
 typedef CGAL::Polygon_2<Kernel> Polygon;
 

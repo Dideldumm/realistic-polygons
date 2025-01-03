@@ -8,7 +8,7 @@
 #include <random>
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 
-typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
+typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
 typedef uint_least32_t u32;
 typedef std::mt19937 NumberGenerator;

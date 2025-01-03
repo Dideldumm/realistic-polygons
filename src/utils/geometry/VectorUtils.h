@@ -10,7 +10,7 @@
 
 #include "../PointGenerator/SeededPointGenerator.h"
 
-typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
+typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
 typedef CGAL::Vector_2<Kernel> Vector;
 
 /**

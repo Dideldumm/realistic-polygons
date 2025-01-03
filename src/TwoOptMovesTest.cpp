@@ -8,7 +8,7 @@
 #include "utils/PointGenerator/RandomPointGenerator.h"
 #include "utils/ToStringUtils.h"
 
-typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
+typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
 typedef CGAL::Polygon_2<Kernel> Polygon;
 typedef CGAL::Segment_2<Kernel> Segment;

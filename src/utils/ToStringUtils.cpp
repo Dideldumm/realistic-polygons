@@ -4,7 +4,7 @@
 
 #include "ToStringUtils.h"
 
-std::string pointToString(const Point point) {
+std::string pointToString(const Point &point) {
     const std::string x = std::to_string(point.x());
     const std::string y = std::to_string(point.y());
     return x + "|" + y;
