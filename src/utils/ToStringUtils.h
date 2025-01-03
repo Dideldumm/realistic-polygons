@@ -37,7 +37,7 @@ std::string containerToString(const auto &container, auto toString) {
  * @param point the point
  * @return a string reporesentation of the given point
  */
-std::string pointToString(Point point);
+std::string pointToString(const Point &point);
 
 /**
  * Builds a string that represents the given segment.

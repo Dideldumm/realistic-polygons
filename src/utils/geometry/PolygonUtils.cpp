@@ -35,10 +35,6 @@ Polygon join_polygons(const std::vector<Polygon> &polygons) {
     PolygonWithHoles result(polygons.at(0));
     for (unsigned int i = 1; i < polygons.size(); ++i) {
         CGAL::join(polygons.at(i), result.outer_boundary(), result);
-        // std::cout << "added polygon:" << std::endl;
-        // CGAL::draw(polygon);
-        // std::cout << "result outer boundary" << std::endl;
-        // CGAL::draw(result.outer_boundary());
     }
     return result.outer_boundary();
 }

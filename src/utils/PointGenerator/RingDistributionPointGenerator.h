@@ -21,11 +21,11 @@ private:
     [[nodiscard]] Point calculate_point(double angle, double distance) const;
 
 public:
-    explicit RingDistributionPointGenerator(double inner_radius, double outer_radius, Point origin, u32 seed);
+    explicit RingDistributionPointGenerator(double inner_radius, double outer_radius, Point origin, const u32 &seed);
 
-    explicit RingDistributionPointGenerator(double inner_radius, double outer_radius, u32 seed);
+    explicit RingDistributionPointGenerator(double inner_radius, double outer_radius, const u32 &seed);
 
-    explicit RingDistributionPointGenerator(double inner_radius, double outer_radius, Point origin);
+    explicit RingDistributionPointGenerator(double inner_radius, double outer_radius, const Point &origin);
 
     explicit RingDistributionPointGenerator(double inner_radius, double outer_radius);
 

@@ -5,8 +5,8 @@
 #include "ToStringUtils.h"
 
 std::string pointToString(const Point &point) {
-    const std::string x = std::to_string(point.x());
-    const std::string y = std::to_string(point.y());
+    const std::string x = std::to_string(CGAL::to_double(point.x()));
+    const std::string y = std::to_string(CGAL::to_double(point.y()));
     return x + "|" + y;
 }
 

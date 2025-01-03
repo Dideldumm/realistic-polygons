@@ -10,7 +10,7 @@ u32 create_seed() {
     return os_seed();
 }
 
-NumberGenerator create_number_generator(const u32 seed) {
+NumberGenerator create_number_generator(const u32 &seed) {
     const NumberGenerator generator(seed);
     return generator;
 }

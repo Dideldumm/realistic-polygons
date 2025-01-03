@@ -34,6 +34,6 @@ public:
 
 u32 create_seed();
 
-NumberGenerator create_number_generator(u32 seed);
+NumberGenerator create_number_generator(const u32 &seed);
 
 #endif //POINTGENERATOR_H

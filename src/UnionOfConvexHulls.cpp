@@ -43,14 +43,14 @@ Polygon unionOfConvexHulls(const unsigned int max_number_of_points, const unsign
         std::list<Point> vertices;
         std::ranges::copy(points, std::back_inserter(vertices));
 
-        Polygon next_polygon;
-        CGAL::random_polygon_2(vertices.size(), std::back_inserter(next_polygon), vertices.begin());
-        // Polygon next_polygon = generate_random_convex_polygon(vertices);
+        //Polygon next_polygon;
+        //CGAL::random_polygon_2(vertices.size(), std::back_inserter(next_polygon), vertices.begin());
+        Polygon next_polygon = generate_random_convex_polygon(vertices);
         Point random_point = random_vector_generator.generate_point();
         Vector random_vector(random_point.x(), random_point.y());
         Polygon translated_polygon = translate_polygon(next_polygon, random_vector);
 
-        polygons.emplace_back(next_polygon);
+        polygons.emplace_back(translated_polygon);
     }
     const Polygon unioned_polygon = join_polygons(polygons);
     return unioned_polygon;
@@ -61,6 +61,7 @@ int main(int argc, char **argv) {
     const unsigned int max_number_of_points = std::stoi(argv[2]);
     const double max_translation_distance = std::stod(argv[3]);
     const Polygon result = unionOfConvexHulls(max_number_of_points, number_of_polygons, max_translation_distance);
+    std::cout << "---" << std::endl;
     std::cout << polygonToString(result) << std::endl;
     CGAL::draw(result);
 }
