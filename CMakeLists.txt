@@ -12,7 +12,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wpedantic -Wextra")
 
 # Add executables
 add_executable(simplePolygon
-        src/utils/geometry/PointAndSegmentUtils.cpp
+        src/utils/geometry/PointUtils.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
         src/utils/PointGenerator/SeededPointGenerator.cpp
         src/utils/PointGenerator/RingDistributionPointGenerator.cpp
@@ -22,7 +22,7 @@ add_executable(simplePolygon
 
 add_executable(shortestPolygon
         src/BruteForceShortestPolygon.cpp
-        src/utils/geometry/PointAndSegmentUtils.cpp
+        src/utils/geometry/PointUtils.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
         src/utils/PointGenerator/SeededPointGenerator.cpp
         src/utils/PointGenerator/RingDistributionPointGenerator.cpp
@@ -56,7 +56,7 @@ add_executable(shortestPolygon
 add_executable(mergeConvexHulls
         src/MergeConvexHulls.cpp
         src/utils/geometry/PolygonUtils.cpp
-        src/utils/geometry/PointAndSegmentUtils.cpp
+        src/utils/geometry/PointUtils.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
         src/utils/PointGenerator/RingDistributionPointGenerator.cpp
         src/utils/PointGenerator/SeededPointGenerator.cpp
@@ -107,3 +107,6 @@ else ()
     endforeach ()
 endif ()
 
+add_executable(leftMostRightmostVertices src/LeftMostRightMostVertices/LeftMostRightMostVertices.cpp
+        src/LeftMostRightMostVertices/QuadrantTree.cpp
+        src/LeftMostRightMostVertices/QuadrantTree.h)

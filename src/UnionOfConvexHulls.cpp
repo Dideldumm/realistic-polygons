@@ -7,7 +7,6 @@
 #include <CGAL/convex_hull_2.h>
 #include <CGAL/Boolean_set_operations_2.h>
 #include <CGAL/draw_polygon_2.h>
-
 #include <CGAL/random_polygon_2.h>
 
 #include "utils/PointGenerator/SeededPointGenerator.h"
