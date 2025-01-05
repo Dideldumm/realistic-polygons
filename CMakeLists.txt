@@ -21,7 +21,7 @@ add_executable(simplePolygon
 )
 
 add_executable(shortestPolygon
-        src/GenerateShortestPolygon.cpp
+        src/BruteForceShortestPolygon.cpp
         src/utils/geometry/PointAndSegmentUtils.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
         src/utils/PointGenerator/SeededPointGenerator.cpp
