@@ -109,4 +109,6 @@ endif ()
 
 add_executable(leftMostRightmostVertices src/LeftMostRightMostVertices/LeftMostRightMostVertices.cpp
         src/LeftMostRightMostVertices/QuadrantTree.cpp
-        src/LeftMostRightMostVertices/QuadrantTree.h)
+        src/LeftMostRightMostVertices/QuadrantTree.h
+        src/utils/geometry/SegmentUtils.h
+        src/utils/geometry/SegmentUtils.cpp)

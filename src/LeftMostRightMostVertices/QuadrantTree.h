@@ -16,9 +16,12 @@ private:
     QuadrantTree *top_right;
     QuadrantTree *bottom_left;
     QuadrantTree *bottom_right;
+    std::vector<Point> points;
 
 public:
-    explicit QuadrantTree(std::vector<Point> points);
+    explicit QuadrantTree(const std::vector<Point>& points);
+
+    [[nodiscard]] bool is_leaf() const;
 };
 
 

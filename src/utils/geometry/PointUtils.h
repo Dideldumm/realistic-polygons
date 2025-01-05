@@ -19,13 +19,13 @@ bool is_above(const Point &a, const Point &b);
 
 bool is_below(const Point &a, const Point &b);
 
-Point leftmost(const std::vector<Point> &points);
+Point get_leftmost(const std::vector<Point> &points);
 
-Point rightmost(const std::vector<Point> &points);
+Point get_rightmost(const std::vector<Point> &points);
 
-Point topmost(const std::vector<Point> &points);
+Point get_topmost(const std::vector<Point> &points);
 
-Point bottommost(const std::vector<Point> &points);
+Point get_bottommost(const std::vector<Point> &points);
 
 
 #endif //ALGOGEOUTILS_H

@@ -19,18 +19,18 @@ bool is_above(const Point &a, const Point &b) {
     return a.y() > b.y() || (a.y() == b.y() && a.x() > b.x());
 }
 
-Point leftmost(const std::vector<Point> &points) {
+Point get_leftmost(const std::vector<Point> &points) {
     return *std::ranges::max_element(points, is_left_of);
 }
 
-Point rightmost(const std::vector<Point> &points) {
+Point get_rightmost(const std::vector<Point> &points) {
     return *std::ranges::max_element(points, is_right_of);
 }
 
-Point topmost(const std::vector<Point> &points) {
+Point get_topmost(const std::vector<Point> &points) {
     return *std::ranges::max_element(points, is_above);
 }
 
-Point bottommost(const std::vector<Point> &points) {
+Point get_bottommost(const std::vector<Point> &points) {
     return *std::ranges::max_element(points, is_below);
 }

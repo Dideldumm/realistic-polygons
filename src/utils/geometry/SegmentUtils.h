@@ -11,6 +11,10 @@ typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
 typedef CGAL::Segment_2<Kernel> Segment;
 
+bool is_left_of(const Point &p, const Segment &s);
+
+bool is_right_of(const Point &p, const Segment &s);
+
 bool is_above(const Point &p, const Segment &s);
 
 bool is_below(const Point &p, const Segment &s);
