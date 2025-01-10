@@ -61,5 +61,7 @@ int main(int argc, char **argv) {
     const Polygon result = unionOfConvexHulls(max_number_of_points, number_of_polygons, max_translation_distance);
     std::cout << "---" << std::endl;
     std::cout << polygonToString(result) << std::endl;
+    std::cout << "---" << std::endl;
+    std::cout << result.vertices().size() << std::endl;
     CGAL::draw(result);
 }

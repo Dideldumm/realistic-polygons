@@ -1,20 +1,11 @@
 # Letztes Meeting mit Prof. Schirra
-- **Erstmal nur Polygone erzeugen!!**
-	- Polygone erzeugen und übereinanderlegen
-	- [x] _Vereinigung von konvexen Hüllen_
-		- Punktemengen generieren:
-			- Ruhig an der gleichen Stelle generieren
-			- Jede Punktemenge um einen (zufälligen) Vektor verschieben
-			- Jede Punktemenge (zufällig) skalieren
-	- [x] Mal ausprobieren, was bei disjunkten Polygonen passiert -> Leeres Polygon
-		- Wie sieht `outer boundary` dann aus? -> Leere Menge also kein Polygon bzw. keine Vertices
-		- Zur Not vermeiden durch gezieltes Verschieben der Punktemengen
-- [x] Praktikumsbericht nur ein ganz kurzes Fazit
-	- Die Ziele sollten aus den Aufgaben ersichtlich werden
-- Mit KI überprüfen, ob ein polygon realistisch ist? 
-	- nur nebenbei so 5% der Zeit investieren
-	- Zur Überprüfung open street Bilder nutzen 
-	- [x] Christians Clustering and Classification Seminar -> sklearn
+- 3 Optionen 
+	- Ergebnisse optimieren (durch draufgucken die Polygone klasssifizieren)
+		- Punkte am rand zusätzlich generieren
+	- Sklearn benutzen um die Polygone zu evaluieren
+		- Realistische Testdaten von open street
+		- Unrealistische durch CGAL generieren
+	- Klassifikator für Polygone finden
 
 ## Ideen zur Definition / Beschreibung realistischer Polygone
 --> siehe [[2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations]]
@@ -30,8 +21,6 @@ Eine Möglichkeit wäre Polygone aus der Punktmenge zu bilden, welche einen mög
 ### Punkte Generieren
 - Punkte nicht zufällig
 	- Punkte nur in einem definierten Ring - skaliert nur das Problem :C
-	
-
 ### Ziel / Zweck
 realistische Polygone, sodass Tests von Algorithmen darauf sinnvolle Ergebnisse liefern
 	- QuickHull ist im worst case quadratisch, aber das tritt im Praxisfall nicht auf 
