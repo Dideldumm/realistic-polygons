@@ -1,12 +1,48 @@
 # Letztes Meeting mit Prof. Schirra
 - 3 Optionen 
-	- Ergebnisse optimieren (durch draufgucken die Polygone klasssifizieren)
-		- Punkte am rand zusätzlich generieren
+	- Ergebnisse optimieren (und durch "draufgucken" die Polygone klasssifizieren)
+		- z.B durch zusätzlich generierte Punkte am Rand
 	- Sklearn benutzen um die Polygone zu evaluieren
-		- Realistische Testdaten von open street
+		- Realistische Testdaten von open street holen
 		- Unrealistische durch CGAL generieren
 	- Klassifikator für Polygone finden
 
+## Testdaten von OSM holen
+- Open street map (kurz OSM)
+- hat unglaublich viele Daten
+	- das Planet XML File: **146GB**
+	- [Daten verarbeiten mit tools für diese Datenmengen](https://wiki.openstreetmap.org/wiki/Downloading_data#Huge_amounts_of_data)
+		- **Osmosis** is a command line Java application for processing OSM data.
+		- **osmconvert** can be used to convert and process OpenStreetMap files.
+		- **osmfilter** is a command line tool used to filter OpenStreetMap data files for specific tags.
+	- Osmosis wirkt hier am vielversprechendsten
+- Welche Daten will ich am Ende eigentlich herausziehen und in welcher Form?
+
+- mögliche Probleme mit dem Trainieren des classifiers
+	- Dauert lange -> uni cluster benutzen -> große Datenmengen müssen hin und hergeschoben werden
+	- Wie mit den verschiedenen Punktmengen umgehen? -> gabs aber in c&c auch!
+
+- Mögliche Vorgehensweise:
+	- Daten mit Hilfe von Osmosis filtern (zum Beispiel auf Ländergrenzen)
+		- Wie genau das aussieht weiß ich noch nicht
+	- Die Eckpunkte der Ländergrenzen in eine n-dimensionale Matrix bringen (für jeden Punkt 2 Dimensionen?)
+	- Das gleiche mit den Eckpunkten von random generierten Polygonen machen
+	- Die erstellten Daten in eine Datei oder mehrere Dateien gießen
+	- Mit Sklearn einen Classifier trainieren anhand der Trainingsdaten
+		- 1 Drittel der Daten zur Verifikation nutzen oder so
+	- Die Ergebnisse des Classifiers auswerten
+
+## TODO
+- In Osmosis einlesen
+- In Sklearn einlesen
+	- Wie benutze ich das auf dem cluster?
+- Alles andere was oben steht AAAH!
+
+# Jans Idee
+Scheibenkäse
+und alternativ:
+- Animation - fixed seed - einzelnde Parameter schrittweise erhöhen - vllt für Algo Erklärung
+- Input Punkte Rendern
 ## Ideen zur Definition / Beschreibung realistischer Polygone
 --> siehe [[2-Opt_Moves_and_Flips_for_Area-optimal_Polygonizations]]
 
