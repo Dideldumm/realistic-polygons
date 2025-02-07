@@ -4,6 +4,8 @@ project(try_cgal)
 # Find necessary packages
 find_package(CGAL REQUIRED OPTIONAL_COMPONENTS Qt6)
 find_package(GMP REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(JSONCPP jsoncpp)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -91,12 +93,18 @@ add_executable(unionOfConvexHulls
         src/utils/geometry/VectorUtils.cpp
 )
 
-add_executable(leftMostRightmostVertices src/LeftMostRightMostVertices/LeftMostRightMostVertices.cpp
+add_executable(leftMostRightmostVertices
+        src/LeftMostRightMostVertices/LeftMostRightMostVertices.cpp
         src/LeftMostRightMostVertices/QuadrantTree.cpp
         src/LeftMostRightMostVertices/QuadrantTree.h
         src/utils/geometry/SegmentUtils.h
         src/utils/geometry/SegmentUtils.cpp)
 
+add_executable(geojsonparser
+        src/geojson/geojson.cpp)
+
+target_include_directories(geojsonparser PRIVATE ${JSONCPP_INCLUDE_DIRS})
+target_link_libraries(geojsonparser PRIVATE ${JSONCPP_LIBRARIES})
 
 # Define a list of targets - mergeClosestObjects twoOptMoves
 set(TARGETS simplePolygon shortestPolygon mergeConvexHulls test unionOfConvexHulls)
