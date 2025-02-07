@@ -7,6 +7,20 @@
 
 #include "geojson.h"
 
+#include <optional>
+
+struct Coordinates {
+    const double latitude;
+    const double longitude;
+
+    Coordinates(const double &latitude, const double &longitude) : latitude(latitude), longitude(longitude) {
+    }
+
+    bool operator==(const Coordinates &other) const {
+        return latitude == other.latitude && longitude == other.longitude;
+    }
+};
+
 /// Parse a geojson file to the given root.
 /// @param file_path the path to the geojson file
 /// @param root a pointer to a json root object where the parsed data should be saved
@@ -37,7 +51,7 @@ bool is_root_valid(const Json::Value &root) {
         return false;
     }
     if (root["type"].asString() != "FeatureCollection") {
-        std::cerr << "Not a valid GeoJSON FeatureCollection.\n";
+        std::cerr << "Not a valid GeoJSON FeatureCollection." << std::endl;
         return false;
     }
     if (!root.isMember("features")) {
@@ -64,14 +78,52 @@ bool is_feature_valid(Json::Value feature) {
     return true;
 }
 
-std::vector<std::pair<double, double>> get_coordinates(Json::Value feature) {
-
+std::optional<Coordinates> parse_coordinates(const Json::Value &coordinate) {
+    if (!coordinate.isArray() || coordinate.size() < 2) {
+        std::cerr << "Not enough values for longitude and latitude: " << coordinate << std::endl;
+        return {};
+    }
+    if (!coordinate[0].isDouble() || !coordinate[1].isDouble()) {
+        std::cerr << "Coordinates are not double values: " << coordinate << std::endl;
+        return {};
+    }
+    const double &longitude = coordinate[0].asDouble();
+    const double &latitude = coordinate[1].asDouble();
+    Coordinates parsed(latitude, longitude);
+    return parsed;
 }
 
+std::vector<Coordinates> parse_array(const Json::Value &array) {
+    if (!array.isArray()) {
+        std::cerr << "Could not parse as array:\n" << array << std::endl;
+        return {};
+    }
+    std::vector<Coordinates> points;
+    for (const auto &coordinates: array) {
+        if (auto maybe_point = parse_coordinates(coordinates); maybe_point.has_value()) {
+            points.emplace_back(maybe_point.value());
+        }
+    }
+    return points;
+}
 
+std::vector<Coordinates> parse_linestring(const Json::Value &linestring) {
+    if (!linestring.isMember("coordinates")) {
+        std::cerr << "Could not parse linestring:\n" << linestring << std::endl;
+        return {};
+    }
+    return parse_array(linestring["coordinates"]);
+}
 
-void process_feature(const Json::Value& feature) {
+std::vector<Coordinates> parse_polygon(const Json::Value &polygon) {
+    std::vector<Coordinates> points = parse_linestring(polygon);
+    if (points.front() == points.back()) {
+        points.pop_back();
+    }
+    return points;
+}
 
+void process_feature(const Json::Value &feature) {
 }
 
 int main(int argc, char **argv) {
