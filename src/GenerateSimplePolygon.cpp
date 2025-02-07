@@ -3,7 +3,8 @@
 #include <CGAL/Polygon_2.h>
 #include <CGAL/draw_polygon_2.h>
 #include "utils/PointGenerator/RandomPointGenerator.h"
-#include "utils/geometry/PointAndSegmentUtils.h"
+#include "utils/geometry/PointUtils.h"
+#include "utils/geometry/SegmentUtils.h"
 
 typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
 typedef CGAL::Polygon_2<Kernel> Polygon;
@@ -15,13 +16,13 @@ Polygon create_non_intersecting_polygon(std::vector<Point> inputPoints) {
     //initialize points, leftmost and rightmost
     auto begin = inputPoints.begin();
     const auto end = inputPoints.end();
-    std::unordered_set<Point> points{};
+    std::vector<Point> points{};
     Point leftmost = *begin;
     Point rightmost = leftmost;
 
     for (; begin != end; ++begin) {
         Point current_point = *begin;
-        points.insert(current_point);
+        points.emplace_back(current_point);
         if (is_left_of(current_point, leftmost)) {
             leftmost = current_point;
         }
@@ -30,28 +31,28 @@ Polygon create_non_intersecting_polygon(std::vector<Point> inputPoints) {
             rightmost = current_point;
         }
     }
-    points.erase(rightmost);
-    points.erase(leftmost);
+    std::erase(points, rightmost);
+    std::erase(points, leftmost);
 
     const Segment middle_line(leftmost, rightmost);
 
-    std::set<Point, LeftComparator> a; //sorts points from left to right
-    std::set<Point, RightComparator> b; //sorts points from right to left
-    for (Point point: points) {
+    std::set<Point, bool(*)(const Point&, const Point&)> ascending_set(is_left_of); //sorts points from left to right
+    std::set<Point, bool(*)(const Point&, const Point&)> descending_set(is_right_of); //sorts points from right to left
+    for (const Point& point: points) {
         if (is_above(point, middle_line)) {
-            a.insert(point);
+            ascending_set.insert(point);
         } else {
-            b.insert(point);
+            descending_set.insert(point);
         }
     }
 
     Polygon polygon;
     polygon.push_back(leftmost);
-    for (Point point: a) {
+    for (const Point& point: ascending_set) {
         polygon.push_back(point);
     }
     polygon.push_back(rightmost);
-    for (Point point: b) {
+    for (const Point& point: descending_set) {
         polygon.push_back(point);
     }
     return polygon;

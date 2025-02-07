@@ -7,7 +7,7 @@
 #include <CGAL/convex_hull_2.h>
 #include <CGAL/draw_polygon_2.h>
 
-#include "utils/geometry/PointAndSegmentUtils.h"
+#include "utils/geometry/SegmentUtils.h"
 #include "utils/geometry/PolygonUtils.h"
 #include "utils/PointGenerator/RandomPointGenerator.h"
 
@@ -23,7 +23,7 @@ std::list<ConvexHull> build_convex_hulls(std::list<Point> points) {
     while (!points.empty()) {
         const ConvexHull new_hull = create_convex_hull(points);
         convex_hulls.emplace_back(new_hull);
-        for (Point point: new_hull) {
+        for (const Point& point: new_hull) {
             points.remove(point);
         }
     }
@@ -31,7 +31,7 @@ std::list<ConvexHull> build_convex_hulls(std::list<Point> points) {
 }
 
 void merge(Polygon &polygon, const ConvexHull &new_hull) {
-    for (Point point: new_hull) {
+    for (const Point& point: new_hull) {
         const Segment nearest_segment = find_nearest_segment(polygon.edges(), point);
         insert_point_at_segment(polygon, nearest_segment, point);
     }

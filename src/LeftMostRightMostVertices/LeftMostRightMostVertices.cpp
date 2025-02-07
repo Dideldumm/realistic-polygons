@@ -13,7 +13,6 @@ typedef CGAL::Segment_2<Kernel> Segment;
 
 Polygon generate_realistic_polygon(std::vector<Point> vertices) {
 
-
 }
 
 

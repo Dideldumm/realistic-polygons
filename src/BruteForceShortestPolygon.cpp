@@ -37,15 +37,10 @@ std::vector<Polygon> generateAllPolygonsForSetOfPoints(const std::vector<Point> 
     return polygons;
 }
 
-double calculateDistance(const Point a, const Point b) {
-    const double squaredDistance = CGAL::squared_distance(a, b);
-    return sqrt(squaredDistance);
-}
-
-double calculateCircumference(const Polygon &polygon) {
-    double circumference = 0;
+auto calc_sum_of_squared_edges(const Polygon &polygon) {
+    Kernel::FT circumference(0);
     for (auto edge: polygon.edges()) {
-        const double length = sqrt(edge.squared_length());
+        const Kernel::FT length = edge.squared_length();
         circumference += length;
     }
     std::cout << "Polygon: " << polygonToString(polygon) << "with circumference: " << circumference << std::endl;
@@ -57,7 +52,7 @@ std::vector<Point> getUserInput() {
 
     PointIterator input_begin(std::cin);
     for (const PointIterator input_end; input_begin != input_end; ++input_begin) {
-        Point const current_point = *input_begin;
+        Point const& current_point = *input_begin;
         points.push_back(current_point);
     }
     return points;
@@ -68,9 +63,9 @@ Polygon createShortestPolygon(const std::vector<Point> &points) {
     erase_if(allPossiblePolygons, [](const Polygon &polygon) { return !polygon.is_simple(); });
 
     Polygon shortest;
-    double shortestCircumference = std::numeric_limits<double>::max();
+    Kernel::FT shortestCircumference(std::numeric_limits<double>::max());
     for (const auto &polygon: allPossiblePolygons) {
-        if (const double circumference = calculateCircumference(polygon); circumference < shortestCircumference) {
+        if (const auto circumference = calc_sum_of_squared_edges(polygon); circumference < shortestCircumference) {
             shortest = polygon;
             shortestCircumference = circumference;
         }
@@ -85,7 +80,7 @@ int main(const int argc, char *argv[]) {
     RandomPointGenerator generator;
     std::vector<Point> points = generator.generate_points(numberOfPoints);
 
-    for (const Point point: points) {
+    for (const Point& point: points) {
         std::cout << pointToString(point) << std::endl;
     }
     std::cout << "And now we wait" << std::endl;
