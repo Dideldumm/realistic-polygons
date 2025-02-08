@@ -3,23 +3,14 @@
 //
 #include <iostream>
 #include <fstream>
+#include <optional>
+
 #include <json/json.h>
 
 #include "geojson.h"
+#include "GeoJsonPolygon.h"
 
-#include <optional>
 
-struct Coordinates {
-    const double latitude;
-    const double longitude;
-
-    Coordinates(const double &latitude, const double &longitude) : latitude(latitude), longitude(longitude) {
-    }
-
-    bool operator==(const Coordinates &other) const {
-        return latitude == other.latitude && longitude == other.longitude;
-    }
-};
 
 /// Parse a geojson file to the given root.
 /// @param file_path the path to the geojson file
@@ -78,7 +69,7 @@ bool is_feature_valid(Json::Value feature) {
     return true;
 }
 
-std::optional<Coordinates> parse_coordinates(const Json::Value &coordinate) {
+std::optional<LatsAndLongs> parse_point(const Json::Value &coordinate) {
     if (!coordinate.isArray() || coordinate.size() < 2) {
         std::cerr << "Not enough values for longitude and latitude: " << coordinate << std::endl;
         return {};
@@ -89,25 +80,25 @@ std::optional<Coordinates> parse_coordinates(const Json::Value &coordinate) {
     }
     const double &longitude = coordinate[0].asDouble();
     const double &latitude = coordinate[1].asDouble();
-    Coordinates parsed(latitude, longitude);
+    LatsAndLongs parsed(latitude, longitude);
     return parsed;
 }
 
-std::vector<Coordinates> parse_array(const Json::Value &array) {
+std::vector<LatsAndLongs> parse_array(const Json::Value &array) {
     if (!array.isArray()) {
         std::cerr << "Could not parse as array:\n" << array << std::endl;
         return {};
     }
-    std::vector<Coordinates> points;
+    std::vector<LatsAndLongs> points;
     for (const auto &coordinates: array) {
-        if (auto maybe_point = parse_coordinates(coordinates); maybe_point.has_value()) {
+        if (auto maybe_point = parse_point(coordinates); maybe_point.has_value()) {
             points.emplace_back(maybe_point.value());
         }
     }
     return points;
 }
 
-std::vector<Coordinates> parse_linestring(const Json::Value &linestring) {
+std::vector<LatsAndLongs> parse_linestring(const Json::Value &linestring) {
     if (!linestring.isMember("coordinates")) {
         std::cerr << "Could not parse linestring:\n" << linestring << std::endl;
         return {};
@@ -115,15 +106,58 @@ std::vector<Coordinates> parse_linestring(const Json::Value &linestring) {
     return parse_array(linestring["coordinates"]);
 }
 
-std::vector<Coordinates> parse_polygon(const Json::Value &polygon) {
-    std::vector<Coordinates> points = parse_linestring(polygon);
+std::vector<LatsAndLongs> parse_polygon(const Json::Value &polygon) {
+    std::vector<LatsAndLongs> points = parse_linestring(polygon);
     if (points.front() == points.back()) {
         points.pop_back();
     }
     return points;
 }
 
-void process_feature(const Json::Value &feature) {
+std::vector<std::vector<LatsAndLongs> > parse_multipolygon(const Json::Value &multipolygon) {
+    if (!multipolygon.isMember("coordinates")) {
+        std::cerr << "Coordinates member missing:\n" << multipolygon << std::endl;
+        return {};
+    }
+    unsigned int failed_counter = 0;
+    std::vector<std::vector<LatsAndLongs> > polygons;
+    for (const Json::Value &polygon_data: multipolygon["coordinates"]) {
+        if (std::vector<LatsAndLongs> parsed_polygon = parse_polygon(polygon_data); parsed_polygon.empty()) {
+            failed_counter++;
+        } else {
+            polygons.emplace_back(parsed_polygon);
+        }
+    }
+    if (failed_counter > 0) {
+        std::cerr << "Could not parse " << failed_counter << " out of " << multipolygon["coordinates"].size() <<
+                " polygons." << std::endl;
+    }
+    return polygons;
+}
+
+void process_feature(const Json::Value &feature, std::vector<std::vector<LatsAndLongs>> polygons) {
+    if (!is_feature_valid(feature)) {
+        return;
+    }
+    switch (Json::Value geometry_value = feature["geometry"]; geometry_value["type"].asString()) {
+        case "LineString":
+            polygons.emplace_back(parse_linestring(geometry_value));
+            break;
+        case "Polygon":
+            polygons.emplace_back(parse_polygon(geometry_value));
+            break;
+        case "MultiPolygon":
+            auto new_polygons = parse_multipolygon(geometry_value);
+            polygons.insert(polygons.end(), new_polygons.begin(), new_polygons.end());
+            break;
+        default:
+            std::cout << "Ignoring geometry of type: " << geometry_value["type"].asString();
+            break;
+    }
+}
+
+double** polygon_to_matrix (const std::vector<LatsAndLongs> &polygon) {
+
 }
 
 int main(int argc, char **argv) {
@@ -134,9 +168,12 @@ int main(int argc, char **argv) {
     if (!is_root_valid(root)) {
         return 1;
     }
-
+    const std::vector<std::vector<LatsAndLongs>> polygons;
     for (const auto feature&: root["features"]) {
-        process_feature(feature);
+        process_feature(feature, polygons);
+    }
+    for (auto polygon: polygons) {
+
     }
     return 0;
 }
