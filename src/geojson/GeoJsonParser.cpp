@@ -35,6 +35,7 @@ LatsAndLongs parse_point(const Json::Value &coordinate) {
 
 std::vector<LatsAndLongs> parse_array(const Json::Value &array) {
     std::vector<LatsAndLongs> points;
+    points.reserve(array.size());
     for (const auto &coordinates: array) {
         points.emplace_back(parse_point(coordinates));
     }
@@ -62,6 +63,7 @@ std::vector<GeoJsonPolygon> parse_multipolygon(const Json::Value &multipolygon) 
 std::vector<GeoJsonPolygon> GeoJsonParser::parse_all_polygons() const {
     const Json::Value &root = *(this->root);
     std::vector<GeoJsonPolygon> polygons;
+    polygons.reserve(root["features"].size());
     for (Json::Value feature: root["features"]) {
         Json::Value geometry_data = feature["geometry"];
         Json::Value coordinates = geometry_data["coordinates"];
