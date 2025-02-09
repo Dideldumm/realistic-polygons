@@ -105,7 +105,9 @@ add_executable(geojsonparser
         src/geojson/GeoJsonPolygon.cpp
         src/geojson/GeoJsonPolygon.h
         src/geojson/GeoJsonParser.cpp
-        src/geojson/GeoJsonParser.h)
+        src/geojson/GeoJsonParser.h
+        src/geojson/PolygonCsvWriter.cpp
+        src/geojson/PolygonCsvWriter.h)
 
 target_include_directories(geojsonparser PRIVATE ${JSONCPP_INCLUDE_DIRS})
 target_link_libraries(geojsonparser PRIVATE ${JSONCPP_LIBRARIES})
