@@ -4,10 +4,19 @@
 
 #include "GeoJsonPolygon.h"
 
+#include <cmath>
+#include <format>
+
+LatsAndLongs::LatsAndLongs(const double &latitude, const double &longitude): latitude(latitude), longitude(longitude) {
+}
+
 bool LatsAndLongs::operator==(const LatsAndLongs &other) const {
     return latitude == other.latitude && longitude == other.longitude;
 }
 
-Point LatsAndLongs::to_point() const {
-    //TODO implement
+std::string LatsAndLongs::to_string() const {
+    return std::format("{}|{}", longitude, latitude);
+}
+
+GeoJsonPolygon::GeoJsonPolygon(const std::vector<LatsAndLongs> &vertices) : vertices(vertices) {
 }

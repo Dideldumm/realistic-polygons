@@ -7,9 +7,7 @@
 
 #include <json/json.h>
 
-#include "geojson.h"
 #include "GeoJsonPolygon.h"
-
 
 
 /// Parse a geojson file to the given root.

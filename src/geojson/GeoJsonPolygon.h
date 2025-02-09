@@ -4,39 +4,26 @@
 
 #ifndef GEOJSONPOLYGON_H
 #define GEOJSONPOLYGON_H
+#include <string>
 #include <vector>
-
-
-struct Point {
-    const double x;
-    const double y;
-
-    explicit Point(const double &x, const double &y) : x(x), y(y) {
-    }
-
-};
 
 struct LatsAndLongs {
     const double latitude;
     const double longitude;
 
-    explicit LatsAndLongs(const double &latitude, const double &longitude) : latitude(latitude), longitude(longitude) {
-    }
+    LatsAndLongs(const double &latitude, const double &longitude);
 
     bool operator==(const LatsAndLongs &other) const;
 
-    [[nodiscard]] Point to_point() const;
-
+    [[nodiscard]] std::string to_string() const;
 };
 
 class GeoJsonPolygon {
 private:
-
+    std::vector<LatsAndLongs> vertices;
 
 public:
-    explicit GeoJsonPolygon(std::vector<LatsAndLongs> vertices);
+    explicit GeoJsonPolygon(const std::vector<LatsAndLongs> &vertices);
 };
-
-
 
 #endif //GEOJSONPOLYGON_H
