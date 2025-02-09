@@ -1,6 +1,5 @@
 # Letztes Meeting mit Prof. Schirra
 
-
 ## Testdaten von OSM holen
 - Open street map (kurz OSM)
 - hat unglaublich viele Daten
@@ -17,17 +16,20 @@
 	- Daten mit Hilfe von osmium filtern 
 		- nur multipolygons und polygons?
 		- aber eigentlich gibt es auch oft ways, die passen würden (zum Beispiel viele Seen)
-	- Die Eckpunkte der Ländergrenzen in eine n-dimensionale Matrix bringen (für jeden Punkt 2 Dimensionen?)
-	- Das gleiche mit den Eckpunkten von random generierten Polygonen machen
-	- Die erstellten Daten in eine Datei oder mehrere Dateien gießen
+	- das .pbf-file mit osmium zu geojson exportieren
+	- geojson weiter filtern und die Daten eine Matrix mappen
+		- Jede Reihe ist ein Polygon
+		- 1. Spalte x des ersten Punkts, 2. Spalte y des ersten Punkts, 3. Spalte x des zweiten Punkts, ...
+		- also csv-Datei speichern
+	- Eine ähnliche csv-Datei mit random generierten Polygonen erstellen
 	- Mit Sklearn einen Classifier trainieren anhand der Trainingsdaten
-		- 1 Drittel der Daten zur Verifikation nutzen oder so
-	- Die Ergebnisse des Classifiers auswerten
+		- 1 Drittel der Daten zur Verifikation?
+		- binärer classifier
+	- Die Ergebnisse auswerten
 
 ## TODO
 - In Sklearn einlesen
 	- Wie benutze ich das auf dem cluster?
-	- In welche Form muss ich meine Daten bringen?
 
 # Jans Idee
 Scheibenkäse und alternativ:
