@@ -8,11 +8,11 @@
 
 #include <iostream>
 
-static unsigned int max_number_of_features = 0;
+static int max_number_of_features = 0;
 
 std::string polygon_to_string(const GeoJsonPolygon &polygon) {
     std::string string;
-    unsigned int number_of_features = 0;
+    int number_of_features = 0;
     for (const LatsAndLongs& vertex: polygon.getVertices()) {
         string += std::to_string(vertex.longitude) + ',' + std::to_string(vertex.latitude) + ',';
         number_of_features += 2;
@@ -40,5 +40,7 @@ void write_polygons(const std::string &file_path, const std::vector<GeoJsonPolyg
         return;
     }
     metadata_file << max_number_of_features << "\n";
-    metadata_file.close();
+    metadata_file << polygons.size() << "\n";
+    metadata_file.close();;
+    std::cout << max_number_of_features;
 }

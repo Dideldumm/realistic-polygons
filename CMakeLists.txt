@@ -98,13 +98,21 @@ add_executable(leftMostRightmostVertices
         src/LeftMostRightMostVertices/QuadrantTree.cpp
         src/LeftMostRightMostVertices/QuadrantTree.h
         src/utils/geometry/SegmentUtils.h
-        src/utils/geometry/SegmentUtils.cpp)
+        src/utils/geometry/SegmentUtils.cpp
+)
 
 add_executable(geojsonparser
         src/geojson/geojson.cpp
         src/geojson/GeoJsonPolygon.cpp
         src/geojson/GeoJsonParser.cpp
-        src/geojson/PolygonCsvWriter.cpp)
+        src/geojson/PolygonCsvWriter.cpp
+)
+
+add_executable(unrealisticPolygons
+        src/UnrealisticPolygonGenerator/unrealisticpolygons.cpp
+        src/geojson/GeoJsonPolygon.cpp
+        src/geojson/PolygonCsvWriter.cpp
+)
 
 target_include_directories(geojsonparser PRIVATE ${JSONCPP_INCLUDE_DIRS})
 target_link_libraries(geojsonparser PRIVATE ${JSONCPP_LIBRARIES})
