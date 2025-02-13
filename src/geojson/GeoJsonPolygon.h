@@ -8,10 +8,12 @@
 #include <vector>
 
 struct LatsAndLongs {
-    const double latitude;
-    const double longitude;
+    double latitude;
+    double longitude;
 
     LatsAndLongs(const double &latitude, const double &longitude);
+
+    LatsAndLongs(const LatsAndLongs &other);
 
     bool operator==(const LatsAndLongs &other) const;
 
@@ -24,6 +26,8 @@ private:
 
 public:
     explicit GeoJsonPolygon(const std::vector<LatsAndLongs> &vertices);
+
+    [[nodiscard]] const std::vector<LatsAndLongs> &getVertices() const;
 };
 
 #endif //GEOJSONPOLYGON_H

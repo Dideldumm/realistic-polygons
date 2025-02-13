@@ -8,9 +8,9 @@
 #include <iostream>
 
 std::unique_ptr<Json::Value> read_file(const std::string &file_path) {
-    std::ifstream file(file_path, std::ifstream::binary);
+    std::ifstream file(file_path);
     if (!file.is_open()) {
-        std::cerr << "Unable to open GeoJSON file.\n";
+        std::cerr << "Unable to open GeoJSON file." << std::endl;
         return nullptr;
     }
 
@@ -42,19 +42,19 @@ std::vector<LatsAndLongs> parse_array(const Json::Value &array) {
     return points;
 }
 
-GeoJsonPolygon parse_linestring(const Json::Value &linestring) {
-    return GeoJsonPolygon(parse_array(linestring["coordinates"]));
+GeoJsonPolygon parse_linestring(const Json::Value &coordinates) {
+    return GeoJsonPolygon(parse_array(coordinates));
 }
 
-GeoJsonPolygon parse_polygon(const Json::Value &polygon_data) {
-    std::vector<LatsAndLongs> points = parse_array(polygon_data["coordinates"]);
+GeoJsonPolygon parse_polygon(const Json::Value &coordinates) {
+    std::vector<LatsAndLongs> points = parse_array(coordinates);
     points.pop_back();
     return GeoJsonPolygon(points);
 }
 
 std::vector<GeoJsonPolygon> parse_multipolygon(const Json::Value &multipolygon) {
     std::vector<GeoJsonPolygon> polygons;
-    for (const Json::Value &polygon_data: multipolygon["coordinates"]) {
+    for (const Json::Value &polygon_data: multipolygon) {
         polygons.emplace_back(parse_polygon(polygon_data));
     }
     return polygons;
@@ -65,22 +65,19 @@ std::vector<GeoJsonPolygon> GeoJsonParser::parse_all_polygons() const {
     std::vector<GeoJsonPolygon> polygons;
     polygons.reserve(root["features"].size());
     for (Json::Value feature: root["features"]) {
-        Json::Value geometry_data = feature["geometry"];
-        Json::Value coordinates = geometry_data["coordinates"];
-        switch (geometry_data["type"].asString()) {
-            case "LineString":
-                polygons.emplace_back(parse_linestring(coordinates));
-                break;
-            case "Polygon":
-                parse_polygon(coordinates);
-                break;
-            case "Multipolygon":
-                std::vector<GeoJsonPolygon> multipolygon = parse_multipolygon(coordinates);
-                polygons.insert(polygons.end(), multipolygon.begin(), multipolygon.end());
-                break;
-            default:
-                //TODO log the skipped lines?
-                break;
+        const Json::Value &geometry_data = feature["geometry"];
+        const Json::Value &coordinates = geometry_data["coordinates"];
+        const std::string geometry_type = geometry_data["type"].asString();
+        if (geometry_type == "LineString") {
+            polygons.emplace_back(parse_linestring(coordinates));
+        } else if (geometry_type == "Polygon") {
+            polygons.emplace_back(parse_polygon(coordinates));
+        } else if (geometry_type == "MultiPolygon") {
+            // TODO fix
+            // std::vector<GeoJsonPolygon> multipolygon = parse_multipolygon(coordinates);
+            // polygons.insert(polygons.end(), multipolygon.begin(), multipolygon.end());
+        } else {
+            //TODO log the skipped lines?
         }
     }
     return polygons;

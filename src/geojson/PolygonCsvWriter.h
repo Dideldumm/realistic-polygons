@@ -10,5 +10,4 @@
 
 void write_polygons(const std::string &file_path, const std::vector<GeoJsonPolygon> &polygons);
 
-
 #endif //POLYGONCSVWRITER_H

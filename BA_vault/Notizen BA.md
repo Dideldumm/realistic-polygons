@@ -1,4 +1,7 @@
 # Letztes Meeting mit Prof. Schirra
+- Erstmal weitermachen
+- Vielleicht doch mit json direkt einlesen probieren?
+	- Glaube aber nicht, dass das gut ausgeht
 
 ## Testdaten von OSM holen
 - Open street map (kurz OSM)
