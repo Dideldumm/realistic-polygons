@@ -112,13 +112,17 @@ add_executable(unrealisticPolygons
         src/UnrealisticPolygonGenerator/unrealisticpolygons.cpp
         src/geojson/GeoJsonPolygon.cpp
         src/geojson/PolygonCsvWriter.cpp
+        src/utils/PointGenerator/SeededPointGenerator.cpp
+        src/utils/PointGenerator/RingDistributionPointGenerator.cpp
+        src/utils/PointGenerator/RandomPointGenerator.cpp
 )
 
 target_include_directories(geojsonparser PRIVATE ${JSONCPP_INCLUDE_DIRS})
 target_link_libraries(geojsonparser PRIVATE ${JSONCPP_LIBRARIES})
+#target_link_libraries(unrealisticPolygons PRIVATE CGAL::CGAL GMP::GMP GMP::GMPXX)
 
 # Define a list of targets - mergeClosestObjects twoOptMoves
-set(TARGETS simplePolygon shortestPolygon mergeConvexHulls test unionOfConvexHulls)
+set(TARGETS simplePolygon shortestPolygon mergeConvexHulls test unionOfConvexHulls unrealisticPolygons)
 
 # Link libraries if CGAL with Qt6 is found
 if (CGAL_Qt6_FOUND)
