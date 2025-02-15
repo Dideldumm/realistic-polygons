@@ -6,7 +6,7 @@ import numpy as np
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import classification_report
 
 random_state = 42
 
@@ -49,14 +49,12 @@ def main(realistic_data: str, unrealistic_data: str) -> None:
                                                                                 test_size=0.2,
                                                                                 random_state=random_state)
 
-    model = LogisticRegression(solver="saga", max_iter=1000)
+    model = LogisticRegression(solver="saga", max_iter=10000)
     model.fit(train_features, train_labels)
 
     prediction = model.predict(test_features)
 
-    accuracy = accuracy_score(test_labels, prediction)
-
-    print(f"Accuracy: {accuracy}")
+    print(classification_report(test_labels, prediction))
 
 
 if __name__ == "__main__":
