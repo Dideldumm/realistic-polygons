@@ -55,5 +55,5 @@ int main(int argc, char *argv[]) {
         mapped_polygons.push_back(map_cgal_polygon(polygon));
     }
 
-    write_polygons(file_path, mapped_polygons);
+    write_polygons(file_path, mapped_polygons, max_number_of_points);
 }

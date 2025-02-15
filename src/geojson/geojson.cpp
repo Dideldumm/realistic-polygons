@@ -11,9 +11,9 @@
 int main(int argc, char **argv) {
     const std::string json_file_path = argv[1];
     const std::string target_file_path = argv[2];
-    const GeoJsonParser parser(json_file_path);
+    GeoJsonParser parser(json_file_path);
 
     const std::vector<GeoJsonPolygon> polygons = parser.parse_all_polygons();
-    write_polygons(target_file_path, polygons);
+    write_polygons(target_file_path, polygons, parser.get_max_number_of_vertices());
     return 0;
 }

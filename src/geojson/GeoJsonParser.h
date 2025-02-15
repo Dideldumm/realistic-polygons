@@ -13,11 +13,14 @@
 class GeoJsonParser {
 private:
     const std::unique_ptr<Json::Value> root;
+    unsigned long max_number_of_vertices = 0;
 
 public:
     explicit GeoJsonParser(const std::string &file_path);
 
-    [[nodiscard]] std::vector<GeoJsonPolygon> parse_all_polygons() const;
+    [[nodiscard]] std::vector<GeoJsonPolygon> parse_all_polygons();
+
+    [[nodiscard]] unsigned long get_max_number_of_vertices() const;
 };
 
 

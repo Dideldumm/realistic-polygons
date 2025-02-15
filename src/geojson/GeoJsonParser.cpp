@@ -60,7 +60,7 @@ std::vector<GeoJsonPolygon> parse_multipolygon(const Json::Value &multipolygon) 
     return polygons;
 }
 
-std::vector<GeoJsonPolygon> GeoJsonParser::parse_all_polygons() const {
+std::vector<GeoJsonPolygon> GeoJsonParser::parse_all_polygons() {
     const Json::Value &root = *(this->root);
     std::vector<GeoJsonPolygon> polygons;
     polygons.reserve(root["features"].size());
@@ -69,9 +69,17 @@ std::vector<GeoJsonPolygon> GeoJsonParser::parse_all_polygons() const {
         const Json::Value &coordinates = geometry_data["coordinates"];
         const std::string geometry_type = geometry_data["type"].asString();
         if (geometry_type == "LineString") {
-            polygons.emplace_back(parse_linestring(coordinates));
+            GeoJsonPolygon polygon = parse_linestring(coordinates);
+            polygons.emplace_back(polygon);
+            if (polygon.getVertices().size() > max_number_of_vertices) {
+                max_number_of_vertices = polygon.getVertices().size();
+            }
         } else if (geometry_type == "Polygon") {
-            polygons.emplace_back(parse_polygon(coordinates));
+            GeoJsonPolygon polygon = parse_polygon(coordinates);
+            polygons.emplace_back(polygon);
+            if (polygon.getVertices().size() > max_number_of_vertices) {
+                max_number_of_vertices = polygon.getVertices().size();
+            }
         } else if (geometry_type == "MultiPolygon") {
             // TODO fix
             // std::vector<GeoJsonPolygon> multipolygon = parse_multipolygon(coordinates);
@@ -81,4 +89,8 @@ std::vector<GeoJsonPolygon> GeoJsonParser::parse_all_polygons() const {
         }
     }
     return polygons;
+}
+
+unsigned long GeoJsonParser::get_max_number_of_vertices() const {
+    return max_number_of_vertices;
 }
