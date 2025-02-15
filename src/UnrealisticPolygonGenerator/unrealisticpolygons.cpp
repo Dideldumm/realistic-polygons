@@ -38,14 +38,12 @@ Polygon generate_simple_polygon(const int &number_of_vertices) {
 
     CGAL::random_polygon_2(random_points.size(), std::back_inserter(polygon),
                            random_points.begin());
-    std::cout << "The following simple polygon was made: " << std::endl;
-    std::cout << polygon << std::endl;
     return polygon;
 }
 
 int main(int argc, char *argv[]) {
     const std::string file_path = argv[1];
-    const int max_number_of_points = std::stoi(argv[2]) / 2;
+    const int max_number_of_points = std::stoi(argv[2]);
     // Each point corresponds to 2 features (x and y coordinate of that point)
     const int number_of_polygons = std::stoi(argv[3]);
 
