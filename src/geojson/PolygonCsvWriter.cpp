@@ -40,5 +40,4 @@ void write_polygons(const std::string &file_path, const std::vector<GeoJsonPolyg
     metadata_file << max_number_of_points << "\n";
     metadata_file << polygons.size() << "\n";
     metadata_file.close();;
-    std::cout << max_number_of_points;
 }

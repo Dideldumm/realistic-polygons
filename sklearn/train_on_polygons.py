@@ -3,7 +3,6 @@ from typing import Tuple
 from typing import List
 
 import numpy as np
-import pandas as pd
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -47,7 +46,7 @@ def main(realistic_data: str, unrealistic_data: str) -> None:
     shuffled_labels = labels[random_indices]
 
     train_features, test_features, train_labels, test_labels = train_test_split(shuffled_features, shuffled_labels,
-                                                                                test_size=0.5,
+                                                                                test_size=0.2,
                                                                                 random_state=random_state)
 
     model = LogisticRegression(solver="saga", max_iter=1000)

@@ -9,8 +9,10 @@
 
 /.idea
 /*/.idea
+
 /cmake-build-debug
 /.obsidian
 
 # Buildfiles
 /build
+/sklearn/data
