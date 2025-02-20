@@ -2,9 +2,9 @@
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 #include <CGAL/draw_polygon_2.h>
-#include "utils/PointGenerator/RandomPointGenerator.h"
-#include "utils/geometry/PointUtils.h"
-#include "utils/geometry/SegmentUtils.h"
+#include "../utils/PointGenerator/RandomPointGenerator.h"
+#include "../utils/geometry/PointUtils.h"
+#include "../utils/geometry/SegmentUtils.h"
 
 typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
 typedef CGAL::Polygon_2<Kernel> Polygon;

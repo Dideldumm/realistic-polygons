@@ -8,27 +8,27 @@
 
 #include <iostream>
 
-std::string polygon_to_string(const GeoJsonPolygon &polygon, const unsigned long max_number_of_points) {
+std::string polygon_to_string(const Polygon &polygon, const unsigned long max_number_of_points) {
     std::string string;
-    for (const LatsAndLongs &vertex: polygon.getVertices()) {
-        string += std::to_string(vertex.longitude) + ',' + std::to_string(vertex.latitude) + ',';
+    for (const auto &[x, y]: polygon) {
+        string += std::to_string(x) + ',' + std::to_string(y) + ',';
     }
     const std::string empty_point = "0,0,";
-    for (unsigned long i = 0; i < max_number_of_points - polygon.getVertices().size(); ++i) {
+    for (unsigned long i = 0; i < max_number_of_points - polygon.size(); ++i) {
         string += empty_point;
     }
     string.pop_back();
     return string;
 }
 
-void write_polygons(const std::string &file_path, const std::vector<GeoJsonPolygon> &polygons,
+void write_polygons(const std::string &file_path, const std::vector<Polygon> &polygons,
                     const unsigned long max_number_of_points) {
     std::ofstream file(file_path);
     if (!file.is_open()) {
         std::cerr << "Failed to open file: " << file_path << std::endl;
         return;
     }
-    for (const GeoJsonPolygon &polygon: polygons) {
+    for (const Polygon &polygon: polygons) {
         file << polygon_to_string(polygon, max_number_of_points) << "\n";
     }
     file.close();

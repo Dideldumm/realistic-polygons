@@ -19,12 +19,12 @@ add_executable(simplePolygon
         src/utils/PointGenerator/RandomPointGenerator.cpp
         src/utils/PointGenerator/SeededPointGenerator.cpp
         src/utils/PointGenerator/RingDistributionPointGenerator.cpp
-        src/GenerateSimplePolygon.cpp
+        src/PolygonGenerator/GenerateSimplePolygon.cpp
         src/utils/CommandLineArgumentHandler.cpp
 )
 
 add_executable(shortestPolygon
-        src/BruteForceShortestPolygon.cpp
+        src/PolygonGenerator/BruteForceShortestPolygon.cpp
         src/utils/geometry/PointUtils.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
         src/utils/PointGenerator/SeededPointGenerator.cpp
@@ -57,7 +57,7 @@ add_executable(shortestPolygon
 #)
 
 add_executable(mergeConvexHulls
-        src/MergeConvexHulls.cpp
+        src/PolygonGenerator/MergeConvexHulls.cpp
         src/utils/geometry/PolygonUtils.cpp
         src/utils/geometry/PointUtils.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
@@ -84,7 +84,7 @@ add_executable(test
 )
 
 add_executable(unionOfConvexHulls
-        src/UnionOfConvexHulls.cpp
+        src/PolygonGenerator/UnionOfConvexHulls.cpp
         src/utils/PointGenerator/SeededPointGenerator.cpp
         src/utils/PointGenerator/RingDistributionPointGenerator.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
@@ -137,3 +137,4 @@ else ()
         target_link_libraries(${target} PUBLIC stdc++ m)
     endforeach ()
 endif ()
+add_executable(unionedHullsGenerator src/PolygonGenerator/unionedHullsGenerator.cpp)

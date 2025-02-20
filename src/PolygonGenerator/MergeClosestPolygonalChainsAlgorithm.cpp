@@ -5,7 +5,7 @@
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 
-#include "utils/VectorUtils.h"
+#include "../utils/VectorUtils.h"
 #include "utils/geometry/PointAndSegmentUtils.h"
 
 typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;

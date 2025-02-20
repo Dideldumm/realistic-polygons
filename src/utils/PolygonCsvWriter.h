@@ -6,9 +6,15 @@
 #define POLYGONCSVWRITER_H
 #include <vector>
 
-#include "../geojson/GeoJsonPolygon.h"
+namespace CsvWriter {
+    struct Point {
+        double x;
+        double y;
+    };
 
-void write_polygons(const std::string &file_path, const std::vector<GeoJsonPolygon> &polygons,
-                    const unsigned long max_number_of_points);
+    typedef std::vector<Point> Polygon;
 
+    void write_polygons(const std::string &file_path, const std::vector<Polygon> &polygons,
+                        unsigned long max_number_of_points);
+}
 #endif //POLYGONCSVWRITER_H

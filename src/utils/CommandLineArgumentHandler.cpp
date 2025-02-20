@@ -22,6 +22,10 @@ std::string getMandatoryCMDLineOption(char **begin, char **end, const std::strin
 }
 
 
+bool isOptionPresent(char **begin, char **end, const std::string &optionName) {
+    return std::find(begin, end, optionName) != end;
+}
+
 Point parsePoint(const std::string &pointString) {
     const std::regex numberRegex("\\d+");
     std::smatch numberMatch;

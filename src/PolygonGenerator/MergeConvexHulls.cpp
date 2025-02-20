@@ -7,9 +7,9 @@
 #include <CGAL/convex_hull_2.h>
 #include <CGAL/draw_polygon_2.h>
 
-#include "utils/geometry/SegmentUtils.h"
-#include "utils/geometry/PolygonUtils.h"
-#include "utils/PointGenerator/RandomPointGenerator.h"
+#include "../utils/geometry/SegmentUtils.h"
+#include "../utils/geometry/PolygonUtils.h"
+#include "../utils/PointGenerator/RandomPointGenerator.h"
 
 typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;

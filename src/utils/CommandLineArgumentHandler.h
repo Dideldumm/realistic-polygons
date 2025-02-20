@@ -15,9 +15,7 @@ typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
 typedef CGAL::Polygon_2<Kernel> Polygon;
 typedef CGAL::Point_2<Kernel> Point;
 
-inline bool isOptionPresent(char **begin, char **end, const std::string &optionName) {
-    return std::find(begin, end, optionName) != end;
-}
+bool isOptionPresent(char **begin, char **end, const std::string &optionName);
 
 Point parsePoint(const std::string &pointString);
 

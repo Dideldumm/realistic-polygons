@@ -9,11 +9,11 @@
 #include <CGAL/draw_polygon_2.h>
 #include <CGAL/random_polygon_2.h>
 
-#include "utils/PointGenerator/SeededPointGenerator.h"
-#include "utils/PointGenerator/RandomPointGenerator.h"
-#include "utils/ToStringUtils.h"
-#include "utils/geometry/PolygonUtils.h"
-#include "utils/geometry/VectorUtils.h"
+#include "../utils/PointGenerator/SeededPointGenerator.h"
+#include "../utils/PointGenerator/RandomPointGenerator.h"
+#include "../utils/ToStringUtils.h"
+#include "../utils/geometry/PolygonUtils.h"
+#include "../utils/geometry/VectorUtils.h"
 
 typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
 typedef CGAL::Point_2<Kernel> Point;
