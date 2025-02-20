@@ -8,7 +8,7 @@
 #include <CGAL/random_polygon_2.h>
 
 #include "../geojson/GeoJsonPolygon.h"
-#include "../geojson/PolygonCsvWriter.h"
+#include "../utils/PolygonCsvWriter.h"
 #include "../utils/PointGenerator/RandomPointGenerator.h"
 
 typedef CGAL::Polygon_2<Kernel> Polygon;

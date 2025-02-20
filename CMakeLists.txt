@@ -105,13 +105,13 @@ add_executable(geojsonparser
         src/geojson/geojson.cpp
         src/geojson/GeoJsonPolygon.cpp
         src/geojson/GeoJsonParser.cpp
-        src/geojson/PolygonCsvWriter.cpp
+        src/utils/PolygonCsvWriter.cpp
 )
 
 add_executable(unrealisticPolygons
-        src/UnrealisticPolygonGenerator/unrealisticpolygons.cpp
+        src/PolygonGenerator/unrealisticpolygons.cpp
         src/geojson/GeoJsonPolygon.cpp
-        src/geojson/PolygonCsvWriter.cpp
+        src/utils/PolygonCsvWriter.cpp
         src/utils/PointGenerator/SeededPointGenerator.cpp
         src/utils/PointGenerator/RingDistributionPointGenerator.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp

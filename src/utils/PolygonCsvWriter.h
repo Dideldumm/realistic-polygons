@@ -6,7 +6,7 @@
 #define POLYGONCSVWRITER_H
 #include <vector>
 
-#include "GeoJsonPolygon.h"
+#include "../geojson/GeoJsonPolygon.h"
 
 void write_polygons(const std::string &file_path, const std::vector<GeoJsonPolygon> &polygons,
                     const unsigned long max_number_of_points);
