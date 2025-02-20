@@ -18,10 +18,10 @@ CsvWriter::Point map_cgal_point(const CGAL_Point &p) {
 }
 
 CsvWriter::Polygon map_cgal_polygon(const CGAL_Polygon &cgal_polygon) {
-    CsvWriter::Polygon lats_and_longs;
-    lats_and_longs.reserve(cgal_polygon.size());
-    std::ranges::transform(cgal_polygon.vertices(), std::back_inserter(lats_and_longs), map_cgal_point);
-    return lats_and_longs;
+    CsvWriter::Polygon mapped_polygon;
+    mapped_polygon.reserve(cgal_polygon.size());
+    std::ranges::transform(cgal_polygon.vertices(), std::back_inserter(mapped_polygon), map_cgal_point);
+    return mapped_polygon;
 }
 
 CGAL_Polygon generate_simple_polygon(const int &number_of_vertices) {
