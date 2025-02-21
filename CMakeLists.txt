@@ -115,6 +115,8 @@ add_executable(unrealisticPolygons
         src/utils/PointGenerator/SeededPointGenerator.cpp
         src/utils/PointGenerator/RingDistributionPointGenerator.cpp
         src/utils/PointGenerator/RandomPointGenerator.cpp
+        src/PolygonGenerator/CgalPolygonGenerator.cpp
+        src/PolygonGenerator/CgalPolygonGenerator.h
 )
 
 target_include_directories(geojsonparser PRIVATE ${JSONCPP_INCLUDE_DIRS})
@@ -138,4 +140,6 @@ else ()
     endforeach ()
 endif ()
 add_executable(unionedHullsGenerator src/PolygonGenerator/unionedHullsGenerator.cpp)
-add_executable(polygonGenerator src/PolygonGenerator/PolygonGenerator.cpp)
+add_executable(polygonGenerator src/PolygonGenerator/PolygonGenerator.cpp
+        src/PolygonGenerator/PolygonMapping.cpp
+        src/PolygonGenerator/PolygonMapping.h)

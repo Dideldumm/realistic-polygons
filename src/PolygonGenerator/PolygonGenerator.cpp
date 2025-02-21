@@ -9,6 +9,8 @@
 #include "../geojson/GeoJsonParser.h"
 #include "../utils/PolygonCsvWriter.h"
 #include "../utils/geometry/PointUtils.h"
+#include "PolygonMapping.h"
+
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel CgalKernel;
 
@@ -18,27 +20,11 @@ enum GeneratorAlgorithm {
     UNION_OF_CONVEX_HULLS
 };
 
-CsvWriter::Polygon map_to_polygon(GeoJsonPolygon const &polygon) {
-    std::vector<CsvWriter::Point> mapped_vertices;
-    for (const auto vertex: polygon.getVertices()) {
-        CsvWriter::Point mapped_vertex(vertex.longitude, vertex.latitude);
-        mapped_vertices.emplace_back(mapped_vertex);
-    }
-    return mapped_vertices;
-}
-
-std::vector<CsvWriter::Polygon> map_polygons(std::vector<GeoJsonPolygon> geo_json_polygons) {
-    std::vector<CsvWriter::Polygon> mapped_polygons;
-    for (const GeoJsonPolygon &polygon: geo_json_polygons) {
-        mapped_polygons.push_back(map_to_polygon(polygon));
-    }
-    return mapped_polygons;
-}
 
 void geojson_parser(const argparse::ArgumentParser &arguments) {
-    const std::string file_path = arguments.get<std::string>("file");
-    const std::string output_path = arguments.get<std::string>("output");
-    const unsigned long max_number_of_points = arguments.get<unsigned long>("max-points");
+    const auto file_path = arguments.get<std::string>("file");
+    const auto output_path = arguments.get<std::string>("output");
+    const auto max_number_of_points = arguments.get<unsigned long>("max-points");
 
     GeoJsonParser geo_json_parser(file_path);
     const auto parsed_polygons = geo_json_parser.parse_all_polygons();
@@ -47,18 +33,6 @@ void geojson_parser(const argparse::ArgumentParser &arguments) {
 }
 
 CGAL::Polygon_2<CgalKernel> generate_simple_polygon(const int &number_of_vertices) {
-    CGAL_Polygon polygon;
-    CGAL::Random rand;
-
-    const int size = rand.get_int(4, number_of_vertices);
-    constexpr int radius = 1; // TODO
-
-    RandomPointGenerator random_point_generator(radius);
-    std::vector<Point> random_points = random_point_generator.generate_points(size);
-
-    CGAL::random_polygon_2(random_points.size(), std::back_inserter(polygon),
-                           random_points.begin());
-    return polygon;
 }
 
 void union_of_convex_hulls(argparse::ArgumentParser &arguments) {
@@ -76,9 +50,9 @@ CsvWriter::Polygon map_cgal_polygon(const CGAL::Polygon_2<CgalKernel> &cgal_poly
 }
 
 void cgal_two_opt(const argparse::ArgumentParser &arguments) {
-    const int number_of_polygons = arguments.get<int>("n-polygons");
-    const int number_of_vertices = arguments.get<int>("max-points");
-    const std::string output_path = arguments.get<std::string>("output");
+    const auto number_of_polygons = arguments.get<int>("n-polygons");
+    const auto number_of_vertices = arguments.get<int>("max-points");
+    const auto output_path = arguments.get<std::string>("output");
 
     std::vector<CsvWriter::Polygon> polygons;
     for (int i = 0; i < number_of_polygons; ++i) {
