@@ -8,7 +8,7 @@
 #include "../geojson/GeoJsonParser.h"
 #include "../utils/PolygonCsvWriter.h"
 #include "../utils/geometry/PointUtils.h"
-#include "PolygonMapping.h"
+#include "../utils/PolygonMapping.h"
 #include "CgalPolygonGenerator.h"
 
 

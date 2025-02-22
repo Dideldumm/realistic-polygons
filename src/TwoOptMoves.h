@@ -5,29 +5,22 @@
 #ifndef TWOOPTMOVES_H
 #define TWOOPTMOVES_H
 
-#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
-#include <CGAL/Polygon_2.h>
-
-
-typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
-typedef CGAL::Point_2<Kernel> Point;
-typedef CGAL::Polygon_2<Kernel> Polygon;
-typedef CGAL::Segment_2<Kernel> Segment;
+#include "utils/geometry/CgalTypes.h"
 
 class TwoOptMoves {
-    Polygon polygon;
+    CgalTypes::Polygon polygon;
 
-    static std::optional<Point> getIntersection(const Segment &edge, const Segment &newPointEdge, const Point &oldEnd,
+    static std::optional<Point> getIntersection(const CgalTypes::Segment &edge, const CgalTypes::Segment &newPointEdge, const Point &oldEnd,
                                                 const Point &oldStart);
 
-    static Segment findIntersection(const Polygon &test, const Point &newPoint);
+    static CgalTypes::Segment findIntersection(const CgalTypes::Polygon &test, const Point &newPoint);
 
-    [[nodiscard]] Polygon constructPolygonWithoutIntersection(const Point &point, Polygon &test) const;
+    [[nodiscard]] CgalTypes::Polygon constructPolygonWithoutIntersection(const Point &point, CgalTypes::Polygon &test) const;
 
 public:
     void addPoint(const Point &point);
 
-    [[nodiscard]] Polygon getPolygon() const {
+    [[nodiscard]] CgalTypes::Polygon getPolygon() const {
         return this->polygon;
     }
 };

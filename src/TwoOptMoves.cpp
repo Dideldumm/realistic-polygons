@@ -5,18 +5,10 @@
 
 #include <CGAL/draw_polygon_2.h>
 #include "utils/PointGenerator/RandomPointGenerator.h"
-#include "utils/CommandLineArgumentHandler.h"
 
 #include "TwoOptMoves.h"
 
-
-typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
-typedef CGAL::Point_2<Kernel> Point;
-typedef CGAL::Polygon_2<Kernel> Polygon;
-typedef CGAL::Segment_2<Kernel> Segment;
-
-
-std::optional<Point> TwoOptMoves::getIntersection(const Segment &edge, const Segment &newPointEdge, const Point &oldEnd,
+std::optional<Point> TwoOptMoves::getIntersection(const CgalTypes::Segment &edge, const CgalTypes::Segment &newPointEdge, const Point &oldEnd,
                                                   const Point &oldStart) {
     if (auto intersectEdgeToNewPoint = CGAL::intersection(edge, newPointEdge)) {
         // Determine the type of intersection using boost::get
@@ -25,7 +17,7 @@ std::optional<Point> TwoOptMoves::getIntersection(const Segment &edge, const Seg
             if (*p != oldEnd && *p != oldStart) {
                 return {*p};
             }
-        } else if (std::get_if<Segment>(&*intersectEdgeToNewPoint)) {
+        } else if (std::get_if<CgalTypes::Segment>(&*intersectEdgeToNewPoint)) {
             // Intersection is a line (lines are collinear)
             throw std::invalid_argument("The lines are collinear and overlap.");
         }
@@ -33,12 +25,12 @@ std::optional<Point> TwoOptMoves::getIntersection(const Segment &edge, const Seg
     return {};
 }
 
-Segment TwoOptMoves::findIntersection(const Polygon &test, const Point &newPoint) {
-    Segment edgeToNewPoint;
-    Segment edgeFromNewPoint;
+CgalTypes::Segment TwoOptMoves::findIntersection(const CgalTypes::Polygon &test, const Point &newPoint) {
+    CgalTypes::Segment edgeToNewPoint;
+    CgalTypes::Segment edgeFromNewPoint;
     Point oldStart;
     Point oldEnd;
-    for (Segment edge: test.edges()) {
+    for (CgalTypes::Segment edge: test.edges()) {
         if (edge.end() == newPoint) {
             edgeToNewPoint = edge;
             oldStart = edge.start();
@@ -49,7 +41,7 @@ Segment TwoOptMoves::findIntersection(const Polygon &test, const Point &newPoint
         }
     }
 
-    for (Segment edge: test.edges()) {
+    for (CgalTypes::Segment edge: test.edges()) {
         if (edge == edgeToNewPoint || edge == edgeFromNewPoint) {
             // skip the added segments since they obviously intersect with themselves
             continue;
@@ -81,10 +73,10 @@ Segment TwoOptMoves::findIntersection(const Polygon &test, const Point &newPoint
 //     return test;
 // }
 
-Polygon TwoOptMoves::constructPolygonWithoutIntersection(const Point &point, Polygon &test) const {
-    const Segment intersectingSegment = findIntersection(test, point);
+CgalTypes::Polygon TwoOptMoves::constructPolygonWithoutIntersection(const Point &point, CgalTypes::Polygon &test) const {
+    const CgalTypes::Segment intersectingSegment = findIntersection(test, point);
     test = polygon;
-    Polygon newPolygon;
+    CgalTypes::Polygon newPolygon;
     bool alreadyAdded = false;
     for (Point vertex: test.vertices()) {
         newPolygon.push_back(vertex);
@@ -103,7 +95,7 @@ void TwoOptMoves::addPoint(const Point &point) {
         return;
     }
 
-    Polygon test = polygon;
+    CgalTypes::Polygon test = polygon;
     test.push_back(point);
 
     while (!test.is_simple()) {

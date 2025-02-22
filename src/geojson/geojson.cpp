@@ -5,7 +5,7 @@
 
 #include "GeoJsonParser.h"
 #include "GeoJsonPolygon.h"
-#include "../PolygonGenerator/PolygonMapping.h"
+#include "../utils/PolygonMapping.h"
 
 #include "../utils/PolygonCsvWriter.h"
 

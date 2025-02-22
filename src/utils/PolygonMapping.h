@@ -5,18 +5,13 @@
 #ifndef POLYGONMAPPING_H
 #define POLYGONMAPPING_H
 
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#include <CGAL/Polygon_2.h>
 
-#include "../utils/PolygonCsvWriter.h"
+#include "geometry/CgalTypes.h"
+#include "PolygonCsvWriter.h"
 #include "../geojson/GeoJsonPolygon.h"
 
 
-typedef CGAL::Exact_predicates_inexact_constructions_kernel CGALKernel;
-typedef CGAL::Polygon_2<CGALKernel> CGALPolygon;
-
-
-CsvWriter::Polygon map_polygon(CGALPolygon const &polygon);
+CsvWriter::Polygon map_polygon(CgalTypes::Polygon const &polygon);
 
 CsvWriter::Polygon map_polygon(GeoJsonPolygon const &polygon);
 

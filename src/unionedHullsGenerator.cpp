@@ -4,18 +4,12 @@
 
 #include <string>
 #include <vector>
-#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
-#include <CGAL/Polygon_2.h>
 
-#include "../utils/PolygonCsvWriter.h"
+#include "utils/PolygonMapping.h"
+#include "utils/geometry/CgalTypes.h"
+#include "PolygonGenerator/UnionOfConvexHullsGenerator.h"
+#include "utils/PolygonCsvWriter.h"
 
-typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
-typedef CGAL::Polygon_2<Kernel> CGAL_Polygon;
-typedef Kernel::Point_2 CGAL_Point;
-
-CGAL_Polygon generate_polygon(const int &max_number_of_points) {
-
-}
 
 int main(int argc, char *argv[]) {
     const std::string file_path = argv[1];
@@ -25,8 +19,8 @@ int main(int argc, char *argv[]) {
 
     std::vector<CsvWriter::Polygon> mapped_polygons;
     for (int i = 0; i < number_of_polygons; i++) {
-        const CGAL_Polygon polygon = generate_polygon(max_number_of_points);
-        mapped_polygons.push_back(map_cgal_polygon(polygon));
+        const CgalTypes::Polygon polygon = unionOfConvexHulls(max_number_of_points, number_of_polygons, 1);
+        mapped_polygons.push_back(map_polygon(polygon));
     }
 
     write_polygons(file_path, mapped_polygons, max_number_of_points);

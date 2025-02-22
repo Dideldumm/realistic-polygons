@@ -5,15 +5,11 @@
 #ifndef CGALPOLYGONGENERATOR_H
 #define CGALPOLYGONGENERATOR_H
 
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#include <CGAL/Polygon_2.h>
+#include "../utils/geometry/CgalTypes.h"
 
-typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
-typedef CGAL::Polygon_2<Kernel> CGALPolygon;
+CgalTypes::Polygon generate_simple_polygon(const int &number_of_vertices);
 
-CGALPolygon generate_simple_polygon(const int &number_of_vertices);
-
-std::vector<CGALPolygon> generate_polygons(const int & number_of_polygons, const int &max_number_of_vertices);
+std::vector<CgalTypes::Polygon> generate_polygons(const int &number_of_polygons, const int &max_number_of_vertices);
 
 
 #endif //CGALPOLYGONGENERATOR_H

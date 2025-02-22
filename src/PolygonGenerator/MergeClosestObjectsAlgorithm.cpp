@@ -3,18 +3,13 @@
 //
 
 #include <CGAL/draw_polygon_2.h>
-#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
-#include <CGAL/Polygon_2.h>
-
 #include <ranges>
+
 #include "../utils/ToStringUtils.h"
 #include "../TwoOptMoves.h"
 #include "../utils/PointGenerator/RandomPointGenerator.h"
 #include "../utils/geometry/PolygonalChain.h"
 
-typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
-typedef CGAL::Point_2<Kernel> Point;
-typedef CGAL::Polygon_2<Kernel> Polygon;
 
 class PolygonalChain;
 

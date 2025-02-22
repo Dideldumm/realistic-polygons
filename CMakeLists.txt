@@ -113,7 +113,7 @@ add_executable(geojsonparser
 )
 
 add_executable(unrealisticPolygons
-        src/PolygonGenerator/unrealisticpolygons.cpp
+        src/unrealisticpolygons.cpp
         src/geojson/GeoJsonPolygon.cpp
         src/utils/PolygonCsvWriter.cpp
         src/utils/PointGenerator/SeededPointGenerator.cpp
@@ -143,7 +143,7 @@ else ()
         target_link_libraries(${target} PUBLIC stdc++ m)
     endforeach ()
 endif ()
-add_executable(unionedHullsGenerator src/PolygonGenerator/unionedHullsGenerator.cpp)
+add_executable(unionedHullsGenerator src/unionedHullsGenerator.cpp)
 add_executable(polygonGenerator src/PolygonGenerator/PolygonGenerator.cpp
-        src/PolygonGenerator/PolygonMapping.cpp
-        src/PolygonGenerator/PolygonMapping.h)
+        src/utils/PolygonMapping.cpp
+        src/utils/PolygonMapping.h)
