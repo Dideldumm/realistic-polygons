@@ -6,14 +6,8 @@
 #define TOSTRINGUTILS_H
 
 #include <string>
-#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
-#include <CGAL/Polygon_2.h>
 
-typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
-typedef CGAL::Point_2<Kernel> Point;
-typedef CGAL::Segment_2<Kernel> Segment;
-typedef CGAL::Polygon_2<Kernel> Polygon;
-
+#include "geometry/CgalTypes.h"
 
 template<class T>
 std::string containerToString(const auto &container, auto toString, auto delimiter) {
@@ -37,7 +31,7 @@ std::string containerToString(const auto &container, auto toString) {
  * @param point the point
  * @return a string reporesentation of the given point
  */
-std::string pointToString(const Point &point);
+std::string pointToString(const CgalTypes::Point &point);
 
 /**
  * Builds a string that represents the given segment.
@@ -45,8 +39,8 @@ std::string pointToString(const Point &point);
  * @param segment the segment to represent
  * @return a string representation of the given segment
  */
-std::string segmentToString(const Segment &segment);
+std::string segmentToString(const CgalTypes::Segment &segment);
 
-std::string polygonToString(const Polygon &polygon);
+std::string polygonToString(const CgalTypes::Polygon &polygon);
 
 #endif //TOSTRINGUTILS_H

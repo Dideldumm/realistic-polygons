@@ -3,18 +3,16 @@
 //
 
 #include <string>
+#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
-#include <CGAL/Random.h>
-#include <CGAL/random_polygon_2.h>
 
 #include "../utils/PolygonCsvWriter.h"
-#include "../utils/PointGenerator/RandomPointGenerator.h"
+#include "CgalPolygonGenerator.h"
+#include "PolygonMapping.h"
 
 
-typedef CGAL::Polygon_2<Kernel> CGAL_Polygon;
-typedef Kernel::Point_2 CGAL_Point;
-
-
+typedef CGAL::Exact_predicates_inexact_constructions_kernel CGALKernel;
+typedef CGAL::Polygon_2<CGALKernel> CGAL_Polygon;
 
 
 int main(int argc, char *argv[]) {
@@ -26,7 +24,7 @@ int main(int argc, char *argv[]) {
     std::vector<CsvWriter::Polygon> mapped_polygons;
     for (int i = 0; i < number_of_polygons; i++) {
         const CGAL_Polygon polygon = generate_simple_polygon(max_number_of_points);
-        mapped_polygons.push_back(map_cgal_polygon(polygon));
+        mapped_polygons.push_back(map_polygon(polygon));
     }
 
     write_polygons(file_path, mapped_polygons, max_number_of_points);

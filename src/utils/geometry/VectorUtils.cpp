@@ -4,7 +4,7 @@
 
 #include "VectorUtils.h"
 
-Vector map_angle_to_vector(const double &angle) {
+CgalTypes::Vector map_angle_to_vector(const double &angle) {
     constexpr double hypothenuse = 1;
     //sin(angle) = Gegenkathete / Hypothenuse
     const double y = hypothenuse / sin(angle);
@@ -13,6 +13,6 @@ Vector map_angle_to_vector(const double &angle) {
     return {x, y};
 }
 
-Vector create_random_vector(SeededPointGenerator &point_generator) {
+CgalTypes::Vector create_random_vector(SeededPointGenerator &point_generator) {
     return {{0, 0}, point_generator.generate_point()};
 }

@@ -3,16 +3,14 @@
 //
 
 #include <argparse/argparse.hpp>
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#include <CGAL/Polygon_2.h>
 
+#include "../utils/geometry/CgalTypes.h"
 #include "../geojson/GeoJsonParser.h"
 #include "../utils/PolygonCsvWriter.h"
 #include "../utils/geometry/PointUtils.h"
 #include "PolygonMapping.h"
+#include "CgalPolygonGenerator.h"
 
-
-typedef CGAL::Exact_predicates_inexact_constructions_kernel CgalKernel;
 
 enum GeneratorAlgorithm {
     GEOJSON_PARSER,
@@ -32,17 +30,14 @@ void geojson_parser(const argparse::ArgumentParser &arguments) {
     CsvWriter::write_polygons(output_path, mapped_polygons, max_number_of_points);
 }
 
-CGAL::Polygon_2<CgalKernel> generate_simple_polygon(const int &number_of_vertices) {
-}
-
 void union_of_convex_hulls(argparse::ArgumentParser &arguments) {
 }
 
-CsvWriter::Point map_cgal_point(const CGAL::Point_2<CgalKernel> &p) {
+CsvWriter::Point map_cgal_point(const CgalTypes::Point &p) {
     return {CGAL::to_double(p.x()), CGAL::to_double(p.y())};
 }
 
-CsvWriter::Polygon map_cgal_polygon(const CGAL::Polygon_2<CgalKernel> &cgal_polygon) {
+CsvWriter::Polygon map_cgal_polygon(const CgalTypes::Polygon &cgal_polygon) {
     CsvWriter::Polygon mapped_polygon;
     mapped_polygon.reserve(cgal_polygon.size());
     std::ranges::transform(cgal_polygon.vertices(), std::back_inserter(mapped_polygon), map_cgal_point);
@@ -51,15 +46,15 @@ CsvWriter::Polygon map_cgal_polygon(const CGAL::Polygon_2<CgalKernel> &cgal_poly
 
 void cgal_two_opt(const argparse::ArgumentParser &arguments) {
     const auto number_of_polygons = arguments.get<int>("n-polygons");
-    const auto number_of_vertices = arguments.get<int>("max-points");
+    const auto max_number_of_vertices = arguments.get<int>("max-points");
     const auto output_path = arguments.get<std::string>("output");
 
     std::vector<CsvWriter::Polygon> polygons;
     for (int i = 0; i < number_of_polygons; ++i) {
-        polygons.emplace_back(map_cgal_polygon(generate_simple_polygon(number_of_vertices)));
+        polygons.emplace_back(map_cgal_polygon(generate_polygons(number_of_polygons, max_number_of_vertices)));
     }
 
-    CsvWriter::write_polygons(output_path, polygons, number_of_vertices);
+    CsvWriter::write_polygons(output_path, polygons, max_number_of_vertices);
 }
 
 int main(const int argc, char *argv[]) {

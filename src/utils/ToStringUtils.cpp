@@ -4,18 +4,18 @@
 
 #include "ToStringUtils.h"
 
-std::string pointToString(const Point &point) {
+std::string pointToString(const CgalTypes::Point &point) {
     const std::string x = std::to_string(CGAL::to_double(point.x()));
     const std::string y = std::to_string(CGAL::to_double(point.y()));
     return x + "|" + y;
 }
 
-std::string segmentToString(const Segment &segment) {
+std::string segmentToString(const CgalTypes::Segment &segment) {
     const auto x = segment.start();
     const auto y = segment.end();
-    return containerToString<Point>(std::vector{x, y}, pointToString);
+    return containerToString<CgalTypes::Point>(std::vector{x, y}, pointToString);
 }
 
-std::string polygonToString(const Polygon &polygon) {
-    return containerToString<Point>(polygon.vertices(), pointToString);
+std::string polygonToString(const CgalTypes::Polygon &polygon) {
+    return containerToString<CgalTypes::Point>(polygon.vertices(), pointToString);
 }

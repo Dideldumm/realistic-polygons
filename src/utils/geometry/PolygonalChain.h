@@ -6,8 +6,6 @@
 #define POLYGONALCHAIN_H
 
 #include <CGAL/draw_polygon_2.h>
-#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
-#include <CGAL/Polygon_2.h>
 
 #include "../ToStringUtils.h"
 
@@ -74,9 +72,9 @@ public:
         return other.elements == this->elements;
     }
 
-    static double find_minimal_squared_distance(const Point &a, const PolygonalChain &b);
+    static auto find_minimal_squared_distance(const Point &a, const PolygonalChain &b);
 
-    static double find_minimal_squared_distance(const PolygonalChain &a, const PolygonalChain &b);
+    static auto find_minimal_squared_distance(const PolygonalChain &a, const PolygonalChain &b);
 };
 
 #endif //POLYGONALCHAIN_H

@@ -5,18 +5,12 @@
 #ifndef POLYGONUTILS_H
 #define POLYGONUTILS_H
 
-#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 
+#include "CgalTypes.h"
 
-typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
-typedef CGAL::Point_2<Kernel> Point;
-typedef CGAL::Segment_2<Kernel> Segment;
-typedef CGAL::Polygon_2<Kernel> Polygon;
-typedef std::list<Point> ConvexHull;
-typedef CGAL::Vector_2<Kernel> Vector;
 
-ConvexHull create_convex_hull(const std::list<Point> &vertices);
+CgalTypes::ConvexHull create_convex_hull(const std::list<CgalTypes::Point> &vertices);
 
 /**
  * Inserts the given point into the given polygon at the position of the given segment.
@@ -28,10 +22,11 @@ ConvexHull create_convex_hull(const std::list<Point> &vertices);
  * @param segment the position where the point should be inserted into the polygon
  * @param point the point that should be inserted
  */
-void insert_point_at_segment(Polygon &polygon, const Segment &segment, const Point &point);
+void insert_point_at_segment(CgalTypes::Polygon &polygon, const CgalTypes::Segment &segment,
+                             const CgalTypes::Point &point);
 
-Polygon join_polygons(const std::vector<Polygon> &polygons);
+CgalTypes::Polygon join_polygons(const std::vector<CgalTypes::Polygon> &polygons);
 
-Polygon translate_polygon(const Polygon &polygon, const Vector &vector);
+CgalTypes::Polygon translate_polygon(const CgalTypes::Polygon &polygon, const CgalTypes::Vector &vector);
 
 #endif //POLYGONUTILS_H

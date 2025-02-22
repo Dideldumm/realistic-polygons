@@ -21,10 +21,10 @@ PolygonalChain::PolygonalChain(const PolygonalChain &chain, const Point &point) 
 }
 
 
-double PolygonalChain::find_minimal_squared_distance(const Point &a, const PolygonalChain &b) {
+auto PolygonalChain::find_minimal_squared_distance(const Point &a, const PolygonalChain &b) {
 }
 
-double PolygonalChain::find_minimal_squared_distance(const PolygonalChain &a,
+auto PolygonalChain::find_minimal_squared_distance(const PolygonalChain &a,
                                                      const PolygonalChain &b) {
     if (a.size() == 1 && b.size() == 1) {
         return CGAL::squared_distance(a.getFirstElement(), b.getFirstElement());

@@ -1,12 +1,11 @@
 //
 // Created by dideldumm on 11.07.24.
 //
+
 #include <future>
-#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
+#include <argparse/argparse.hpp>
 #include <CGAL/Euclidean_distance.h>
-#include <CGAL/Polygon_2.h>
 #include <CGAL/draw_polygon_2.h>
-#include "../utils/CommandLineArgumentHandler.h"
 #include "../utils/PointGenerator/RandomPointGenerator.h"
 #include "../utils/ToStringUtils.h"
 
@@ -75,7 +74,7 @@ Polygon createShortestPolygon(const std::vector<Point> &points) {
 
 
 int main(const int argc, char *argv[]) {
-    const int numberOfPoints = std::stoi(getMandatoryCMDLineOption(argv, argv + argc, "-n"));
+    const int numberOfPoints = std::stoi(argv[1]);
 
     RandomPointGenerator generator;
     std::vector<Point> points = generator.generate_points(numberOfPoints);

@@ -91,6 +91,8 @@ add_executable(unionOfConvexHulls
         src/utils/ToStringUtils.cpp
         src/utils/geometry/PolygonUtils.cpp
         src/utils/geometry/VectorUtils.cpp
+        src/PolygonGenerator/UnionOfConvexHullsGenerator.cpp
+        src/PolygonGenerator/UnionOfConvexHullsGenerator.h
 )
 
 add_executable(leftMostRightmostVertices
@@ -106,6 +108,8 @@ add_executable(geojsonparser
         src/geojson/GeoJsonPolygon.cpp
         src/geojson/GeoJsonParser.cpp
         src/utils/PolygonCsvWriter.cpp
+        src/geojson/GeojsonPolygonMapper.cpp
+        src/geojson/GeojsonPolygonMapper.h
 )
 
 add_executable(unrealisticPolygons

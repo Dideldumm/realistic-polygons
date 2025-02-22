@@ -5,6 +5,8 @@
 
 #include "GeoJsonParser.h"
 #include "GeoJsonPolygon.h"
+#include "../PolygonGenerator/PolygonMapping.h"
+
 #include "../utils/PolygonCsvWriter.h"
 
 
@@ -14,6 +16,6 @@ int main(int argc, char **argv) {
     GeoJsonParser parser(json_file_path);
 
     const std::vector<GeoJsonPolygon> polygons = parser.parse_all_polygons();
-    CsvWriter::write_polygons(target_file_path, polygons, parser.get_max_number_of_vertices());
+    CsvWriter::write_polygons(target_file_path, map_polygons(polygons), parser.get_max_number_of_vertices());
     return 0;
 }

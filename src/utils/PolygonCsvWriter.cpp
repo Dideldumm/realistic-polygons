@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-std::string polygon_to_string(const Polygon &polygon, const unsigned long max_number_of_points) {
+std::string polygon_to_string(const CsvWriter::Polygon &polygon, const unsigned long max_number_of_points) {
     std::string string;
     for (const auto &[x, y]: polygon) {
         string += std::to_string(x) + ',' + std::to_string(y) + ',';
@@ -21,14 +21,14 @@ std::string polygon_to_string(const Polygon &polygon, const unsigned long max_nu
     return string;
 }
 
-void write_polygons(const std::string &file_path, const std::vector<Polygon> &polygons,
+void write_polygons(const std::string &file_path, const std::vector<CsvWriter::Polygon> &polygons,
                     const unsigned long max_number_of_points) {
     std::ofstream file(file_path);
     if (!file.is_open()) {
         std::cerr << "Failed to open file: " << file_path << std::endl;
         return;
     }
-    for (const Polygon &polygon: polygons) {
+    for (const CsvWriter::Polygon &polygon: polygons) {
         file << polygon_to_string(polygon, max_number_of_points) << "\n";
     }
     file.close();
