@@ -110,6 +110,8 @@ add_executable(geojsonparser
         src/utils/PolygonCsvWriter.cpp
         src/geojson/GeojsonPolygonMapper.cpp
         src/geojson/GeojsonPolygonMapper.h
+        src/geojson/GeojsonPolygonTransformer.cpp
+        src/geojson/GeojsonPolygonTransformer.h
 )
 
 add_executable(unrealisticPolygons
