@@ -6,10 +6,9 @@
 #define POINTGENERATOR_H
 
 #include <random>
-#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 
-typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
-typedef CGAL::Point_2<Kernel> Point;
+#include "../geometry/CgalTypes.h"
+
 typedef uint_least32_t u32;
 typedef std::mt19937 NumberGenerator;
 
@@ -27,9 +26,9 @@ protected:
 public:
     virtual ~SeededPointGenerator() = default;
 
-    [[nodiscard]] virtual std::vector<Point> generate_points(unsigned int numberOfPoints) = 0;
+    [[nodiscard]] virtual std::vector<CgalTypes::Point> generate_points(unsigned int numberOfPoints) = 0;
 
-    [[nodiscard]] virtual Point generate_point() = 0;
+    [[nodiscard]] virtual CgalTypes::Point generate_point() = 0;
 };
 
 u32 create_seed();

@@ -3,12 +3,12 @@
 //
 #include <json/json.h>
 
-#include "GeoJsonParser.h"
-#include "GeoJsonPolygon.h"
+#include "../geojson/GeoJsonParser.h"
+#include "../geojson/GeoJsonPolygon.h"
 #include "../utils/PolygonMapping.h"
 
 #include "../utils/PolygonCsvWriter.h"
-#include "GeojsonPolygonTransformer.h"
+#include "../geojson/GeojsonPolygonTransformer.h"
 
 
 int main(int argc, char **argv) {

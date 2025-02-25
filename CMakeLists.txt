@@ -29,10 +29,11 @@ source_group("CSV Writer Source Files" FILES
 
 # Add executables
 add_executable(simplePolygon
+        src/PolygonGenerator/GenerateSimplePolygon.cpp
         src/utils/geometry/PointUtils.cpp
         src/utils/geometry/SegmentUtils.cpp
         ${POINTGENS_SRC}
-        src/PolygonGenerator/GenerateSimplePolygon.cpp
+        src/main_files/simplePolygon.cpp
 )
 
 add_executable(shortestPolygon
@@ -40,9 +41,11 @@ add_executable(shortestPolygon
         src/utils/geometry/PointUtils.cpp
         ${POINTGENS_SRC}
         src/utils/ToStringUtils.cpp
+        src/main_files/shortestPolygon.cpp
 )
 
 add_executable(mergeConvexHulls
+        src/main_files/mergeConvexHulls.cpp
         src/PolygonGenerator/MergeConvexHulls.cpp
         src/utils/geometry/PolygonUtils.cpp
         src/utils/geometry/PointUtils.cpp
@@ -50,23 +53,16 @@ add_executable(mergeConvexHulls
 )
 
 add_executable(unionOfConvexHulls
-        src/PolygonGenerator/UnionOfConvexHulls.cpp
+        src/main_files/unionOfConvexHulls.cpp
         ${POINTGENS_SRC}
         src/utils/ToStringUtils.cpp
         src/utils/geometry/PolygonUtils.cpp
         src/utils/geometry/VectorUtils.cpp
         src/PolygonGenerator/UnionOfConvexHullsGenerator.cpp
-        src/PolygonGenerator/UnionOfConvexHullsGenerator.h
-)
-
-add_executable(leftMostRightmostVertices
-        src/LeftMostRightMostVertices/LeftMostRightMostVertices.cpp
-        src/LeftMostRightMostVertices/QuadrantTree.cpp
-        src/utils/geometry/SegmentUtils.cpp
 )
 
 add_executable(geojsonparser
-        src/geojson/geojson.cpp
+        src/main_files/geojson.cpp
         src/geojson/GeoJsonPolygon.cpp
         src/geojson/GeoJsonParser.cpp
         src/utils/PolygonCsvWriter.cpp
@@ -75,7 +71,7 @@ add_executable(geojsonparser
 )
 
 add_executable(unrealisticPolygons
-        src/unrealisticpolygons.cpp
+        src/main_files/unrealisticpolygons.cpp
         src/geojson/GeoJsonPolygon.cpp
         src/utils/PolygonCsvWriter.cpp
         ${POINTGENS_SRC}
@@ -83,7 +79,7 @@ add_executable(unrealisticPolygons
 )
 
 add_executable(unionedHullsGenerator
-        src/unionedHullsGenerator.cpp)
+        src/main_files/unionedHullsGenerator.cpp)
 
 add_executable(polygonGenerator
         src/PolygonGenerator/PolygonGenerator.cpp

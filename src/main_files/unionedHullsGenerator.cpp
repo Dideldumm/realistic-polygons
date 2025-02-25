@@ -5,16 +5,15 @@
 #include <string>
 #include <vector>
 
-#include "utils/PolygonMapping.h"
-#include "utils/geometry/CgalTypes.h"
-#include "PolygonGenerator/UnionOfConvexHullsGenerator.h"
-#include "utils/PolygonCsvWriter.h"
+#include "../PolygonGenerator/UnionOfConvexHullsGenerator.h"
+#include "../utils/PolygonMapping.h"
+#include "../utils/geometry/CgalTypes.h"
+#include "../utils/PolygonCsvWriter.h"
 
 
 int main(int argc, char *argv[]) {
     const std::string file_path = argv[1];
     const int max_number_of_points = std::stoi(argv[2]);
-    // Each point corresponds to 2 features (x and y coordinate of that point)
     const int number_of_polygons = std::stoi(argv[3]);
 
     std::vector<CsvWriter::Polygon> mapped_polygons;

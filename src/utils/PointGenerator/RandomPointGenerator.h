@@ -11,15 +11,13 @@
 #include "SeededPointGenerator.h"
 
 
-typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
-typedef CGAL::Point_2<Kernel> Point;
 typedef uint_least32_t u32;
 
 class RandomPointGenerator final : public RingDistributionPointGenerator {
 public:
-    explicit RandomPointGenerator(double radius, Point origin, u32 seed);
+    explicit RandomPointGenerator(double radius, const CgalTypes::Point &origin, u32 seed);
 
-    explicit RandomPointGenerator(double radius, Point origin);
+    explicit RandomPointGenerator(double radius, const CgalTypes::Point &origin);
 
     explicit RandomPointGenerator(double radius, u32 seed);
 

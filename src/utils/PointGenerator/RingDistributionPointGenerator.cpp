@@ -13,7 +13,7 @@ std::uniform_real_distribution<> createDistribution(const double lower_boundary,
 }
 
 RingDistributionPointGenerator::RingDistributionPointGenerator(const double inner_radius, const double outer_radius,
-                                                               Point origin,
+                                                               CgalTypes::Point origin,
                                                                const u32 &seed) : SeededPointGenerator(
         seed, create_number_generator(seed)),
     origin(std::move(origin)),
@@ -29,7 +29,7 @@ RingDistributionPointGenerator::RingDistributionPointGenerator(const double inne
 }
 
 RingDistributionPointGenerator::RingDistributionPointGenerator(const double inner_radius, const double outer_radius,
-                                                               const Point &origin) : RingDistributionPointGenerator(
+                                                               const CgalTypes::Point &origin) : RingDistributionPointGenerator(
     inner_radius, outer_radius, origin, create_seed()) {
 }
 
@@ -39,7 +39,7 @@ RingDistributionPointGenerator::RingDistributionPointGenerator(const double inne
     inner_radius, outer_radius, {0, 0}, create_seed()) {
 }
 
-Point RingDistributionPointGenerator::calculate_point(const double angle, const double distance) const {
+CgalTypes::Point RingDistributionPointGenerator::calculate_point(const double angle, const double distance) const {
     auto x = origin.x();
     x += distance * std::cos(angle);
     auto y = origin.y();
@@ -47,15 +47,15 @@ Point RingDistributionPointGenerator::calculate_point(const double angle, const 
     return {x, y};
 }
 
-std::vector<Point> RingDistributionPointGenerator::generate_points(const unsigned int number_of_points) {
-    std::vector<Point> points{};
+std::vector<CgalTypes::Point> RingDistributionPointGenerator::generate_points(const unsigned int number_of_points) {
+    std::vector<CgalTypes::Point> points{};
     for (unsigned int i = 0; i < number_of_points; ++i) {
         points.emplace_back(generate_point());
     }
     return points;
 }
 
-Point RingDistributionPointGenerator::generate_point() {
+CgalTypes::Point RingDistributionPointGenerator::generate_point() {
     const double angle = this->angle_distribution(this->number_generator);
     const double distance = this->distance_distribution(this->number_generator);
     return calculate_point(angle, distance);

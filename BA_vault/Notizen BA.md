@@ -1,9 +1,5 @@
 # Letztes Meeting mit Prof. Schirra
-- [x]  Realistische Polygone skalieren und auf $(0,0)$ verschieben
-	- Mittelpunkt des Polygons $M$ berechnen
-	- Alle Punkte um $-M$ verschieben
-	- Danach den Punkt des Polygons suchen der von $M$ am weitesten entfernt ist
-	- Alle Punkte so skalieren, dass der am weitesten entfernte Punkt auf dem Einheitskreis liegt
+- [x]  Realistische Polygone skalieren und verschieben
 - [ ] Meine Algorithmen in `.csv`-Dateien schreiben und Model klassifizieren lassen
 - [ ] Titel für die BA überlegen
 - [x] Generierte Polygone sollte eine zufällige Menge an Punkten habe und nicht alle die Maximal mögliche Anzahl

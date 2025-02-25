@@ -3,17 +3,16 @@
 //
 
 #include "RandomPointGenerator.h"
-#include "../CommandLineArgumentHandler.h"
 
 #define DEFAULT_ORIGIN {0,0}
 
 RandomPointGenerator::RandomPointGenerator(const double radius,
-                                           const Point origin,
+                                           const CgalTypes::Point &origin,
                                            const u32 seed) : RingDistributionPointGenerator(
     0, radius, origin, seed) {
 }
 
-RandomPointGenerator::RandomPointGenerator(const double radius, const Point origin) : RandomPointGenerator(
+RandomPointGenerator::RandomPointGenerator(const double radius, const CgalTypes::Point &origin) : RandomPointGenerator(
     radius, origin, create_seed()) {
 }
 

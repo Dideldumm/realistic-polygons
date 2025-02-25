@@ -6,9 +6,9 @@
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
 
-#include "utils/PolygonCsvWriter.h"
-#include "PolygonGenerator/CgalPolygonGenerator.h"
-#include "utils/PolygonMapping.h"
+#include "../utils/PolygonCsvWriter.h"
+#include "../PolygonGenerator/CgalPolygonGenerator.h"
+#include "../utils/PolygonMapping.h"
 
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel CGALKernel;
