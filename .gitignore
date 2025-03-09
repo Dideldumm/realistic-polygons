@@ -1,17 +1,13 @@
-# The following is to ignore executables
-# TODO use an output directory instead
-# Ingore all
-*
-# Unignore all with extensions
-!*.*
-# Unignore all directories
-!*/
-
+# Ignore jetbrains metadata
 /.idea
 /*/.idea
 
+# Ignore cmake metadata
 /cmake-build-debug
+
+# Ignore obsidian metadata
 /.obsidian
+/*/.obsidian
 
 # Buildfiles
 /build
