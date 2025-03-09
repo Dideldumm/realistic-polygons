@@ -1,7 +1,7 @@
 # Letztes Meeting mit Prof. Schirra
 - [x]  Realistische Polygone skalieren und verschieben
 - [ ] Meine Algorithmen in `.csv`-Dateien schreiben und Model klassifizieren lassen
-- [ ] Titel für die BA überlegen
+- [x] Titel für die BA überlegen
 - [x] Generierte Polygone sollte eine zufällige Menge an Punkten habe und nicht alle die Maximal mögliche Anzahl
 - [ ] Ein trainiertes Modell speichern
 
@@ -31,10 +31,6 @@
 		- 1 Drittel der Daten zur Verifikation?
 		- binärer classifier
 	- Die Ergebnisse auswerten
-
-## TODO
-- In Sklearn einlesen
-	- Wie benutze ich das auf dem cluster?
 
 # Jans Idee
 Scheibenkäse und alternativ:
