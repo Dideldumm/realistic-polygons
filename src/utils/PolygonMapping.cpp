@@ -5,14 +5,14 @@
 #include "PolygonMapping.h"
 
 
-typedef CGAL::Point_2<CGALKernel> CGALPoint;
+typedef CGAL::Point_2<CgalTypes::Kernel> CGALPoint;
 
 
 CsvWriter::Point map_cgal_point(const CGALPoint &p) {
     return {CGAL::to_double(p.x()), CGAL::to_double(p.y())};
 }
 
-CsvWriter::Polygon map_polygon(CGALPolygon const &polygon) {
+CsvWriter::Polygon map_polygon(CgalTypes::Polygon const &polygon) {
     CsvWriter::Polygon mapped_polygon;
     mapped_polygon.reserve(polygon.vertices().size());
     std::ranges::transform(polygon.vertices(), std::back_inserter(mapped_polygon), map_cgal_point);

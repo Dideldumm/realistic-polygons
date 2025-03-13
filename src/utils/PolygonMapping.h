@@ -19,7 +19,7 @@ template<typename T>
 std::vector<CsvWriter::Polygon> map_polygons(const std::vector<T> &polygons) {
     std::vector<CsvWriter::Polygon> mapped_polygons;
     mapped_polygons.reserve(polygons.size());
-    for (const GeoJsonPolygon &polygon: polygons) {
+    for (const T &polygon: polygons) {
         mapped_polygons.push_back(map_polygon(polygon));
     }
     return mapped_polygons;

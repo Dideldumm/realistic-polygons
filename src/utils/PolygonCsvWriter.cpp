@@ -21,8 +21,8 @@ std::string polygon_to_string(const CsvWriter::Polygon &polygon, const unsigned 
     return string;
 }
 
-void write_polygons(const std::string &file_path, const std::vector<CsvWriter::Polygon> &polygons,
-                    const unsigned long max_number_of_points) {
+void CsvWriter::write_polygons(const std::string &file_path, const std::vector<Polygon> &polygons,
+    unsigned long max_number_of_points) {
     std::ofstream file(file_path);
     if (!file.is_open()) {
         std::cerr << "Failed to open file: " << file_path << std::endl;
@@ -39,5 +39,5 @@ void write_polygons(const std::string &file_path, const std::vector<CsvWriter::P
     }
     metadata_file << max_number_of_points << "\n";
     metadata_file << polygons.size() << "\n";
-    metadata_file.close();;
+    metadata_file.close();
 }

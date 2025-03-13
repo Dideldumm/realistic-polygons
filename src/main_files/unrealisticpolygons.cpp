@@ -11,10 +11,6 @@
 #include "../utils/PolygonMapping.h"
 
 
-typedef CGAL::Exact_predicates_inexact_constructions_kernel CGALKernel;
-typedef CGAL::Polygon_2<CGALKernel> CGAL_Polygon;
-
-
 int main(int argc, char *argv[]) {
     const std::string file_path = argv[1];
     const int max_number_of_points = std::stoi(argv[2]);
@@ -23,7 +19,7 @@ int main(int argc, char *argv[]) {
 
     std::vector<CsvWriter::Polygon> mapped_polygons;
     for (int i = 0; i < number_of_polygons; i++) {
-        const CGAL_Polygon polygon = generate_simple_polygon(max_number_of_points);
+        const CgalTypes::Polygon polygon = generate_simple_polygon(max_number_of_points);
         mapped_polygons.push_back(map_polygon(polygon));
     }
 

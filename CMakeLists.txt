@@ -76,14 +76,25 @@ add_executable(unrealisticPolygons
         src/utils/PolygonCsvWriter.cpp
         ${POINTGENS_SRC}
         src/PolygonGenerator/CgalPolygonGenerator.cpp
+        src/utils/PolygonMapping.cpp
 )
 
 add_executable(unionedHullsGenerator
-        src/main_files/unionedHullsGenerator.cpp)
+        src/main_files/unionedHullsGenerator.cpp
+        src/utils/PolygonMapping.cpp
+        src/utils/PolygonCsvWriter.cpp
+        src/PolygonGenerator/UnionOfConvexHullsGenerator.cpp
+        src/geojson/GeoJsonPolygon.cpp
+        ${POINTGENS_SRC}
+        src/utils/geometry/PolygonUtils.cpp
+)
 
 add_executable(polygonGenerator
         src/PolygonGenerator/PolygonGenerator.cpp
         src/utils/PolygonMapping.cpp
+        src/geojson/GeoJsonPolygon.cpp
+        src/utils/PolygonCsvWriter.cpp
+        src/geojson/GeoJsonParser.cpp
 )
 
 target_include_directories(geojsonparser PRIVATE ${JSONCPP_INCLUDE_DIRS})
@@ -91,7 +102,15 @@ target_link_libraries(geojsonparser PRIVATE ${JSONCPP_LIBRARIES})
 #target_link_libraries(unrealisticPolygons PRIVATE CGAL::CGAL GMP::GMP GMP::GMPXX)
 
 # Define a list of targets - mergeClosestObjects twoOptMoves
-set(TARGETS simplePolygon shortestPolygon mergeConvexHulls unionOfConvexHulls unrealisticPolygons)
+set(TARGETS
+        simplePolygon
+        shortestPolygon
+        mergeConvexHulls
+        unionOfConvexHulls
+        unrealisticPolygons
+        geojsonparser
+        unionedHullsGenerator
+)
 
 # Link libraries if CGAL with Qt6 is found
 if (CGAL_Qt6_FOUND)

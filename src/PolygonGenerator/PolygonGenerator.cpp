@@ -7,7 +7,6 @@
 #include "../utils/geometry/CgalTypes.h"
 #include "../geojson/GeoJsonParser.h"
 #include "../utils/PolygonCsvWriter.h"
-#include "../utils/geometry/PointUtils.h"
 #include "../utils/PolygonMapping.h"
 #include "CgalPolygonGenerator.h"
 
@@ -33,28 +32,16 @@ void geojson_parser(const argparse::ArgumentParser &arguments) {
 void union_of_convex_hulls(argparse::ArgumentParser &arguments) {
 }
 
-CsvWriter::Point map_cgal_point(const CgalTypes::Point &p) {
-    return {CGAL::to_double(p.x()), CGAL::to_double(p.y())};
-}
-
-CsvWriter::Polygon map_cgal_polygon(const CgalTypes::Polygon &cgal_polygon) {
-    CsvWriter::Polygon mapped_polygon;
-    mapped_polygon.reserve(cgal_polygon.size());
-    std::ranges::transform(cgal_polygon.vertices(), std::back_inserter(mapped_polygon), map_cgal_point);
-    return mapped_polygon;
-}
-
 void cgal_two_opt(const argparse::ArgumentParser &arguments) {
     const auto number_of_polygons = arguments.get<int>("n-polygons");
     const auto max_number_of_vertices = arguments.get<int>("max-points");
     const auto output_path = arguments.get<std::string>("output");
 
-    std::vector<CsvWriter::Polygon> polygons;
-    for (int i = 0; i < number_of_polygons; ++i) {
-        polygons.emplace_back(map_cgal_polygon(generate_polygons(number_of_polygons, max_number_of_vertices)));
-    }
+    std::vector<CgalTypes::Polygon> cgal_polygons = generate_polygons(number_of_polygons, max_number_of_vertices);
+    const std::vector<CsvWriter::Polygon> csvwriter_polygons = map_polygons(
+        generate_polygons(number_of_polygons, max_number_of_vertices));
 
-    CsvWriter::write_polygons(output_path, polygons, max_number_of_vertices);
+    CsvWriter::write_polygons(output_path, csvwriter_polygons, max_number_of_vertices);
 }
 
 int main(const int argc, char *argv[]) {
