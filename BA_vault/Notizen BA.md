@@ -1,8 +1,10 @@
+
+# Fragen
+- In der Arbeit Pseudocode und den CPP code in den Anhang?
+	- Das was sinnvoller ist an der Stelle 
+
 # Letztes Meeting mit Prof. Schirra
-- [x]  Realistische Polygone skalieren und verschieben
-- [ ] Meine Algorithmen in `.csv`-Dateien schreiben und Model klassifizieren lassen
-- [x] Titel für die BA überlegen
-- [x] Generierte Polygone sollte eine zufällige Menge an Punkten habe und nicht alle die Maximal mögliche Anzahl
+- [ ] Klassifizierung des Modells anschauen
 - [ ] Ein trainiertes Modell speichern
 
 ## Testdaten von OSM holen
