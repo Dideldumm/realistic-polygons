@@ -8,7 +8,7 @@
 
 #include <json/json.h>
 
-#include "GeoJsonPolygon.h"
+#include "../utils/geometry/CgalTypes.h"
 
 class GeoJsonParser {
 private:
@@ -18,7 +18,7 @@ private:
 public:
     explicit GeoJsonParser(const std::string &file_path);
 
-    [[nodiscard]] std::vector<GeoJsonPolygon> parse_all_polygons();
+    [[nodiscard]] std::vector<CgalTypes::Polygon> parse_all_polygons();
 
     [[nodiscard]] unsigned long get_max_number_of_vertices() const;
 };

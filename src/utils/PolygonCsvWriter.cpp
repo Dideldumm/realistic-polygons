@@ -8,10 +8,10 @@
 
 #include <iostream>
 
-std::string polygon_to_string(const CsvWriter::Polygon &polygon, const unsigned long max_number_of_points) {
+std::string polygon_to_string(const CgalTypes::Polygon &polygon, const unsigned long max_number_of_points) {
     std::string string;
-    for (const auto &[x, y]: polygon) {
-        string += std::to_string(x) + ',' + std::to_string(y) + ',';
+    for (const auto &point: polygon) {
+        string += std::to_string(CGAL::to_double(point.x())) + ',' + std::to_string(CGAL::to_double(point.y())) + ',';
     }
     const std::string empty_point = "0,0,";
     for (unsigned long i = 0; i < max_number_of_points - polygon.size(); ++i) {
@@ -21,14 +21,14 @@ std::string polygon_to_string(const CsvWriter::Polygon &polygon, const unsigned 
     return string;
 }
 
-void CsvWriter::write_polygons(const std::string &file_path, const std::vector<Polygon> &polygons,
-    unsigned long max_number_of_points) {
+void CsvWriter::write_polygons(const std::string &file_path, const std::vector<CgalTypes::Polygon> &polygons,
+                               unsigned long max_number_of_points) {
     std::ofstream file(file_path);
     if (!file.is_open()) {
         std::cerr << "Failed to open file: " << file_path << std::endl;
         return;
     }
-    for (const CsvWriter::Polygon &polygon: polygons) {
+    for (const CgalTypes::Polygon &polygon: polygons) {
         file << polygon_to_string(polygon, max_number_of_points) << "\n";
     }
     file.close();

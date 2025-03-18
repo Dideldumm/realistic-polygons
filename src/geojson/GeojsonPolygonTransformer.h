@@ -4,16 +4,16 @@
 
 #ifndef GEOJSONPOLYGONTRANSFORMER_H
 #define GEOJSONPOLYGONTRANSFORMER_H
+#include "../utils/geometry/CgalTypes.h"
 
-#include "GeoJsonPolygon.h"
 
-LatsAndLongs find_middle_point(const GeoJsonPolygon &polygon);
+CgalTypes::Point find_middle_point(const CgalTypes::Polygon &polygon);
 
-GeoJsonPolygon move_to_origin(const GeoJsonPolygon &polygon);
+CgalTypes::Polygon move_to_origin(const CgalTypes::Polygon &polygon);
 
-LatsAndLongs find_point_furthest_from_origin(const GeoJsonPolygon &polygon);
+CgalTypes::Point find_point_furthest_from_origin(const CgalTypes::Polygon &polygon);
 
-GeoJsonPolygon normalize_scaling(const GeoJsonPolygon &polygon);
+CgalTypes::Polygon normalize_scaling(const CgalTypes::Polygon &polygon);
 
 
 #endif //GEOJSONPOLYGONTRANSFORMER_H

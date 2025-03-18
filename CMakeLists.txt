@@ -23,8 +23,6 @@ source_group(TREE ${CMAKE_SOURCE_DIR}/src/utils/geometry PREFIX "CGAL Geometry u
 source_group("CSV Writer Source Files" FILES
         src/utils/PolygonCsvWriter.cpp
         src/utils/PolygonCsvWriter.h
-        src/utils/PolygonMapping.cpp
-        src/utils/PolygonMapping.h
 )
 
 # Add executables
@@ -63,36 +61,28 @@ add_executable(unionOfConvexHulls
 
 add_executable(geojsonparser
         src/main_files/geojson.cpp
-        src/geojson/GeoJsonPolygon.cpp
         src/geojson/GeoJsonParser.cpp
         src/utils/PolygonCsvWriter.cpp
-        src/utils/PolygonMapping.cpp
         src/geojson/GeojsonPolygonTransformer.cpp
 )
 
 add_executable(unrealisticPolygons
         src/main_files/unrealisticpolygons.cpp
-        src/geojson/GeoJsonPolygon.cpp
         src/utils/PolygonCsvWriter.cpp
         ${POINTGENS_SRC}
         src/PolygonGenerator/CgalPolygonGenerator.cpp
-        src/utils/PolygonMapping.cpp
 )
 
 add_executable(unionedHullsGenerator
         src/main_files/unionedHullsGenerator.cpp
-        src/utils/PolygonMapping.cpp
         src/utils/PolygonCsvWriter.cpp
         src/PolygonGenerator/UnionOfConvexHullsGenerator.cpp
-        src/geojson/GeoJsonPolygon.cpp
         ${POINTGENS_SRC}
         src/utils/geometry/PolygonUtils.cpp
 )
 
 add_executable(polygonGenerator
         src/PolygonGenerator/PolygonGenerator.cpp
-        src/utils/PolygonMapping.cpp
-        src/geojson/GeoJsonPolygon.cpp
         src/utils/PolygonCsvWriter.cpp
         src/geojson/GeoJsonParser.cpp
 )

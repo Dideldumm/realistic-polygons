@@ -8,7 +8,6 @@
 
 #include "../utils/PolygonCsvWriter.h"
 #include "../PolygonGenerator/CgalPolygonGenerator.h"
-#include "../utils/PolygonMapping.h"
 
 
 int main(int argc, char *argv[]) {
@@ -17,11 +16,11 @@ int main(int argc, char *argv[]) {
     // Each point corresponds to 2 features (x and y coordinate of that point)
     const int number_of_polygons = std::stoi(argv[3]);
 
-    std::vector<CsvWriter::Polygon> mapped_polygons;
+    std::vector<CgalTypes::Polygon> mapped_polygons;
     for (int i = 0; i < number_of_polygons; i++) {
         const CgalTypes::Polygon polygon = generate_simple_polygon(max_number_of_points);
-        mapped_polygons.push_back(map_polygon(polygon));
+        mapped_polygons.push_back(polygon);
     }
 
-    write_polygons(file_path, mapped_polygons, max_number_of_points);
+    CsvWriter::write_polygons(file_path, mapped_polygons, max_number_of_points);
 }

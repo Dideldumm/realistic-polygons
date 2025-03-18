@@ -4,37 +4,37 @@
 
 #include "GeojsonPolygonTransformer.h"
 
-LatsAndLongs find_middle_point(const GeoJsonPolygon &polygon) {
-    double sum_lats = 0;
-    double sum_longs = 0;
-    for (const LatsAndLongs &vertex: polygon.getVertices()) {
-        sum_lats += vertex.latitude;
-        sum_longs += vertex.longitude;
+CgalTypes::Point find_middle_point(const CgalTypes::Polygon &polygon) {
+    CgalTypes::Number sum_lats(0);
+    CgalTypes::Number sum_longs(0);
+    for (const CgalTypes::Point &vertex: polygon.vertices()) {
+        sum_lats += vertex.y();
+        sum_longs += vertex.x();
     }
-    sum_lats /= polygon.getVertices().size();
-    sum_longs /= polygon.getVertices().size();
-    return LatsAndLongs(sum_lats, sum_longs);
+    sum_lats /= CgalTypes::Number(polygon.vertices().size());
+    sum_longs /= CgalTypes::Number(polygon.vertices().size());
+    return {sum_lats, sum_longs};
 }
 
-GeoJsonPolygon move_to_origin(const GeoJsonPolygon &polygon) {
-    const LatsAndLongs middle = find_middle_point(polygon);
-    std::vector<LatsAndLongs> vertices;
-    for (const LatsAndLongs &vertex: polygon.getVertices()) {
-        LatsAndLongs moved_vertex(vertex.latitude - middle.latitude, vertex.longitude - middle.longitude);
+CgalTypes::Polygon move_to_origin(const CgalTypes::Polygon &polygon) {
+    const CgalTypes::Point middle = find_middle_point(polygon);
+    std::vector<CgalTypes::Point> vertices;
+    for (const CgalTypes::Point &vertex: polygon.vertices()) {
+        CgalTypes::Point moved_vertex(vertex.y() - middle.y(), vertex.x() - middle.x());
         vertices.emplace_back(moved_vertex);
     }
-    return GeoJsonPolygon(vertices);
+    return {vertices.begin(), vertices.end()};
 }
 
-double squared_distance(const LatsAndLongs &a) {
-    return (a.latitude * a.latitude) + (a.longitude * a.longitude);
+CgalTypes::Number squared_distance(const CgalTypes::Point &a) {
+    return (a.y() * a.y()) + (a.x() * a.x());
 }
 
-LatsAndLongs find_point_furthest_from_origin(const GeoJsonPolygon &polygon) {
-    double max_distance = 0;
-    LatsAndLongs furthest_point(0, 0);
-    for (const LatsAndLongs &vertex: polygon.getVertices()) {
-        if (const double distance = squared_distance(vertex); distance > max_distance) {
+CgalTypes::Point find_point_furthest_from_origin(const CgalTypes::Polygon &polygon) {
+    CgalTypes::Number max_distance = 0;
+    CgalTypes::Point furthest_point(0, 0);
+    for (const CgalTypes::Point &vertex: polygon.vertices()) {
+        if (const CgalTypes::Number distance = squared_distance(vertex); distance > max_distance) {
             max_distance = distance;
             furthest_point = vertex;
         }
@@ -42,13 +42,13 @@ LatsAndLongs find_point_furthest_from_origin(const GeoJsonPolygon &polygon) {
     return furthest_point;
 }
 
-GeoJsonPolygon normalize_scaling(const GeoJsonPolygon &polygon) {
-    const LatsAndLongs furthest_point = find_point_furthest_from_origin(polygon);
-    const double distance = squared_distance(furthest_point);
-    std::vector<LatsAndLongs> normalized_vertices;
-    for (const LatsAndLongs &vertex: polygon.getVertices()) {
-        LatsAndLongs normalized_vertex(vertex.latitude / distance, vertex.longitude / distance);
+CgalTypes::Polygon normalize_scaling(const CgalTypes::Polygon &polygon) {
+    const CgalTypes::Point furthest_point = find_point_furthest_from_origin(polygon);
+    const CgalTypes::Number distance = squared_distance(furthest_point);
+    std::vector<CgalTypes::Point> normalized_vertices;
+    for (const CgalTypes::Point &vertex: polygon.vertices()) {
+        CgalTypes::Point normalized_vertex(vertex.y() / distance, vertex.x() / distance);
         normalized_vertices.emplace_back(normalized_vertex);
     }
-    return GeoJsonPolygon(normalized_vertices);
+    return {normalized_vertices.begin(), normalized_vertices.end()};
 }

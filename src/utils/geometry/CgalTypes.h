@@ -7,6 +7,7 @@
 
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
+#include <CGAL/Gmpq.h>
 
 namespace CgalTypes {
     typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
@@ -15,5 +16,6 @@ namespace CgalTypes {
     typedef CGAL::Polygon_2<Kernel> Polygon;
     typedef std::list<Point> ConvexHull;
     typedef CGAL::Vector_2<Kernel> Vector;
+    typedef Kernel::FT Number;
 }
 #endif //CGALGEOMETRY_H

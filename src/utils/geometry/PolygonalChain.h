@@ -9,15 +9,11 @@
 
 #include "../ToStringUtils.h"
 
-typedef CGAL::Exact_predicates_exact_constructions_kernel Kernel;
-typedef CGAL::Point_2<Kernel> Point;
-typedef CGAL::Polygon_2<Kernel> Polygon;
-
 class PolygonalChain {
 private:
-    std::vector<Point> elements;
+    std::vector<CgalTypes::Point> elements;
 
-    void addAllElements(bool forwards, const std::vector<Point> &elements);
+    void addAllElements(bool forwards, const std::vector<CgalTypes::Point> &elements);
 
 public:
     explicit PolygonalChain(): elements({}) {
@@ -27,7 +23,7 @@ public:
      * Creates a Polygonal Chain that contains exactly one point
      * @param p the point that this polygonal chain will contain
      */
-    explicit PolygonalChain(Point p) {
+    explicit PolygonalChain(CgalTypes::Point p) {
         elements = {p};
     }
 
@@ -46,21 +42,21 @@ public:
      * @param chain the polygonal chain, where the point is inserted
      * @param point the point to be inserted
      */
-    explicit PolygonalChain(const PolygonalChain &chain, const Point &point);
+    explicit PolygonalChain(const PolygonalChain &chain, const CgalTypes::Point &point);
 
-    [[nodiscard]] Point getLastElement() const {
+    [[nodiscard]] CgalTypes::Point getLastElement() const {
         return elements.back();
     }
 
-    [[nodiscard]] Point getFirstElement() const {
+    [[nodiscard]] CgalTypes::Point getFirstElement() const {
         return elements.front();
     }
 
     [[nodiscard]] std::string toString() const {
-        return polygonToString(Polygon(elements.begin(), elements.end()));
+        return polygonToString(CgalTypes::Polygon(elements.begin(), elements.end()));
     }
 
-    [[nodiscard]] std::vector<Point> getElements() const {
+    [[nodiscard]] std::vector<CgalTypes::Point> getElements() const {
         return elements;
     };
 
@@ -72,7 +68,7 @@ public:
         return other.elements == this->elements;
     }
 
-    static auto find_minimal_squared_distance(const Point &a, const PolygonalChain &b);
+    static auto find_minimal_squared_distance(const CgalTypes::Point &a, const PolygonalChain &b);
 
     static auto find_minimal_squared_distance(const PolygonalChain &a, const PolygonalChain &b);
 };

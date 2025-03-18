@@ -4,15 +4,16 @@
 
 
 #include <CGAL/draw_polygon_2.h>
-#include "utils/PointGenerator/RandomPointGenerator.h"
 
 #include "TwoOptMoves.h"
 
-std::optional<Point> TwoOptMoves::getIntersection(const CgalTypes::Segment &edge, const CgalTypes::Segment &newPointEdge, const Point &oldEnd,
-                                                  const Point &oldStart) {
-    if (auto intersectEdgeToNewPoint = CGAL::intersection(edge, newPointEdge)) {
+std::optional<CgalTypes::Point> TwoOptMoves::getIntersection(const CgalTypes::Segment &edge,
+                                                             const CgalTypes::Segment &newPointEdge,
+                                                             const CgalTypes::Point &oldEnd,
+                                                             const CgalTypes::Point &oldStart) {
+    if (const auto intersectEdgeToNewPoint = CGAL::intersection(edge, newPointEdge)) {
         // Determine the type of intersection using boost::get
-        if (const Point *p = std::get_if<Point>(&*intersectEdgeToNewPoint)) {
+        if (const CgalTypes::Point *p = std::get_if<CgalTypes::Point>(&*intersectEdgeToNewPoint)) {
             // Intersection is a point
             if (*p != oldEnd && *p != oldStart) {
                 return {*p};
@@ -25,11 +26,11 @@ std::optional<Point> TwoOptMoves::getIntersection(const CgalTypes::Segment &edge
     return {};
 }
 
-CgalTypes::Segment TwoOptMoves::findIntersection(const CgalTypes::Polygon &test, const Point &newPoint) {
+CgalTypes::Segment TwoOptMoves::findIntersection(const CgalTypes::Polygon &test, const CgalTypes::Point &newPoint) {
     CgalTypes::Segment edgeToNewPoint;
     CgalTypes::Segment edgeFromNewPoint;
-    Point oldStart;
-    Point oldEnd;
+    CgalTypes::Point oldStart;
+    CgalTypes::Point oldEnd;
     for (CgalTypes::Segment edge: test.edges()) {
         if (edge.end() == newPoint) {
             edgeToNewPoint = edge;
@@ -47,7 +48,7 @@ CgalTypes::Segment TwoOptMoves::findIntersection(const CgalTypes::Polygon &test,
             continue;
         }
 
-        std::optional<Point> intersectionWithNewEdges = getIntersection(
+        std::optional<CgalTypes::Point> intersectionWithNewEdges = getIntersection(
             edge, edgeToNewPoint, oldEnd, oldStart);
         if (intersectionWithNewEdges) {
             return edge;
@@ -73,12 +74,13 @@ CgalTypes::Segment TwoOptMoves::findIntersection(const CgalTypes::Polygon &test,
 //     return test;
 // }
 
-CgalTypes::Polygon TwoOptMoves::constructPolygonWithoutIntersection(const Point &point, CgalTypes::Polygon &test) const {
+CgalTypes::Polygon TwoOptMoves::constructPolygonWithoutIntersection(const CgalTypes::Point &point,
+                                                                    CgalTypes::Polygon &test) const {
     const CgalTypes::Segment intersectingSegment = findIntersection(test, point);
     test = polygon;
     CgalTypes::Polygon newPolygon;
     bool alreadyAdded = false;
-    for (Point vertex: test.vertices()) {
+    for (CgalTypes::Point vertex: test.vertices()) {
         newPolygon.push_back(vertex);
         if (!alreadyAdded && (vertex == intersectingSegment.start() || vertex == intersectingSegment.end())) {
             newPolygon.push_back(point);
@@ -88,7 +90,7 @@ CgalTypes::Polygon TwoOptMoves::constructPolygonWithoutIntersection(const Point 
     return newPolygon;
 }
 
-void TwoOptMoves::addPoint(const Point &point) {
+void TwoOptMoves::addPoint(const CgalTypes::Point &point) {
     if (polygon.size() < 3) {
         // trivial case
         polygon.push_back(point);

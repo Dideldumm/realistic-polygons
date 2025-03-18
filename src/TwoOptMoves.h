@@ -10,15 +10,18 @@
 class TwoOptMoves {
     CgalTypes::Polygon polygon;
 
-    static std::optional<Point> getIntersection(const CgalTypes::Segment &edge, const CgalTypes::Segment &newPointEdge, const Point &oldEnd,
-                                                const Point &oldStart);
+    static std::optional<CgalTypes::Point> getIntersection(const CgalTypes::Segment &edge,
+                                                           const CgalTypes::Segment &newPointEdge,
+                                                           const CgalTypes::Point &oldEnd,
+                                                           const CgalTypes::Point &oldStart);
 
-    static CgalTypes::Segment findIntersection(const CgalTypes::Polygon &test, const Point &newPoint);
+    static CgalTypes::Segment findIntersection(const CgalTypes::Polygon &test, const CgalTypes::Point &newPoint);
 
-    [[nodiscard]] CgalTypes::Polygon constructPolygonWithoutIntersection(const Point &point, CgalTypes::Polygon &test) const;
+    [[nodiscard]] CgalTypes::Polygon constructPolygonWithoutIntersection(
+        const CgalTypes::Point &point, CgalTypes::Polygon &test) const;
 
 public:
-    void addPoint(const Point &point);
+    void addPoint(const CgalTypes::Point &point);
 
     [[nodiscard]] CgalTypes::Polygon getPolygon() const {
         return this->polygon;

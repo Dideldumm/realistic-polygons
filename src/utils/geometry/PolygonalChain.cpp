@@ -5,7 +5,7 @@
 #include "PolygonalChain.h"
 #include <ranges>
 
-void PolygonalChain::addAllElements(const bool forwards, const std::vector<Point> &elements) {
+void PolygonalChain::addAllElements(const bool forwards, const std::vector<CgalTypes::Point> &elements) {
     if (forwards) {
         for (auto point: elements) {
             this->elements.push_back(point);
@@ -17,11 +17,11 @@ void PolygonalChain::addAllElements(const bool forwards, const std::vector<Point
     }
 }
 
-PolygonalChain::PolygonalChain(const PolygonalChain &chain, const Point &point) {
+PolygonalChain::PolygonalChain(const PolygonalChain &chain, const CgalTypes::Point &point) {
 }
 
 
-auto PolygonalChain::find_minimal_squared_distance(const Point &a, const PolygonalChain &b) {
+auto PolygonalChain::find_minimal_squared_distance(const CgalTypes::Point &a, const PolygonalChain &b) {
 }
 
 auto PolygonalChain::find_minimal_squared_distance(const PolygonalChain &a,
