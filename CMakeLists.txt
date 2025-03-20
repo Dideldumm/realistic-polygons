@@ -85,11 +85,16 @@ add_executable(polygonGenerator
         src/PolygonGenerator/PolygonGenerator.cpp
         src/utils/PolygonCsvWriter.cpp
         src/geojson/GeoJsonParser.cpp
+        src/PolygonGenerator/CgalPolygonGenerator.cpp
+        ${POINTGENS_SRC}
 )
 
 target_include_directories(geojsonparser PRIVATE ${JSONCPP_INCLUDE_DIRS})
 target_link_libraries(geojsonparser PRIVATE ${JSONCPP_LIBRARIES})
-#target_link_libraries(unrealisticPolygons PRIVATE CGAL::CGAL GMP::GMP GMP::GMPXX)
+
+target_include_directories(polygonGenerator PRIVATE ${JSONCPP_INCLUDE_DIRS})
+target_link_libraries(polygonGenerator PRIVATE ${JSONCPP_LIBRARIES})
+
 
 # Define a list of targets - mergeClosestObjects twoOptMoves
 set(TARGETS
@@ -100,6 +105,7 @@ set(TARGETS
         unrealisticPolygons
         geojsonparser
         unionedHullsGenerator
+        polygonGenerator
 )
 
 # Link libraries if CGAL with Qt6 is found
