@@ -1,17 +1,22 @@
 # Train a model.
 import sys
 
-from skl2onnx import to_onnx
+import numpy as np
+import skl2onnx
+from onnxconverter_common import FloatTensorType
 
 import train_on_polygons
 
 
 def main(realistic_data: str, unrealistic_data: str, output_name: str):
-    shuffled_features, shuffled_labels, unrealistic_features, unrealistic_labels = train_on_polygons.prepare_training_data(
-        realistic_data,
-        unrealistic_data)
-    model = train_on_polygons.train_and_test_new_model(shuffled_features, shuffled_labels)
-    onnx = to_onnx(model, shuffled_features[:1])
+    realistic_features = np.loadtxt(realistic_data, delimiter=",")
+    unrealistic_features = np.loadtxt(unrealistic_data, delimiter=",")
+    shuffled_features, shuffled_labels = train_on_polygons.prepare_training_data(realistic_features,
+                                                                                 unrealistic_features)
+    model = train_on_polygons.train_and_test_new_model(shuffled_features, shuffled_labels, False)
+    initial_type = [('input', FloatTensorType([None, shuffled_features.shape[1]]))]
+    onnx = skl2onnx.convert_sklearn(model, initial_types=initial_type)
+    # onnx = to_onnx(model, shuffled_features[:1])
     with open(output_name, "wb") as file:
         file.write(onnx.SerializeToString())
 

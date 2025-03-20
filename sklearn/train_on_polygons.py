@@ -10,14 +10,13 @@ random_state = 42
 
 
 def main(realistic_data: str, unrealistic_data: str, generated_data: str) -> None:
-    # realistic_features = pd.read_csv(realistic_data, header=None, names=header).values
     realistic_features = np.loadtxt(realistic_data, delimiter=",")
     unrealistic_features = np.loadtxt(unrealistic_data, delimiter=",")
     shuffled_features, shuffled_labels = prepare_training_data(realistic_features, unrealistic_features)
     model = train_and_test_new_model(shuffled_features, shuffled_labels)
 
     generated_features = np.loadtxt(generated_data, delimiter=",")
-    generated_with_unrealistic, target = prepare_training_data(generated_features, unrealistic_features)
+    generated_with_unrealistic, target = prepare_training_data(generated_features, unrealistic_features[0])
 
     prediction = model.predict(generated_with_unrealistic)
     print("performance of generated data:\n")
@@ -49,14 +48,25 @@ def prepare_generated_data(generated_data, unrealistic_features, unrealistic_lab
     return generated_with_unrealistic, target
 
 
-def train_and_test_new_model(shuffled_features, shuffled_labels):
-    train_features, test_features, train_labels, test_labels = train_test_split(shuffled_features, shuffled_labels,
-                                                                                test_size=0.2,
-                                                                                random_state=random_state)
+def train_and_test_new_model(shuffled_features, shuffled_labels, split_data: bool = True):
+    if split_data:
+        train_features, test_features, train_labels, test_labels = train_test_split(
+            shuffled_features,
+            shuffled_labels,
+            test_size=0.2,
+            random_state=random_state)
+    else:
+        train_features = shuffled_features
+        train_labels = shuffled_labels
+        test_features = None
+        test_labels = None
+
     model = train_new_model(train_features, train_labels)
-    test_prediction = model.predict(test_features)
-    print("test prediction:\n")
-    print(classification_report(test_labels, test_prediction))
+    if test_features is not None and test_labels is not None:
+        test_prediction = model.predict(test_features)
+        print("test prediction:\n")
+        print(classification_report(test_labels, test_prediction))
+
     return model
 
 
