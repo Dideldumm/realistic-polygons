@@ -1,11 +1,15 @@
 
 # Fragen
-- In der Arbeit Pseudocode und den CPP code in den Anhang?
+- In der Arbeit Pseudocode oder CPP code?
 	- Das was sinnvoller ist an der Stelle 
+- Code im Volltext oder mit Link im Anhang?
+	- Im Volltext
 
 # Letztes Meeting mit Prof. Schirra
 - [ ] Klassifizierung des Modells anschauen
-- [ ] Ein trainiertes Modell speichern
+- [x] Ein trainiertes Modell speichern
+
+- [ ] Umgang mit disjunkten Polygonen
 
 ## Testdaten von OSM holen
 - Open street map (kurz OSM)
@@ -17,7 +21,7 @@
 
 - mögliche Probleme mit dem Trainieren des classifiers
 	- Dauert lange -> uni cluster benutzen -> große Datenmengen müssen hin und hergeschoben werden
-	- Wie mit den verschiedenen Punktmengen umgehen? -> gabs aber in c&c auch!
+	- Wie mit den verschiedeneng Punktmengen umgehen? -> gabs aber in c&c auch!
 
 - Mögliche Vorgehensweise:
 	- Daten mit Hilfe von osmium filtern 
