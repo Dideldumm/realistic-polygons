@@ -8,6 +8,7 @@
 #include "../PolygonGenerator/UnionOfConvexHullsGenerator.h"
 #include "../utils/geometry/CgalTypes.h"
 #include "../utils/PolygonCsvWriter.h"
+#include "../utils/geometry/PolygonNormalizer.h"
 
 
 int main(int argc, char *argv[]) {
@@ -18,10 +19,8 @@ int main(int argc, char *argv[]) {
     std::vector<CgalTypes::Polygon> mapped_polygons;
     for (int i = 0; i < number_of_polygons; i++) {
         const CgalTypes::Polygon polygon = drawUnionOfConvexHulls(max_number_of_points, number_of_polygons, 1);
-        //TODO normalize the polygon
-
-        mapped_polygons.push_back(polygon);
+        CgalTypes::Polygon normal_polygon = normalize_scaling(move_to_origin(polygon));
+        mapped_polygons.push_back(normal_polygon);
     }
-
     CsvWriter::write_polygons(file_path, mapped_polygons, max_number_of_points);
 }
