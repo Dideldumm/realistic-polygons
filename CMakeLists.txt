@@ -75,7 +75,7 @@ add_executable(unrealisticPolygons
 )
 
 add_executable(unionedHullsGenerator
-        src/main_files/unionedHullsGenerator.cpp
+        src/main_files/writeUnionedHullsToFile.cpp
         src/utils/PolygonCsvWriter.cpp
         src/PolygonGenerator/UnionOfConvexHullsGenerator.cpp
         ${POINTGENS_SRC}

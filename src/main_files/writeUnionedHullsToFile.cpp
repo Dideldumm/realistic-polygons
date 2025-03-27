@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 
     std::vector<CgalTypes::Polygon> mapped_polygons;
     for (int i = 0; i < number_of_polygons; i++) {
-        const CgalTypes::Polygon polygon = unionOfConvexHulls(max_number_of_points, number_of_polygons, 1);
+        const CgalTypes::Polygon polygon = drawUnionOfConvexHulls(max_number_of_points, number_of_polygons, 1);
         //TODO normalize the polygon
 
         mapped_polygons.push_back(polygon);

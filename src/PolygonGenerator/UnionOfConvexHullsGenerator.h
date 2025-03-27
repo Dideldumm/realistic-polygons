@@ -11,7 +11,7 @@
 
 CgalTypes::Polygon generate_random_convex_polygon(const std::list<CgalTypes::Point> &vertices);
 
-CgalTypes::Polygon unionOfConvexHulls(unsigned int max_number_of_points, unsigned int number_of_polygons, double
+CgalTypes::Polygon drawUnionOfConvexHulls(unsigned int max_number_of_points, unsigned int number_of_polygons, double
                                       max_translation_distance);
 
 
