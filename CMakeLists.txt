@@ -7,6 +7,7 @@ find_package(GMP REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(JSONCPP jsoncpp)
 
+
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -89,6 +90,13 @@ add_executable(polygonGenerator
         ${POINTGENS_SRC}
 )
 
+add_executable(loadPolygonPredictions
+        src/PolygonGenerator/WrittenPolygonLoader.cpp
+        src/main_files/LoadPolygonPredictions.cpp
+)
+
+include_directories(${CMAKE_SOURCE_DIR}/libs/rapidcsv)
+
 target_include_directories(geojsonparser PRIVATE ${JSONCPP_INCLUDE_DIRS})
 target_link_libraries(geojsonparser PRIVATE ${JSONCPP_LIBRARIES})
 
@@ -106,6 +114,7 @@ set(TARGETS
         geojsonparser
         unionedHullsGenerator
         polygonGenerator
+        loadPolygonPredictions
 )
 
 # Link libraries if CGAL with Qt6 is found
