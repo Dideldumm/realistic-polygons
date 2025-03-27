@@ -51,11 +51,12 @@ add_executable(mergeConvexHulls
         ${POINTGENS_SRC}
 )
 
-add_executable(unionOfConvexHulls
+add_executable(drawUnionOfConvexHulls
         src/main_files/drawUnionOfConvexHulls.cpp
         ${POINTGENS_SRC}
         src/utils/ToStringUtils.cpp
         src/utils/geometry/PolygonUtils.cpp
+        src/utils/geometry/PolygonNormalizer.cpp
         src/utils/geometry/VectorUtils.cpp
         src/PolygonGenerator/UnionOfConvexHullsGenerator.cpp
 )
@@ -74,9 +75,10 @@ add_executable(unrealisticPolygons
         src/PolygonGenerator/CgalPolygonGenerator.cpp
 )
 
-add_executable(unionedHullsGenerator
+add_executable(writeUnionedHullsToFile
         src/main_files/writeUnionedHullsToFile.cpp
         src/utils/PolygonCsvWriter.cpp
+        src/utils/geometry/PolygonNormalizer.cpp
         src/PolygonGenerator/UnionOfConvexHullsGenerator.cpp
         ${POINTGENS_SRC}
         src/utils/geometry/PolygonUtils.cpp
@@ -109,10 +111,10 @@ set(TARGETS
         simplePolygon
         shortestPolygon
         mergeConvexHulls
-        unionOfConvexHulls
+        drawUnionOfConvexHulls
         unrealisticPolygons
         geojsonparser
-        unionedHullsGenerator
+        writeUnionedHullsToFile
         polygonGenerator
         loadPolygonPredictions
 )
