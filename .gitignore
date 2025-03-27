@@ -5,6 +5,9 @@
 # Ignore cmake metadata
 /cmake-build-debug
 
+# Ignore python metadata
+/*/__pycache__
+
 # Ignore obsidian metadata
 /.obsidian
 /*/.obsidian
