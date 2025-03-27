@@ -15,7 +15,8 @@ struct PolygonPredictions {
     }
 };
 
-int main(int argc, char *argv[]) {
+int main(const int argc, char *argv[]) {
+    assert (argc == 2);
     const std::string filePath = argv[1];
     WrittenPolygonLoader polygon_loader(filePath);
 
@@ -28,6 +29,10 @@ int main(int argc, char *argv[]) {
         polygons_and_predictions.emplace_back(polygons[i], predictions[i]);
     }
     std::sort(polygons_and_predictions.begin(), polygons_and_predictions.end());
+    std::cout << "polygon with the lowest probability (" << polygons_and_predictions.front().prediction * 100 << "%):" <<
+            std::endl;
     CGAL::draw(polygons_and_predictions.front().polygon);
+    std::cout << "polygon with the highest probability (" << polygons_and_predictions.back().prediction * 100 << "%):" <<
+            std::endl;
     CGAL::draw(polygons_and_predictions.back().polygon);
 }

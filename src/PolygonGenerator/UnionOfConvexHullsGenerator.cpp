@@ -16,8 +16,8 @@ CgalTypes::Polygon generate_random_convex_polygon(const std::list<CgalTypes::Poi
     return convex_polygon;
 }
 
-CgalTypes::Polygon drawUnionOfConvexHulls(const unsigned int max_number_of_points, const unsigned int number_of_polygons, const double
-                                      max_translation_distance) {
+CgalTypes::Polygon union_of_convex_hulls(const unsigned int max_number_of_points, const unsigned int number_of_polygons,
+                                         const double max_translation_distance) {
     RandomPointGenerator random_vector_generator(max_translation_distance);
     RandomPointGenerator random_vertex_generator;
 
@@ -30,7 +30,7 @@ CgalTypes::Polygon drawUnionOfConvexHulls(const unsigned int max_number_of_point
 
         CgalTypes::Polygon next_polygon = generate_random_convex_polygon(vertices);
         CgalTypes::Point random_point = random_vector_generator.generate_point();
-        const CGAL::Vector_2<CgalTypes::Kernel> random_vector(random_point.x(), random_point.y());
+        const CgalTypes::Vector random_vector(random_point.x(), random_point.y());
         current_vector += random_vector;
         CgalTypes::Polygon translated_polygon = translate_polygon(next_polygon, current_vector);
 

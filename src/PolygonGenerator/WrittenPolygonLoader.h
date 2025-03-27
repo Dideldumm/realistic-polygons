@@ -19,7 +19,7 @@ private:
     void load_file();
 
 public:
-    explicit WrittenPolygonLoader(const std::string &polygonFile);
+    explicit WrittenPolygonLoader(std::string polygonFile);
 
     std::vector<CgalTypes::Polygon> get_polygons_from_file();
 

@@ -8,13 +8,17 @@
 
 #include <iostream>
 
-std::string polygon_to_string(const CgalTypes::Polygon &polygon, const unsigned long max_number_of_points) {
+std::string polygon_to_string(const CgalTypes::Polygon &polygon, unsigned const long max_number_of_points) {
     std::string string;
     for (const auto &point: polygon) {
         string += std::to_string(CGAL::to_double(point.x())) + ',' + std::to_string(CGAL::to_double(point.y())) + ',';
     }
     const std::string empty_point = "0,0,";
-    for (unsigned long i = 0; i < max_number_of_points - polygon.size(); ++i) {
+    unsigned long end_cond = max_number_of_points - polygon.size();
+    if (end_cond > max_number_of_points) {
+        end_cond = 0;
+    }
+    for (unsigned long i = 0; i < end_cond; ++i) {
         string += empty_point;
     }
     string.pop_back();
