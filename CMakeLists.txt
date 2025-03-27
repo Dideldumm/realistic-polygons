@@ -52,7 +52,7 @@ add_executable(mergeConvexHulls
 )
 
 add_executable(unionOfConvexHulls
-        src/main_files/unionOfConvexHulls.cpp
+        src/main_files/drawUnionOfConvexHulls.cpp
         ${POINTGENS_SRC}
         src/utils/ToStringUtils.cpp
         src/utils/geometry/PolygonUtils.cpp
