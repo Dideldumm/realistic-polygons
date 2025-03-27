@@ -5,7 +5,7 @@
 #include <argparse/argparse.hpp>
 
 #include "../utils/geometry/CgalTypes.h"
-#include "../geojson/GeoJsonParser.h"
+#include "GeoJsonParser.h"
 #include "../utils/PolygonCsvWriter.h"
 #include "CgalPolygonGenerator.h"
 

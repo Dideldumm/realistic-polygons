@@ -2,10 +2,10 @@
 // Created by dideldumm on 07.02.25.
 //
 
-#include "../geojson/GeoJsonParser.h"
+#include "../PolygonGenerator/GeoJsonParser.h"
 
 #include "../utils/PolygonCsvWriter.h"
-#include "../geojson/GeojsonPolygonTransformer.h"
+#include "../utils/geometry/PolygonNormalizer.h"
 
 
 int main(int argc, char **argv) {

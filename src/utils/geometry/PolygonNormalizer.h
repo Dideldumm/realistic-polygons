@@ -4,7 +4,7 @@
 
 #ifndef GEOJSONPOLYGONTRANSFORMER_H
 #define GEOJSONPOLYGONTRANSFORMER_H
-#include "../utils/geometry/CgalTypes.h"
+#include "CgalTypes.h"
 
 
 CgalTypes::Point find_middle_point(const CgalTypes::Polygon &polygon);

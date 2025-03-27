@@ -2,7 +2,7 @@
 // Created by dideldumm on 23.02.25.
 //
 
-#include "GeojsonPolygonTransformer.h"
+#include "./PolygonNormalizer.h"
 
 CgalTypes::Point find_middle_point(const CgalTypes::Polygon &polygon) {
     CgalTypes::Number sum_lats(0);

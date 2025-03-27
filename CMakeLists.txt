@@ -62,9 +62,9 @@ add_executable(unionOfConvexHulls
 
 add_executable(geojsonparser
         src/main_files/geojson.cpp
-        src/geojson/GeoJsonParser.cpp
+        src/PolygonGenerator/GeoJsonParser.cpp
         src/utils/PolygonCsvWriter.cpp
-        src/geojson/GeojsonPolygonTransformer.cpp
+        src/utils/geometry/PolygonNormalizer.cpp
 )
 
 add_executable(unrealisticPolygons
@@ -85,7 +85,7 @@ add_executable(unionedHullsGenerator
 add_executable(polygonGenerator
         src/PolygonGenerator/PolygonGenerator.cpp
         src/utils/PolygonCsvWriter.cpp
-        src/geojson/GeoJsonParser.cpp
+        src/PolygonGenerator/GeoJsonParser.cpp
         src/PolygonGenerator/CgalPolygonGenerator.cpp
         ${POINTGENS_SRC}
 )
