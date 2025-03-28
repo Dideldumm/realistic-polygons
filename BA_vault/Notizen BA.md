@@ -6,10 +6,16 @@
 	- Im Volltext
 
 # Letztes Meeting mit Prof. Schirra
-- [ ] Klassifizierung des Modells anschauen
+- [x] Klassifizierung des Modells anschauen
 - [x] Ein trainiertes Modell speichern
 
 - [ ] Umgang mit disjunkten Polygonen
+- [ ] Polygon ränder "aufrauen"
+- [ ] konvexe Polygone mit weniger Punkten erzeugen
+- [ ] Classifier aufgrund von verpixelten Bilddaten
+- [ ] Ein Bitmap des Polygons erstellen und die Bitmap als features dem Classifier zum trainieren geben
+	- [ ] CGAL drawer kann man zu pdf exportieren
+	- [ ] Dann mit imagemagick zu bitmap
 
 ## Testdaten von OSM holen
 - Open street map (kurz OSM)

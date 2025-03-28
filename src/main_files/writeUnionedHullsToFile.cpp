@@ -15,7 +15,7 @@
 void erase_a_random_point(CgalTypes::Polygon &polygon) {
     std::random_device rd; // obtain a random number from hardware
     std::mt19937 gen(rd()); // seed the generator
-    std::uniform_int_distribution<> distribution(0, polygon.size() - 1); // define the range
+    std::uniform_int_distribution<> distribution(0, polygon.size() - 1);
     const int index = distribution(gen);
     polygon.erase(polygon.begin() + index);
 }
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
         const int number_of_polygons = distribution(gen);
         CgalTypes::Polygon polygon = union_of_convex_hulls(max_points_per_polygon, number_of_polygons, 1);
         while (polygon.size() > max_points_per_polygon) {
-            // TODO punkte werden random gelöscht, bis die anzahl passt
+            // punkte werden random gelöscht, bis die anzahl passt
             erase_a_random_point(polygon);
         }
 
