@@ -1,19 +1,27 @@
 cmake_minimum_required(VERSION 3.28)
 project(realistic-polygons)
 
-# Find necessary packages
-find_package(CGAL REQUIRED OPTIONAL_COMPONENTS Qt6)
-find_package(GMP REQUIRED)
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(JSONCPP jsoncpp)
-
-
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wpedantic -Wextra")
 
-# Collect source files
+# Set path to dependencies
+set(CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/lib" ${CMAKE_PREFIX_PATH})
+set(CMAKE_LIBRARY_PATH "${CMAKE_SOURCE_DIR}/lib" ${CMAKE_LIBRARY_PATH})
+set(CMAKE_INCLUDE_PATH "${CMAKE_SOURCE_DIR}/lib/include" ${CMAKE_INCLUDE_PATH})
+
+# Find necessary packages
+link_directories(${CMAKE_SOURCE_DIR}/lib)
+include_directories(${CMAKE_SOURCE_DIR}/lib/include)
+
+find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(CGAL REQUIRED OPTIONAL_COMPONENTS Qt6)
+find_package(GMP REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(JSONCPP jsoncpp)
+
+# Collect source files and group them
 file(GLOB_RECURSE GEOJSON_SRC src/geojson/*)
 file(GLOB_RECURSE POINTGENS_SRC src/utils/PointGenerator/*)
 file(GLOB_RECURSE GEOMETRY_SRC src/utils/geometry/*)

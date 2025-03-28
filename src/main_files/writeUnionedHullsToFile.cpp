@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+#include <CGAL/IO/Arrangement_2_writer.h>
+
 #include "../PolygonGenerator/UnionOfConvexHullsGenerator.h"
 #include "../utils/geometry/CgalTypes.h"
 #include "../utils/PolygonCsvWriter.h"

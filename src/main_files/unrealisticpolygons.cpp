@@ -19,6 +19,7 @@ int main(int argc, char *argv[]) {
     std::vector<CgalTypes::Polygon> mapped_polygons;
     for (int i = 0; i < number_of_polygons; i++) {
         const CgalTypes::Polygon polygon = generate_simple_polygon(max_number_of_points);
+        std::cout << "Polygon: " << i << std::endl;
         mapped_polygons.push_back(polygon);
     }
 
