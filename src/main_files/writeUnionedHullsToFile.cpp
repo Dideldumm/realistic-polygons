@@ -10,7 +10,7 @@
 
 #include "../PolygonGenerator/UnionOfConvexHullsGenerator.h"
 #include "../utils/geometry/CgalTypes.h"
-#include "../utils/PolygonCsvWriter.h"
+#include "../InputOutput/PolygonCsvWriter.h"
 #include "../utils/geometry/PolygonNormalizer.h"
 
 

@@ -2,9 +2,9 @@
 // Created by dideldumm on 07.02.25.
 //
 
-#include "../PolygonGenerator/GeoJsonParser.h"
+#include "../InputOutput/GeoJsonParser.h"
 
-#include "../utils/PolygonCsvWriter.h"
+#include "../InputOutput/PolygonCsvWriter.h"
 #include "../utils/geometry/PolygonNormalizer.h"
 
 

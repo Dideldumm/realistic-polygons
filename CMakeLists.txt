@@ -30,8 +30,8 @@ source_group(TREE ${CMAKE_SOURCE_DIR}/src/geojson PREFIX "Geojson Source Files" 
 source_group(TREE ${CMAKE_SOURCE_DIR}/src/utils/PointGenerator PREFIX "Point Generators Source Files" FILES ${POINTGENS_SRC})
 source_group(TREE ${CMAKE_SOURCE_DIR}/src/utils/geometry PREFIX "CGAL Geometry utils Source Files" FILES ${GEOMETRY_SRC})
 source_group("CSV Writer Source Files" FILES
-        src/utils/PolygonCsvWriter.cpp
-        src/utils/PolygonCsvWriter.h
+        src/InputOutput/PolygonCsvWriter.cpp
+        src/InputOutput/PolygonCsvWriter.h
 )
 
 # Add executables
@@ -71,37 +71,39 @@ add_executable(drawUnionOfConvexHulls
 
 add_executable(geojsonparser
         src/main_files/geojson.cpp
-        src/PolygonGenerator/GeoJsonParser.cpp
-        src/utils/PolygonCsvWriter.cpp
+        src/InputOutput/GeoJsonParser.cpp
+        src/InputOutput/PolygonCsvWriter.cpp
         src/utils/geometry/PolygonNormalizer.cpp
 )
 
 add_executable(unrealisticPolygons
         src/main_files/unrealisticpolygons.cpp
-        src/utils/PolygonCsvWriter.cpp
+        src/InputOutput/PolygonCsvWriter.cpp
         ${POINTGENS_SRC}
         src/PolygonGenerator/CgalPolygonGenerator.cpp
 )
 
 add_executable(writeUnionedHullsToFile
         src/main_files/writeUnionedHullsToFile.cpp
-        src/utils/PolygonCsvWriter.cpp
+        src/InputOutput/PolygonCsvWriter.cpp
         src/utils/geometry/PolygonNormalizer.cpp
         src/PolygonGenerator/UnionOfConvexHullsGenerator.cpp
         ${POINTGENS_SRC}
         src/utils/geometry/PolygonUtils.cpp
+        src/InputOutput/PolygonImageSaver.cpp
+        src/InputOutput/PolygonImageSaver.h
 )
 
 add_executable(polygonGenerator
         src/PolygonGenerator/PolygonGenerator.cpp
-        src/utils/PolygonCsvWriter.cpp
-        src/PolygonGenerator/GeoJsonParser.cpp
+        src/InputOutput/PolygonCsvWriter.cpp
+        src/InputOutput/GeoJsonParser.cpp
         src/PolygonGenerator/CgalPolygonGenerator.cpp
         ${POINTGENS_SRC}
 )
 
 add_executable(loadPolygonPredictions
-        src/PolygonGenerator/WrittenPolygonLoader.cpp
+        src/InputOutput/WrittenPolygonLoader.cpp
         src/main_files/LoadPolygonPredictions.cpp
 )
 

@@ -4,7 +4,7 @@
 
 #include <CGAL/draw_polygon_2.h>
 
-#include "../PolygonGenerator/WrittenPolygonLoader.h"
+#include "../InputOutput/WrittenPolygonLoader.h"
 
 struct PolygonPredictions {
     CgalTypes::Polygon polygon;

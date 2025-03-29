@@ -6,7 +6,7 @@
 #define POLYGONCSVWRITER_H
 #include <vector>
 
-#include "geometry/CgalTypes.h"
+#include "../utils/geometry/CgalTypes.h"
 
 namespace CsvWriter {
     void write_polygons(const std::string &file_path, const std::vector<CgalTypes::Polygon> &polygons,
