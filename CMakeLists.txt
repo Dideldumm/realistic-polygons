@@ -9,17 +9,16 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wpedantic -Wextra")
 # Set path to dependencies
 set(CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/lib" ${CMAKE_PREFIX_PATH})
 set(CMAKE_LIBRARY_PATH "${CMAKE_SOURCE_DIR}/lib" ${CMAKE_LIBRARY_PATH})
-set(CMAKE_INCLUDE_PATH "${CMAKE_SOURCE_DIR}/lib/include" ${CMAKE_INCLUDE_PATH})
+set(CMAKE_INCLUDE_PATH "${CMAKE_SOURCE_DIR}/include" ${CMAKE_INCLUDE_PATH})
 
 # Find necessary packages
 link_directories(${CMAKE_SOURCE_DIR}/lib)
-include_directories(${CMAKE_SOURCE_DIR}/lib/include)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(CGAL REQUIRED OPTIONAL_COMPONENTS Qt6)
 find_package(GMP REQUIRED)
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(JSONCPP jsoncpp)
+find_package(TBB REQUIRED)
 
 # Collect source files and group them
 file(GLOB_RECURSE GEOJSON_SRC src/geojson/*)
@@ -107,8 +106,6 @@ add_executable(loadPolygonPredictions
         src/main_files/LoadPolygonPredictions.cpp
 )
 
-include_directories(${CMAKE_SOURCE_DIR}/libs/rapidcsv)
-
 target_include_directories(geojsonparser PRIVATE ${JSONCPP_INCLUDE_DIRS})
 target_link_libraries(geojsonparser PRIVATE ${JSONCPP_LIBRARIES})
 
@@ -133,7 +130,7 @@ set(TARGETS
 if (CGAL_Qt6_FOUND)
     message(STATUS "CGAL with Qt6 found. Linking the viewer")
     foreach (target IN LISTS TARGETS)
-        target_link_libraries(${target} PUBLIC CGAL::CGAL_Basic_viewer stdc++ m)
+        target_link_libraries(${target} PUBLIC CGAL::CGAL_Basic_viewer stdc++ m TBB::tbb)
     endforeach ()
 else ()
     # Fallback action or alternative libraries

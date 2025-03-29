@@ -4,9 +4,13 @@
 
 #include <fstream>
 
+#include <rapidcsv.h>
+
 #include "PolygonCsvWriter.h"
 
-#include <iostream>
+#include "../../lib/cgal-6.0.1/Kinetic_space_partition/include/CGAL/KSP/utils.h"
+
+int counter = 0;
 
 std::string polygon_to_string(const CgalTypes::Polygon &polygon, unsigned const long max_number_of_points) {
     std::string string;
@@ -25,23 +29,62 @@ std::string polygon_to_string(const CgalTypes::Polygon &polygon, unsigned const 
     return string;
 }
 
+std::vector<std::string> build_polygon_csv_row(const CgalTypes::Polygon &polygon,
+                                               const unsigned long max_number_of_points) {
+    std::vector<std::string> polygon_csv;
+    unsigned int i = 0;
+    for (const auto &point: polygon) {
+        polygon_csv.emplace_back(std::to_string(CGAL::to_double(point.x())));
+        polygon_csv.emplace_back(std::to_string(CGAL::to_double(point.y())));
+        ++i;
+    }
+
+    const unsigned long end_cond = max_number_of_points - polygon.size();
+    if (end_cond > max_number_of_points) {
+        return polygon_csv;
+    }
+    for (unsigned long _ = 0; _ < end_cond; ++_) {
+        const std::string no_coordinate = "0";
+        polygon_csv.emplace_back(no_coordinate);
+        polygon_csv.emplace_back(no_coordinate);
+    }
+    return polygon_csv;
+}
+
+void add_polygon_to_csv(const CgalTypes::Polygon &polygon, const unsigned long &max_number_of_points,
+                        rapidcsv::Document &doc) {
+    const auto csv_row = build_polygon_csv_row(polygon, max_number_of_points);
+    doc.InsertRow(counter, csv_row);
+    std::cout << "Added: " << counter << std::endl;
+    counter++;
+}
+
 void CsvWriter::write_polygons(const std::string &file_path, const std::vector<CgalTypes::Polygon> &polygons,
-                               unsigned long max_number_of_points) {
-    std::ofstream file(file_path);
-    if (!file.is_open()) {
-        std::cerr << "Failed to open file: " << file_path << std::endl;
-        return;
-    }
-    for (const CgalTypes::Polygon &polygon: polygons) {
-        file << polygon_to_string(polygon, max_number_of_points) << "\n";
-    }
-    file.close();
-    std::ofstream metadata_file(file_path + ".metadata");
-    if (!metadata_file.is_open()) {
-        std::cerr << "Failed to open metadata file" << std::endl;
-        return;
-    }
-    metadata_file << max_number_of_points << "\n";
-    metadata_file << polygons.size() << "\n";
-    metadata_file.close();
+                               const unsigned long max_number_of_points) {
+    rapidcsv::Document csv;
+
+    std::ranges::for_each(polygons, [&](const CgalTypes::Polygon &polygon) {
+        add_polygon_to_csv(polygon, max_number_of_points, csv);
+    });
+
+    csv.Save(file_path);
+
+
+    // std::ofstream file(file_path);
+    // if (!file.is_open()) {
+    //     std::cerr << "Failed to open file: " << file_path << std::endl;
+    //     return;
+    // }
+    // for (const CgalTypes::Polygon &polygon: polygons) {
+    //     file << polygon_to_string(polygon, max_number_of_points) << "\n";
+    // }
+    // file.close();
+    // std::ofstream metadata_file(file_path + ".metadata");
+    // if (!metadata_file.is_open()) {
+    //     std::cerr << "Failed to open metadata file" << std::endl;
+    //     return;
+    // }
+    // metadata_file << max_number_of_points << "\n";
+    // metadata_file << polygons.size() << "\n";
+    // metadata_file.close();
 }

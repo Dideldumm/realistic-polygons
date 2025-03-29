@@ -10,6 +10,6 @@
 
 namespace CsvWriter {
     void write_polygons(const std::string &file_path, const std::vector<CgalTypes::Polygon> &polygons,
-                        unsigned long max_number_of_points);
+                        const unsigned long max_number_of_points);
 }
 #endif //POLYGONCSVWRITER_H
