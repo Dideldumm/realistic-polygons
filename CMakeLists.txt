@@ -79,6 +79,7 @@ add_executable(unrealisticPolygons
         src/main_files/unrealisticpolygons.cpp
         src/InputOutput/PolygonCsvWriter.cpp
         src/PolygonGenerator/CgalPolygonGenerator.cpp
+        src/utils/geometry/PolygonNormalizer.cpp
 )
 
 add_executable(writeUnionedHullsToFile

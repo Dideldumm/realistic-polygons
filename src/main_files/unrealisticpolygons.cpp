@@ -7,6 +7,7 @@
 #include <CGAL/Polygon_2.h>
 #include <execution>
 
+#include "../utils/geometry/PolygonNormalizer.h"
 #include "../InputOutput/PolygonCsvWriter.h"
 #include "../PolygonGenerator/CgalPolygonGenerator.h"
 
@@ -24,6 +25,7 @@ int main(int argc, char *argv[]) {
                       std::cout << "begin: " << current << std::endl;
                       auto polygon = generate_simple_polygon(max_number_of_points);
                       std::cout << "finished: " << current << std::endl;
+                      polygon = normalize_scaling(move_to_origin(polygon));
                       return polygon;
                   });
 
