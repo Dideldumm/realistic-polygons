@@ -63,28 +63,9 @@ void CsvWriter::write_polygons(const std::string &file_path, const std::vector<C
                                const unsigned long max_number_of_points) {
     rapidcsv::Document csv;
 
-    std::ranges::for_each(polygons, [&](const CgalTypes::Polygon &polygon) {
+    for (auto polygon: polygons) {
         add_polygon_to_csv(polygon, max_number_of_points, csv);
-    });
+    }
 
     csv.Save(file_path);
-
-
-    // std::ofstream file(file_path);
-    // if (!file.is_open()) {
-    //     std::cerr << "Failed to open file: " << file_path << std::endl;
-    //     return;
-    // }
-    // for (const CgalTypes::Polygon &polygon: polygons) {
-    //     file << polygon_to_string(polygon, max_number_of_points) << "\n";
-    // }
-    // file.close();
-    // std::ofstream metadata_file(file_path + ".metadata");
-    // if (!metadata_file.is_open()) {
-    //     std::cerr << "Failed to open metadata file" << std::endl;
-    //     return;
-    // }
-    // metadata_file << max_number_of_points << "\n";
-    // metadata_file << polygons.size() << "\n";
-    // metadata_file.close();
 }

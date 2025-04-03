@@ -5,17 +5,21 @@
 #include "CgalPolygonGenerator.h"
 
 #include <CGAL/Random.h>
+#include <CGAL/point_generators_2.h>
 #include <CGAL/random_polygon_2.h>
 
 #include "../utils/PointGenerator/RandomPointGenerator.h"
 
+typedef CGAL::Creator_uniform_2<int, CgalTypes::Point>             Creator;
+typedef CGAL::Random_points_in_disc_2<CgalTypes::Point, Creator> Point_generator;
+
 CgalTypes::Polygon generate_simple_polygon(const int &number_of_vertices) {
     CgalTypes::Polygon polygon;
 
-    constexpr int radius = 1;
-    RandomPointGenerator random_point_generator(radius);
-    std::vector<CgalTypes::Point> random_points = random_point_generator.generate_points(number_of_vertices);
-
+    constexpr int radius = 100000;
+    std::list<CgalTypes::Point> random_points;
+    CGAL::copy_n_unique(Point_generator(radius), number_of_vertices,
+                        std::back_inserter(random_points));
     CGAL::random_polygon_2(random_points.size(), std::back_inserter(polygon),
                            random_points.begin());
     return polygon;

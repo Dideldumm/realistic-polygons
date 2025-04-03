@@ -78,7 +78,6 @@ add_executable(geojsonparser
 add_executable(unrealisticPolygons
         src/main_files/unrealisticpolygons.cpp
         src/InputOutput/PolygonCsvWriter.cpp
-        ${POINTGENS_SRC}
         src/PolygonGenerator/CgalPolygonGenerator.cpp
 )
 
