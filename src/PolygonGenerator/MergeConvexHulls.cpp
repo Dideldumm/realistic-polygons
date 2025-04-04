@@ -9,7 +9,6 @@
 
 #include "../utils/geometry/SegmentUtils.h"
 #include "../utils/geometry/PolygonUtils.h"
-#include "../utils/PointGenerator/RandomPointGenerator.h"
 #include "../utils/geometry/CgalTypes.h"
 
 

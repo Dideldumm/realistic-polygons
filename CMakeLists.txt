@@ -22,7 +22,6 @@ find_package(TBB REQUIRED)
 
 # Collect source files and group them
 file(GLOB_RECURSE GEOJSON_SRC src/geojson/*)
-file(GLOB_RECURSE POINTGENS_SRC src/utils/PointGenerator/*)
 file(GLOB_RECURSE GEOMETRY_SRC src/utils/geometry/*)
 
 source_group(TREE ${CMAKE_SOURCE_DIR}/src/geojson PREFIX "Geojson Source Files" FILES ${GEOJSON_SRC})
@@ -38,14 +37,12 @@ add_executable(simplePolygon
         src/PolygonGenerator/GenerateSimplePolygon.cpp
         src/utils/geometry/PointUtils.cpp
         src/utils/geometry/SegmentUtils.cpp
-        ${POINTGENS_SRC}
         src/main_files/simplePolygon.cpp
 )
 
 add_executable(shortestPolygon
         src/PolygonGenerator/BruteForceShortestPolygon.cpp
         src/utils/geometry/PointUtils.cpp
-        ${POINTGENS_SRC}
         src/utils/ToStringUtils.cpp
         src/main_files/shortestPolygon.cpp
 )
@@ -55,12 +52,10 @@ add_executable(mergeConvexHulls
         src/PolygonGenerator/MergeConvexHulls.cpp
         src/utils/geometry/PolygonUtils.cpp
         src/utils/geometry/PointUtils.cpp
-        ${POINTGENS_SRC}
 )
 
 add_executable(drawUnionOfConvexHulls
         src/main_files/drawUnionOfConvexHulls.cpp
-        ${POINTGENS_SRC}
         src/utils/ToStringUtils.cpp
         src/utils/geometry/PolygonUtils.cpp
         src/utils/geometry/PolygonNormalizer.cpp
@@ -87,7 +82,6 @@ add_executable(writeUnionedHullsToFile
         src/InputOutput/PolygonCsvWriter.cpp
         src/utils/geometry/PolygonNormalizer.cpp
         src/PolygonGenerator/UnionOfConvexHullsGenerator.cpp
-        ${POINTGENS_SRC}
         src/utils/geometry/PolygonUtils.cpp
         src/InputOutput/PolygonImageSaver.cpp
         src/InputOutput/PolygonImageSaver.h
@@ -98,7 +92,6 @@ add_executable(polygonGenerator
         src/InputOutput/PolygonCsvWriter.cpp
         src/InputOutput/GeoJsonParser.cpp
         src/PolygonGenerator/CgalPolygonGenerator.cpp
-        ${POINTGENS_SRC}
 )
 
 add_executable(loadPolygonPredictions

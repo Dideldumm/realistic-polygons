@@ -7,8 +7,8 @@
 
 #include "../utils/ToStringUtils.h"
 #include "../TwoOptMoves.h"
-#include "../utils/PointGenerator/RandomPointGenerator.h"
 #include "../utils/geometry/PolygonalChain.h"
+#include "../utils/geometry/CgalTypes.h"
 
 
 class PolygonalChain;
@@ -21,7 +21,7 @@ enum ShortestConnectionPosition {
 std::tuple<ShortestConnectionPosition, ShortestConnectionPosition, double> minimalDistance(
     const PolygonalChain &a, const PolygonalChain &b);
 
-void PolygonalChain::addAllElements(const bool forwards, const std::vector<Point> &elements) {
+void PolygonalChain::addAllElements(const bool forwards, const std::vector<CgalTypes::Point> &elements) {
     if (forwards) {
         for (auto point: elements) {
             this->elements.push_back(point);
@@ -45,9 +45,9 @@ std::vector<std::pair<PolygonalChain, PolygonalChain> > createAllPairs(const std
     return pairs;
 }
 
-Polygon removeIntersections(const auto &polygonWithIntersections) {
+CgalTypes::Point removeIntersections(const auto &polygonWithIntersections) {
     TwoOptMoves twoOptMoves;
-    for (Point point: polygonWithIntersections) {
+    for (CgalTypes::Point point: polygonWithIntersections) {
         twoOptMoves.addPoint(point);
     }
     return twoOptMoves.getPolygon();
@@ -57,11 +57,12 @@ int main(const int argc, char **argv) {
     // initialize all points as polygonal objects
     const int numberOfPoints = argc > 1 ? std::stoi(argv[1]) : 12;
 
-    RandomPointGenerator point_generator(30.0);
-    std::vector<Point> points = point_generator.generate_points(numberOfPoints);
+    CgalTypes::PointGenerator point_generator(30);
+    std::vector<CgalTypes::Point> points;
+    std::copy_n(point_generator, numberOfPoints, std::back_inserter(points));
 
     std::vector<PolygonalChain> objects;
-    for (const auto point: points) {
+    for (const auto &point: points) {
         objects.emplace_back(point);
     }
 
@@ -83,12 +84,12 @@ int main(const int argc, char **argv) {
         objects.emplace_back(merged);
     }
 
-    const std::vector<Point> finalPolygonalChain = objects.front().getElements();
-    const Polygon polygonWithIntersections(finalPolygonalChain.begin(), finalPolygonalChain.end());
+    const std::vector<CgalTypes::Point> finalPolygonalChain = objects.front().getElements();
+    const CgalTypes::Polygon polygonWithIntersections(finalPolygonalChain.begin(), finalPolygonalChain.end());
     CGAL::draw(polygonWithIntersections);
     if (!polygonWithIntersections.is_simple()) {
         std::cout << "polygon is not simple" << std::endl;
-        const Polygon polygon = removeIntersections(polygonWithIntersections.vertices());
+        const CgalTypes::Polygon polygon = removeIntersections(polygonWithIntersections.vertices());
         CGAL::draw(polygon);
     }
 }

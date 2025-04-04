@@ -6,7 +6,6 @@
 #define VECTORUTILS_H
 
 #include "../geometry/CgalTypes.h"
-#include "../PointGenerator/SeededPointGenerator.h"
 
 
 /**
@@ -15,7 +14,5 @@
  * @return the calculated vector
  */
 CgalTypes::Vector map_angle_to_vector(const double &angle);
-
-CgalTypes::Vector create_random_vector(SeededPointGenerator &point_generator);
 
 #endif //VECTORUTILS_H

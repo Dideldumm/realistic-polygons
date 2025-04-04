@@ -13,6 +13,3 @@ CgalTypes::Vector map_angle_to_vector(const double &angle) {
     return {x, y};
 }
 
-CgalTypes::Vector create_random_vector(SeededPointGenerator &point_generator) {
-    return {{0, 0}, point_generator.generate_point()};
-}

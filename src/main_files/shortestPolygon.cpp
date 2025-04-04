@@ -4,19 +4,20 @@
 
 #include <future>
 #include <CGAL/draw_polygon_2.h>
+#include <CGAL/random_polygon_2.h>
 
 #include "../PolygonGenerator/BruteForceShortestPolygon.h"
 #include "../utils/geometry/CgalTypes.h"
-#include "../utils/PointGenerator/RandomPointGenerator.h"
 #include "../utils/ToStringUtils.h"
 
 int main(const int argc, char *argv[]) {
     const int numberOfPoints = std::stoi(argv[1]);
 
-    RandomPointGenerator generator;
-    std::vector<CgalTypes::Point> points = generator.generate_points(numberOfPoints);
+    const CgalTypes::PointGenerator point_generator(15);
+    std::vector<CgalTypes::Point> points;
+    CGAL::copy_n_unique(point_generator, numberOfPoints, std::back_inserter(points));
 
-    for (const CgalTypes::Point& point: points) {
+    for (const CgalTypes::Point &point: points) {
         std::cout << pointToString(point) << std::endl;
     }
     std::cout << "And now we wait" << std::endl;

@@ -5,14 +5,16 @@
 #include <CGAL/draw_polygon_2.h>
 
 #include "TwoOptMoves.h"
-#include "utils/PointGenerator/RandomPointGenerator.h"
 #include "utils/ToStringUtils.h"
+#include "utils/geometry/CgalTypes.h"
 
 int main(const int argc, char **argv) {
     const int numberOfPoints = argc > 1 ? std::stoi(argv[1]) : 12;
 
-    RandomPointGenerator point_generator(30.0);
-    std::vector<CgalTypes::Point> points = point_generator.generate_points(numberOfPoints);
+    CgalTypes::PointGenerator pointGenerator(1);
+    std::vector<CgalTypes::Point> points;
+    std::copy_n(pointGenerator, numberOfPoints, std::back_inserter(points));
+
     TwoOptMoves two_opt_moves;
     for (CgalTypes::Point point: points) {
         two_opt_moves.addPoint(point);

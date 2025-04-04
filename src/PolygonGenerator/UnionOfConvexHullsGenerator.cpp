@@ -6,8 +6,9 @@
 #include <CGAL/convex_hull_2.h>
 
 #include "UnionOfConvexHullsGenerator.h"
-#include "../utils/PointGenerator/RandomPointGenerator.h"
 #include "../utils/geometry/PolygonUtils.h"
+
+typedef CGAL::Creator_uniform_2<CgalTypes::Point, CgalTypes::Vector> VectorCreator;
 
 CgalTypes::Polygon generate_random_convex_polygon(const std::list<CgalTypes::Point> &vertices) {
     std::vector<CgalTypes::Point> new_hull;
@@ -18,19 +19,20 @@ CgalTypes::Polygon generate_random_convex_polygon(const std::list<CgalTypes::Poi
 
 CgalTypes::Polygon union_of_convex_hulls(const unsigned int max_number_of_points, const unsigned int number_of_polygons,
                                          const double max_translation_distance) {
-    RandomPointGenerator random_vector_generator(max_translation_distance);
-    RandomPointGenerator random_vertex_generator;
+    CgalTypes::PointGenerator random_vector_generator(max_translation_distance);
+    CgalTypes::PointGenerator random_vertex_generator(1);
 
     CgalTypes::Vector current_vector{0, 0};
     std::vector<CgalTypes::Polygon> polygons;
     for (unsigned int i = 0; i < number_of_polygons; ++i) {
-        const std::vector<CgalTypes::Point> points = random_vertex_generator.generate_points(max_number_of_points);
-        std::list<CgalTypes::Point> vertices;
-        std::ranges::copy(points, std::back_inserter(vertices));
+        std::list<CgalTypes::Point> points;
+        std::copy_n(std::move(random_vertex_generator), max_number_of_points, std::back_inserter(points));
 
-        CgalTypes::Polygon next_polygon = generate_random_convex_polygon(vertices);
-        CgalTypes::Point random_point = random_vector_generator.generate_point();
-        const CgalTypes::Vector random_vector(random_point.x(), random_point.y());
+        CgalTypes::Polygon next_polygon = generate_random_convex_polygon(points);
+        CgalTypes::Point vector_point = *random_vector_generator;
+        ++random_vector_generator;
+
+        const CgalTypes::Vector random_vector(vector_point.x(), vector_point.y());
         current_vector += random_vector;
         CgalTypes::Polygon translated_polygon = translate_polygon(next_polygon, current_vector);
 

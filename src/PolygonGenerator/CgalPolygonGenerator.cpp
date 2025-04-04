@@ -8,8 +8,6 @@
 #include <CGAL/point_generators_2.h>
 #include <CGAL/random_polygon_2.h>
 
-#include "../utils/PointGenerator/RandomPointGenerator.h"
-
 typedef CGAL::Creator_uniform_2<int, CgalTypes::Point>             Creator;
 typedef CGAL::Random_points_in_disc_2<CgalTypes::Point, Creator> Point_generator;
 
