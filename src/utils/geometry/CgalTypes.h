@@ -17,6 +17,6 @@ namespace CgalTypes {
     typedef std::list<Point> ConvexHull;
     typedef CGAL::Vector_2<Kernel> Vector;
     typedef Kernel::FT Number;
-    typedef CGAL::Random_points_in_disc_2<Point, CGAL::Creator_uniform_2<Number, Point> > PointGenerator;
+    typedef CGAL::Random_points_in_disc_2<Point> PointGenerator;
 }
 #endif //CGALGEOMETRY_H

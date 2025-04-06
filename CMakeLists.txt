@@ -83,8 +83,6 @@ add_executable(writeUnionedHullsToFile
         src/utils/geometry/PolygonNormalizer.cpp
         src/PolygonGenerator/UnionOfConvexHullsGenerator.cpp
         src/utils/geometry/PolygonUtils.cpp
-        src/InputOutput/PolygonImageSaver.cpp
-        src/InputOutput/PolygonImageSaver.h
 )
 
 add_executable(polygonGenerator
@@ -97,6 +95,10 @@ add_executable(polygonGenerator
 add_executable(loadPolygonPredictions
         src/InputOutput/WrittenPolygonLoader.cpp
         src/main_files/LoadPolygonPredictions.cpp
+)
+
+add_executable(saver
+        src/InputOutput/PolygonImageSaver.cpp
 )
 
 target_include_directories(geojsonparser PRIVATE ${JSONCPP_INCLUDE_DIRS})
@@ -117,6 +119,7 @@ set(TARGETS
         writeUnionedHullsToFile
         polygonGenerator
         loadPolygonPredictions
+        saver
 )
 
 # Link libraries if CGAL with Qt6 is found
