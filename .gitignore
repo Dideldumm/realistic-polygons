@@ -8,6 +8,9 @@
 # Ignore python metadata
 /*/__pycache__
 
+# Ignore lock files
+*.lock
+
 # Ignore obsidian metadata
 /.obsidian
 /*/.obsidian
