@@ -22,8 +22,8 @@ std::ostream &operator<<(std::ostream &lhs, const QPoint &rhs) {
 };
 
 QImage polygon_to_image(const CgalTypes::Polygon &polygon) {
-    constexpr int scale = 500;
-    QImage image(scale, scale, QImage::Format_RGB32);
+    constexpr int scale = 224;
+    QImage image(scale, scale, QImage::Format_Grayscale8);
     image.fill(Qt::white);
 
     QPainter painter(&image);
