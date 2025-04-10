@@ -9,8 +9,8 @@
 #include <QPainter>
 #include <QImage>
 
-int map_range(const auto &smallest_input, const auto &biggest_input, const auto &smallest_output,
-              const auto &biggest_output, const auto &value) {
+int map_from_range_to_range(const auto &smallest_input, const auto &biggest_input, const auto &smallest_output,
+                            const auto &biggest_output, const auto &value) {
     const auto scale = (biggest_output - smallest_output) / (biggest_input - smallest_input);
 
     auto result = scale * (value - smallest_input) + smallest_output;
@@ -36,12 +36,18 @@ QImage polygon_to_image(const CgalTypes::Polygon &polygon) {
 
     QPolygonF qpolygon;
     for (const auto &p: polygon.vertices()) {
-        const int x = map_range(bbox.xmin(), bbox.xmax(), 0, scale, p.x());
-        const int y = map_range(bbox.ymin(), bbox.ymax(), 0, scale, p.y());
+        const int x = map_from_range_to_range(bbox.xmin(), bbox.xmax(), 0, scale, p.x());
+        const int y = map_from_range_to_range(bbox.ymin(), bbox.ymax(), 0, scale, p.y());
 
         qpolygon << QPoint(x, y);
         std::cout << QPoint(x, y) << " ";
     }
     painter.drawPolygon(qpolygon);
     return image;
+}
+
+void save_image(const QImage &image, const std::string &filename) {
+    if (!image.save(filename.c_str())) {
+        std::cerr << "Failed to save image " << filename << std::endl;
+    }
 }

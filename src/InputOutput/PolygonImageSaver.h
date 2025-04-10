@@ -4,20 +4,13 @@
 
 #ifndef POLYGONIMAGESAVER_H
 #define POLYGONIMAGESAVER_H
+
+#include <QImage>
 #include <string>
 
 
-class PolygonImageSaver {
+QImage polygon_to_image(const CgalTypes::Polygon &polygon);
 
-std::string target_directory;
-
-public:
-    explicit PolygonImageSaver(std::string target_directory);
-
-
-
-};
-
-
+void save_image(const QImage &image, const std::string &filename);
 
 #endif //POLYGONIMAGESAVER_H
