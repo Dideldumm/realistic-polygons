@@ -3,8 +3,9 @@ import sys
 import tensorflow as tf
 import tf_keras as keras
 
+
 def main(data_directory: str):
-    print("TensorFlo version: ", tf.__version__)
+    print("TensorFlow version: ", tf.__version__)
 
     image_scale = 224
     epochs = 10
@@ -22,7 +23,7 @@ def main(data_directory: str):
 
     model = keras.models.Sequential([
         keras.Input(shape=(image_scale, image_scale, 1)),
-        keras.layers.Rescaling(1./255),
+        keras.layers.Rescaling(1. / 255),
 
         keras.layers.Conv2D(16, 5, activation='relu'),
         keras.layers.MaxPooling2D(),
@@ -41,9 +42,10 @@ def main(data_directory: str):
         metrics=['accuracy'],
     )
 
-    model.fit(training_data, epochs=epochs, validation_data=test_data)
+    history = model.fit(training_data, epochs=epochs, validation_data=test_data)
+    print(history.history)
 
-    model.save("my_model")
+    model.save("polygon_image_classifier")
 
 
 if __name__ == '__main__':
