@@ -99,7 +99,14 @@ add_executable(loadPolygonPredictions
 
 add_executable(saver
         src/InputOutput/PolygonImageSaver.cpp
+        src/main_files/savePolygonImages.cpp
+        src/InputOutput/GeoJsonParser.cpp
+        src/utils/geometry/PolygonNormalizer.cpp
+        src/PolygonGenerator/CgalPolygonGenerator.cpp
 )
+
+target_include_directories(saver PRIVATE ${JSONCPP_INCLUDE_DIRS})
+target_link_libraries(saver PRIVATE ${JSONCPP_LIBRARIES})
 
 target_include_directories(geojsonparser PRIVATE ${JSONCPP_INCLUDE_DIRS})
 target_link_libraries(geojsonparser PRIVATE ${JSONCPP_LIBRARIES})
