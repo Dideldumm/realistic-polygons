@@ -17,8 +17,8 @@ CgalTypes::ConvexHull create_convex_hull(const std::list<CgalTypes::Point> &vert
     return new_hull;
 }
 
-void insert_point_at_segment(CgalTypes::Polygon &polygon, const CgalTypes::Segment &segment, const CgalTypes::Point &point) {
-    //TODO unit test
+void insert_point_at_segment(CgalTypes::Polygon &polygon, const CgalTypes::Segment &segment,
+                             const CgalTypes::Point &point) {
     const CgalTypes::Point segment_end = segment.end();
     for (auto iterator = polygon.vertices_begin(); iterator != polygon.vertices_end(); ++iterator) {
         if (*iterator == segment_end) {
@@ -29,8 +29,8 @@ void insert_point_at_segment(CgalTypes::Polygon &polygon, const CgalTypes::Segme
 }
 
 CgalTypes::Polygon join_polygons(const std::vector<CgalTypes::Polygon> &polygons) {
-    //TODO unit test
-    PolygonWithHoles result(polygons.at(0));
+    assert(!polygons.empty());
+    PolygonWithHoles result(polygons.front());
     for (unsigned int i = 1; i < polygons.size(); ++i) {
         CGAL::join(polygons.at(i), result.outer_boundary(), result);
     }

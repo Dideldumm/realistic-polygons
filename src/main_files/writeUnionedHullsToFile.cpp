@@ -26,12 +26,10 @@ void do_work(const int max_points_per_polygon, std::vector<CgalTypes::Polygon> &
              std::uniform_int_distribution<> &distribution) {
     const int number_of_polygons = distribution(gen);
     CgalTypes::Polygon polygon = union_of_convex_hulls(max_points_per_polygon, number_of_polygons, 1);
-    std::cout << "Entering while" << std::endl;
     while (polygon.size() > max_points_per_polygon) {
         // punkte werden random gelöscht, bis die anzahl passt
         erase_a_random_point(polygon);
     }
-    std::cout << "Exiting while" << std::endl;
 
     const CgalTypes::Polygon normal_polygon = normalize_scaling(move_to_origin(polygon));
     mapped_polygons.push_back(normal_polygon);

@@ -56,11 +56,10 @@ add_executable(mergeConvexHulls
 
 add_executable(drawUnionOfConvexHulls
         src/main_files/drawUnionOfConvexHulls.cpp
-        src/utils/ToStringUtils.cpp
         src/utils/geometry/PolygonUtils.cpp
         src/utils/geometry/PolygonNormalizer.cpp
-        src/utils/geometry/VectorUtils.cpp
         src/PolygonGenerator/UnionOfConvexHullsGenerator.cpp
+        src/InputOutput/PolygonImageSaver.cpp
 )
 
 add_executable(geojsonparser
@@ -97,16 +96,16 @@ add_executable(loadPolygonPredictions
         src/main_files/LoadPolygonPredictions.cpp
 )
 
-add_executable(saver
-        src/InputOutput/PolygonImageSaver.cpp
+add_executable(savePolygonImages
         src/main_files/savePolygonImages.cpp
+        src/InputOutput/PolygonImageSaver.cpp
         src/InputOutput/GeoJsonParser.cpp
         src/utils/geometry/PolygonNormalizer.cpp
         src/PolygonGenerator/CgalPolygonGenerator.cpp
 )
 
-target_include_directories(saver PRIVATE ${JSONCPP_INCLUDE_DIRS})
-target_link_libraries(saver PRIVATE ${JSONCPP_LIBRARIES})
+target_include_directories(savePolygonImages PRIVATE ${JSONCPP_INCLUDE_DIRS})
+target_link_libraries(savePolygonImages PRIVATE ${JSONCPP_LIBRARIES})
 
 target_include_directories(geojsonparser PRIVATE ${JSONCPP_INCLUDE_DIRS})
 target_link_libraries(geojsonparser PRIVATE ${JSONCPP_LIBRARIES})
@@ -126,7 +125,7 @@ set(TARGETS
         writeUnionedHullsToFile
         polygonGenerator
         loadPolygonPredictions
-        saver
+        savePolygonImages
 )
 
 # Link libraries if CGAL with Qt6 is found
