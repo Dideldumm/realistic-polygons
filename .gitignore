@@ -18,6 +18,7 @@
 # Buildfiles
 /build
 /sklearn/data
+/sklearn/polygon_image_classifier
 
 # Dependencies
 /lib

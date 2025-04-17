@@ -10,16 +10,18 @@ def main(data_directory: str):
     image_scale = 224
     epochs = 10
 
-    data_set = keras.preprocessing.image_dataset_from_directory(
+    training_data, test_data = keras.preprocessing.image_dataset_from_directory(
         data_directory,
         labels="inferred",
         label_mode="binary",
         color_mode="grayscale",
         image_size=(image_scale, image_scale),
         batch_size=32,
+        shuffle=True,
+        seed=123,
+        validation_split=0.2,
+        subset="both",
     )
-
-    training_data, test_data = keras.utils.split_dataset(data_set, left_size=0.8, shuffle=True)
 
     model = keras.models.Sequential([
         keras.Input(shape=(image_scale, image_scale, 1)),

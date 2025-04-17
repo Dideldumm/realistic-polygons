@@ -25,9 +25,9 @@ def main(model_directory: str, data_directory: str):
 
     model: keras.Model = keras.models.load_model(model_directory)
 
-    # if "." in data_directory.:
-    #     predict_single_image(model, data_directory)
-    #     return
+    if data_directory.endswith(".jpg"):
+        predict_single_image(model, data_directory)
+        return
 
     dataset = keras.preprocessing.image_dataset_from_directory(
         data_directory,
@@ -39,8 +39,17 @@ def main(model_directory: str, data_directory: str):
     )
 
     predictions = model.predict(dataset)
+    lowest = (-1, 1)
+    highest = (-1, 0)
     for (i, prediction) in enumerate(predictions, start=0):
         print(i, prediction)
+        if prediction < lowest[1]:
+            lowest = (i, prediction)
+        if prediction > highest[1]:
+            highest = (i, prediction)
+    print("lowest = ", lowest)
+    print("highest = ", highest)
+
 
 
 if __name__ == '__main__':

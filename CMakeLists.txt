@@ -104,6 +104,10 @@ add_executable(savePolygonImages
         src/PolygonGenerator/CgalPolygonGenerator.cpp
 )
 
+add_executable(test
+    src/test.cpp
+)
+
 target_include_directories(savePolygonImages PRIVATE ${JSONCPP_INCLUDE_DIRS})
 target_link_libraries(savePolygonImages PRIVATE ${JSONCPP_LIBRARIES})
 
@@ -126,6 +130,7 @@ set(TARGETS
         polygonGenerator
         loadPolygonPredictions
         savePolygonImages
+        test
 )
 
 # Link libraries if CGAL with Qt6 is found

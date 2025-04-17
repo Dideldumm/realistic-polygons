@@ -62,5 +62,6 @@ int main(const int argc, char *argv[]) {
 
     const std::vector<CgalTypes::Polygon> generated_polygons = generate_polygons(
         number_of_polygons, max_number_of_vertices);
+    std::cout << "Finished generating polygons" << std::endl;
     save_polygon_images(unrealistic_data_dir, generated_polygons, unrealistic);
 }

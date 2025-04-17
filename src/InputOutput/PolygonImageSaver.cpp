@@ -19,7 +19,7 @@ int map_from_range_to_range(const auto &smallest_input, const auto &biggest_inpu
 
 std::ostream &operator<<(std::ostream &lhs, const QPoint &rhs) {
     return lhs << "(" << rhs.x() << ", " << rhs.y() << ")";
-};
+}
 
 QImage polygon_to_image(const CgalTypes::Polygon &polygon) {
     constexpr int scale = 224;

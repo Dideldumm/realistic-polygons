@@ -6,16 +6,15 @@
 	- Im Volltext
 
 # Letztes Meeting mit Prof. Schirra
-- [x] Klassifizierung des Modells anschauen
-- [x] Ein trainiertes Modell speichern
+- [ ] Punkte für jedes Polygon erst single-threaded erzeugen
+	- [ ] Das geht, aber der Algorithmus bleibt trotzdem hängen
+- [ ] Speicher-Problem? -> Heap benutzen
+- [x] Classifier klassen Benennung?
 
 - [ ] Umgang mit disjunkten Polygonen
 - [ ] Polygon ränder "aufrauen"
 - [ ] konvexe Polygone mit weniger Punkten erzeugen
-- [ ] Classifier aufgrund von verpixelten Bilddaten
-- [ ] Ein Bitmap des Polygons erstellen und die Bitmap als features dem Classifier zum trainieren geben
-	- [ ] CGAL drawer kann man zu pdf exportieren
-	- [ ] Dann mit imagemagick zu bitmap
+- [x] Classifier aufgrund von verpixelten Bilddaten
 
 ## Testdaten von OSM holen
 - Open street map (kurz OSM)
@@ -70,6 +69,7 @@ realistische Polygone, sodass Tests von Algorithmen darauf sinnvolle Ergebnisse 
 ## Algorithmus - Ideen
 - Delauney-Triangulierung und dann Kanten entfernen
 	- welche Kanten?
+- https://simblob.blogspot.com/2010/09/polygon-map-generation-part-1.html
 
 ### Umgesetzte Algorithmen
 #### `MergeConvexHulls`
